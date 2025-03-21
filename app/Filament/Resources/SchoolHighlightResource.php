@@ -9,7 +9,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Coolsam\FilamentFlatpickr\Forms\Components\Flatpickr;
 
 class SchoolHighlightResource extends Resource
 {
@@ -27,67 +26,49 @@ class SchoolHighlightResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Section::make('花絮內容')
-                    ->schema([
-                        Forms\Components\Select::make('school_id')
-                            ->label('學校')
-                            ->relationship('school', 'name')
-                            ->required()
-                            ->searchable(),
-                            
-                        Forms\Components\TextInput::make('title')
-                            ->label('標題')
-                            ->required()
-                            ->maxLength(255),
-                            
-                        Forms\Components\Textarea::make('description')
-                            ->label('描述')
-                            ->rows(3),
-                            
-                        Flatpickr::make('highlight_date')
-                            ->label('花絮日期')
-                            ->required()
-                            ->dateFormat('Y-m-d'),
-                            
-                        Forms\Components\Select::make('media_type')
-                            ->label('媒體類型')
-                            ->options([
-                                'image' => '圖片',
-                                'video' => '影片'
-                            ])
-                            ->required()
-                            ->live(),
-                            
-                        Forms\Components\FileUpload::make('media_path')
-                            ->label('媒體檔案')
-                            ->image()
-                            ->imageEditor()
-                            ->visible(fn (Forms\Get $get) => $get('media_type') === 'image')
-                            ->directory('school-highlights')
-                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/gif']),
-                            
-                        Forms\Components\FileUpload::make('media_path')
-                            ->label('媒體檔案')
-                            ->visible(fn (Forms\Get $get) => $get('media_type') === 'video')
-                            ->directory('school-highlights')
-                            ->acceptedFileTypes(['video/mp4']),
-                            
-                        Forms\Components\TextInput::make('sort_order')
-                            ->label('排序')
-                            ->numeric()
-                            ->default(0),
-                    ])->columns(2),
-            ]);
+                Forms\Components\TextInput::make('title')
+                    ->label('標題')
+                    ->required()
+                    ->maxLength(255),
+                    
+                Forms\Components\Textarea::make('description')
+                    ->label('描述')
+                    ->rows(3),
+                    
+                Forms\Components\Select::make('media_type')
+                    ->label('媒體類型')
+                    ->options([
+                        'image' => '圖片',
+                        'video' => '影片'
+                    ])
+                    ->required()
+                    ->live(),
+                    
+                Forms\Components\FileUpload::make('media_path')
+                    ->label('媒體檔案')
+                    ->image()
+                    ->imageEditor()
+                    ->visible(fn (Forms\Get $get) => $get('media_type') === 'image')
+                    ->directory('school-highlights')
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/gif']),
+                    
+                Forms\Components\FileUpload::make('media_path')
+                    ->label('媒體檔案')
+                    ->visible(fn (Forms\Get $get) => $get('media_type') === 'video')
+                    ->directory('school-highlights')
+                    ->acceptedFileTypes(['video/mp4']),
+                    
+                Forms\Components\TextInput::make('sort_order')
+                    ->label('排序')
+                    ->numeric()
+                    ->default(0),
+            ])->columns(2);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('school.name')
-                    ->label('學校')
-                    ->searchable(),
-                    
                 Tables\Columns\TextColumn::make('title')
                     ->label('標題')
                     ->searchable(),
@@ -96,13 +77,13 @@ class SchoolHighlightResource extends Resource
                     ->label('媒體類型')
                     ->formatStateUsing(fn (string $state): string => $state === 'image' ? '圖片' : '影片'),
                     
-                Tables\Columns\TextColumn::make('highlight_date')
-                    ->label('花絮日期')
-                    ->date()
-                    ->sortable(),
-                    
                 Tables\Columns\TextColumn::make('sort_order')
                     ->label('排序')
+                    ->sortable(),
+                    
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('建立時間')
+                    ->dateTime()
                     ->sortable(),
             ])
             ->defaultSort('sort_order')
