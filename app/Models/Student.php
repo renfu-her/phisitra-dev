@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class Student extends Model
 {
@@ -32,10 +34,25 @@ class Student extends Model
     ];
 
     protected $casts = [
-        'birth_date' => 'date',
-        'enrollment_date' => 'date',
-        'expected_graduation_date' => 'date',
+        'birth_date' => 'date:Y-m-d',
+        'enrollment_date' => 'date:Y-m-d',
+        'expected_graduation_date' => 'date:Y-m-d',
     ];
+
+    public function setBirthDateAttribute($value)
+    {
+        $this->attributes['birth_date'] = $value ? Carbon::parse($value)->format('Y-m-d') : null;
+    }
+
+    public function setEnrollmentDateAttribute($value)
+    {
+        $this->attributes['enrollment_date'] = $value ? Carbon::parse($value)->format('Y-m-d') : null;
+    }
+
+    public function setExpectedGraduationDateAttribute($value)
+    {
+        $this->attributes['expected_graduation_date'] = $value ? Carbon::parse($value)->format('Y-m-d') : null;
+    }
 
     protected static function boot()
     {
@@ -52,15 +69,18 @@ class Student extends Model
                     // 讀取圖片
                     $image = $manager->read($path);
                     
-                    // 調整大小，保持比例，最大 800x800
-                    $image->scale(width: 800, height: 800);
+                    // 生成新的檔案名稱（使用 UUID v7）
+                    $newFileName = Str::uuid7() . '.webp';
+                    $webpPath = Storage::disk('public')->path('students/' . $newFileName);
                     
                     // 轉換為 WebP 並保存
-                    $webpPath = preg_replace('/\.[^.]+$/', '.webp', $path);
                     $image->toWebp(90)->save($webpPath);
                     
+                    // 刪除原始檔案
+                    @unlink($path);
+                    
                     // 更新數據庫中的檔案路徑
-                    $student->photo = preg_replace('/\.[^.]+$/', '.webp', $student->photo);
+                    $student->photo = 'students/' . $newFileName;
                 }
             }
         });
@@ -68,8 +88,7 @@ class Student extends Model
 
     public function members(): BelongsToMany
     {
-        return $this->belongsToMany(Member::class)
-            ->withTimestamps();
+        return $this->belongsToMany(Member::class)->withTimestamps();
     }
 
     // 獲取公開資料

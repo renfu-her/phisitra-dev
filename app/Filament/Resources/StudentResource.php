@@ -56,7 +56,10 @@ class StudentResource extends Resource
                         Flatpickr::make('birth_date')
                             ->label('出生日期')
                             ->required()
-                            ->dateFormat('Y-m-d'),
+                            ->dateFormat('Y-m-d')
+                            ->altFormat('Y-m-d')
+                            ->noCalendar(false)
+                            ->enableTime(false),
                             
                         Forms\Components\TextInput::make('nationality')
                             ->label('國籍')
@@ -91,7 +94,10 @@ class StudentResource extends Resource
                         Flatpickr::make('enrollment_date')
                             ->label('入學日期')
                             ->required()
-                            ->dateFormat('Y-m-d'),
+                            ->dateFormat('Y-m-d')
+                            ->altFormat('Y-m-d')
+                            ->noCalendar(false)
+                            ->enableTime(false),
                             
                         Forms\Components\TextInput::make('study_duration')
                             ->label('學制年限')
@@ -103,7 +109,10 @@ class StudentResource extends Resource
                         Flatpickr::make('expected_graduation_date')
                             ->label('預計畢業時間')
                             ->required()
-                            ->dateFormat('Y-m-d'),
+                            ->dateFormat('Y-m-d')
+                            ->altFormat('Y-m-d')
+                            ->noCalendar(false)
+                            ->enableTime(false),
                     ])->columns(2),
 
                 // 其他資料區段
@@ -126,7 +135,10 @@ class StudentResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('photo')
                     ->label('照片')
-                    ->circular(),
+                    ->height('auto')
+                    ->width('auto')
+                    ->square()
+                    ->extraImgAttributes(['style' => 'width: 100px; height: auto;']),
                     
                 Tables\Columns\TextColumn::make('name_zh')
                     ->label('中文姓名')
@@ -153,17 +165,17 @@ class StudentResource extends Resource
                     
                 Tables\Columns\TextColumn::make('enrollment_date')
                     ->label('入學日期')
-                    ->date()
+                    ->date('Y-m-d')
                     ->sortable(),
                     
                 Tables\Columns\TextColumn::make('expected_graduation_date')
                     ->label('預計畢業時間')
-                    ->date()
+                    ->date('Y-m-d')
                     ->sortable(),
                     
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('建立時間')
-                    ->dateTime()
+                    ->dateTime('Y-m-d H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
