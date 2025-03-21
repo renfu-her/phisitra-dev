@@ -16,9 +16,11 @@ class SchoolResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
     
-    protected static ?string $navigationGroup = '網站管理';
+    protected static ?string $navigationGroup = '合作學校';
     
     protected static ?string $modelLabel = '合作學校';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Form $form): Form
     {
