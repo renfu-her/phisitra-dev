@@ -58,7 +58,7 @@ class EditSetting extends Page
                             ->imageResizeMode('cover')
                             ->imageCropAspectRatio('16:9')
                             ->getUploadedFileNameForStorageUsing(
-                                fn (\Illuminate\Http\UploadedFile $file): string => (string) Str::uuid() . '.' . $file->getClientOriginalExtension()
+                                fn (\Illuminate\Http\UploadedFile $file): string => (string) Str::uuid7() . '.' . $file->getClientOriginalExtension()
                             ),
                         FileUpload::make('favicon')
                             ->label('網站 Favicon')
@@ -71,7 +71,7 @@ class EditSetting extends Page
                             ->imageResizeTargetHeight('200')
                             ->imagePreviewHeight('200')
                             ->getUploadedFileNameForStorageUsing(
-                                fn (\Illuminate\Http\UploadedFile $file): string => (string) Str::uuid() . '.' . $file->getClientOriginalExtension()
+                                fn (\Illuminate\Http\UploadedFile $file): string => (string) Str::uuid7() . '.' . $file->getClientOriginalExtension()
                             ),
                     ])->columns(2),
 
