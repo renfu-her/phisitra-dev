@@ -13,6 +13,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Pages\Page;
 use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 class EditSetting extends Page
 {
@@ -55,7 +56,10 @@ class EditSetting extends Page
                             ->directory('settings')
                             ->imageEditor()
                             ->imageResizeMode('cover')
-                            ->imageCropAspectRatio('16:9'),
+                            ->imageCropAspectRatio('16:9')
+                            ->getUploadedFileNameForStorageUsing(
+                                fn (\Illuminate\Http\UploadedFile $file): string => (string) Str::uuid() . '.' . $file->getClientOriginalExtension()
+                            ),
                         FileUpload::make('favicon')
                             ->label('網站 Favicon')
                             ->image()
@@ -65,7 +69,10 @@ class EditSetting extends Page
                             ->imageCropAspectRatio('1:1')
                             ->imageResizeTargetWidth('200')
                             ->imageResizeTargetHeight('200')
-                            ->imagePreviewHeight('200'),
+                            ->imagePreviewHeight('200')
+                            ->getUploadedFileNameForStorageUsing(
+                                fn (\Illuminate\Http\UploadedFile $file): string => (string) Str::uuid() . '.' . $file->getClientOriginalExtension()
+                            ),
                     ])->columns(2),
 
                 Section::make('SEO 設定')
