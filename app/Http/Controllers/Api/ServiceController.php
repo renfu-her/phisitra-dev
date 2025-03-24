@@ -14,7 +14,7 @@ class ServiceController extends Controller
         
         return response()->json([
             'success' => true,
-            'message' => '成功取得服務項目列表',
+            'message' => 'Successfully retrieved services list',
             'data' => ServiceResource::collection($services)
         ]);
     }
@@ -23,7 +23,7 @@ class ServiceController extends Controller
     {
         return response()->json([
             'success' => true,
-            'message' => '成功取得服務項目詳情',
+            'message' => 'Successfully retrieved service details',
             'data' => new ServiceResource($service)
         ]);
     }

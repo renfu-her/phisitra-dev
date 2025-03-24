@@ -14,7 +14,7 @@ class SchoolHighlightController extends Controller
         
         return response()->json([
             'success' => true,
-            'message' => '成功取得合作花絮列表',
+            'message' => 'Successfully retrieved highlights list',
             'data' => SchoolHighlightResource::collection($highlights)
         ]);
     }
@@ -23,7 +23,7 @@ class SchoolHighlightController extends Controller
     {
         return response()->json([
             'success' => true,
-            'message' => '成功取得合作花絮詳情',
+            'message' => 'Successfully retrieved highlight details',
             'data' => new SchoolHighlightResource($highlight)
         ]);
     }

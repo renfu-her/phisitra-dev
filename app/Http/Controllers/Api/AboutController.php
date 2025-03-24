@@ -15,14 +15,14 @@ class AboutController extends Controller
         if (!$about) {
             return response()->json([
                 'success' => false,
-                'message' => '找不到關於我們的資料',
+                'message' => 'About information not found',
                 'data' => null
             ], 404);
         }
         
         return response()->json([
             'success' => true,
-            'message' => '成功取得關於我們的資料',
+            'message' => 'Successfully retrieved about information',
             'data' => new AboutResource($about)
         ]);
     }
