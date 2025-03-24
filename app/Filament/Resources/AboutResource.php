@@ -24,6 +24,8 @@ class AboutResource extends Resource
     
     protected static ?string $modelLabel = '關於我們';
 
+    protected static ?int $navigationSort = 2;
+
     public static function form(Form $form): Form
     {
         return $form

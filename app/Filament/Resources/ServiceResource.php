@@ -9,6 +9,10 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class ServiceResource extends Resource
 {
@@ -19,6 +23,8 @@ class ServiceResource extends Resource
     protected static ?string $navigationGroup = '網站管理';
     
     protected static ?string $modelLabel = '服務項目';
+
+    protected static ?int $navigationSort = 3;
 
     public static function form(Form $form): Form
     {

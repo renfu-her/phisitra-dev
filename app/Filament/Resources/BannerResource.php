@@ -24,6 +24,8 @@ class BannerResource extends Resource
     
     protected static ?string $modelLabel = '輪播圖';
 
+    protected static ?int $navigationSort = 1;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -67,15 +69,6 @@ class BannerResource extends Resource
                             Storage::disk('public')->delete($file);
                         }
                     }),
-                    
-                Forms\Components\TextInput::make('button_text')
-                    ->label('按鈕文字')
-                    ->maxLength(255),
-                    
-                Forms\Components\TextInput::make('button_link')
-                    ->label('按鈕連結')
-                    ->url()
-                    ->maxLength(255),
                     
                 Forms\Components\TextInput::make('order')
                     ->label('排序')

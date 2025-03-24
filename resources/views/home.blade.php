@@ -12,8 +12,8 @@
     </div>
     <div class="carousel-inner">
         @foreach($banners as $key => $banner)
-            <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
-                <img src="{{ Storage::url($banner->image) }}" class="d-block w-100" alt="{{ $banner->title }}">
+            <div class="carousel-item {{ $key === 0 ? 'active' : '' }}" style="height: 450px;">
+                <img src="{{ Storage::url($banner->image) }}" class="d-block w-100 h-100" alt="{{ $banner->title }}" style="object-fit: cover;">
                 <div class="carousel-caption">
                     <h2>{{ $banner->title }}</h2>
                     @if($banner->description)
