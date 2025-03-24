@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +14,6 @@ class SchoolHighlight extends Model
     use HasFactory;
 
     protected $fillable = [
-        'school_id',
         'title',
         'description',
         'media_type',
@@ -63,10 +61,5 @@ class SchoolHighlight extends Model
                 }
             }
         });
-    }
-
-    public function school(): BelongsTo
-    {
-        return $this->belongsTo(School::class);
     }
 } 
