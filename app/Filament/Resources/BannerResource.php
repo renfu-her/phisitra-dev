@@ -2,8 +2,8 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\AboutResource\Pages;
-use App\Models\About;
+use App\Filament\Resources\BannerResource\Pages;
+use App\Models\Banner;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -14,15 +14,15 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
 
-class AboutResource extends Resource
+class BannerResource extends Resource
 {
-    protected static ?string $model = About::class;
+    protected static ?string $model = Banner::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-information-circle';
+    protected static ?string $navigationIcon = 'heroicon-o-photo';
     
     protected static ?string $navigationGroup = '網站管理';
     
-    protected static ?string $modelLabel = '關於我們';
+    protected static ?string $modelLabel = '輪播圖';
 
     public static function form(Form $form): Form
     {
@@ -33,11 +33,15 @@ class AboutResource extends Resource
                     ->required()
                     ->maxLength(255),
                     
+                Forms\Components\Textarea::make('description')
+                    ->label('描述')
+                    ->rows(3),
+                    
                 Forms\Components\FileUpload::make('image')
                     ->label('圖片')
                     ->image()
                     ->imageEditor()
-                    ->directory('about')
+                    ->directory('banners')
                     ->columnSpanFull()
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
                     ->downloadable()
@@ -51,12 +55,12 @@ class AboutResource extends Resource
                         $image->cover(1920, 1080);
                         $filename = Str::uuid7()->toString() . '.webp';
 
-                        if (!file_exists(storage_path('app/public/about'))) {
-                            mkdir(storage_path('app/public/about'), 0755, true);
+                        if (!file_exists(storage_path('app/public/banners'))) {
+                            mkdir(storage_path('app/public/banners'), 0755, true);
                         }
 
-                        $image->toWebp(80)->save(storage_path('app/public/about/' . $filename));
-                        return 'about/' . $filename;
+                        $image->toWebp(80)->save(storage_path('app/public/banners/' . $filename));
+                        return 'banners/' . $filename;
                     })
                     ->deleteUploadedFileUsing(function ($file) {
                         if ($file) {
@@ -64,31 +68,23 @@ class AboutResource extends Resource
                         }
                     }),
                     
-                Forms\Components\RichEditor::make('content')
-                    ->label('內容')
-                    ->required()
-                    ->columnSpanFull(),
+                Forms\Components\TextInput::make('button_text')
+                    ->label('按鈕文字')
+                    ->maxLength(255),
+                    
+                Forms\Components\TextInput::make('button_link')
+                    ->label('按鈕連結')
+                    ->url()
+                    ->maxLength(255),
+                    
+                Forms\Components\TextInput::make('order')
+                    ->label('排序')
+                    ->numeric()
+                    ->default(0),
                     
                 Forms\Components\Toggle::make('is_active')
                     ->label('啟用')
                     ->default(true),
-
-                Forms\Components\Section::make('SEO 設置')
-                    ->schema([
-                        Forms\Components\TextInput::make('seo_title')
-                            ->label('SEO 標題')
-                            ->maxLength(255)
-                            ->helperText('留空將使用上方的標題'),
-                            
-                        Forms\Components\Textarea::make('seo_description')
-                            ->label('SEO 描述')
-                            ->rows(3),
-                            
-                        Forms\Components\TextInput::make('seo_keywords')
-                            ->label('SEO 關鍵字')
-                            ->placeholder('以逗號分隔關鍵字')
-                            ->maxLength(255),
-                    ])->columnSpanFull(),
             ]);
     }
 
@@ -102,6 +98,10 @@ class AboutResource extends Resource
                     
                 Tables\Columns\ImageColumn::make('image')
                     ->label('圖片'),
+                    
+                Tables\Columns\TextColumn::make('order')
+                    ->label('排序')
+                    ->sortable(),
                     
                 Tables\Columns\IconColumn::make('is_active')
                     ->label('狀態')
@@ -127,7 +127,8 @@ class AboutResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->defaultSort('order', 'asc');
     }
 
     public static function getRelations(): array
@@ -140,9 +141,9 @@ class AboutResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListAbouts::route('/'),
-            'create' => Pages\CreateAbout::route('/create'),
-            'edit' => Pages\EditAbout::route('/{record}/edit'),
+            'index' => Pages\ListBanners::route('/'),
+            'create' => Pages\CreateBanner::route('/create'),
+            'edit' => Pages\EditBanner::route('/{record}/edit'),
         ];
     }
 } 

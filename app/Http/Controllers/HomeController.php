@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Setting;
+use App\Models\Banner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -11,9 +12,12 @@ class HomeController extends Controller
     public function index()
     {
         $setting = Setting::first();
+        $banners = Banner::where('is_active', true)
+            ->orderBy('order')
+            ->get();
         $response = Http::withoutVerifying()->get(route('api.v1.about'));
         $about = $response->json();
-        return view('home', compact('setting', 'about'));
+        return view('home', compact('setting', 'about', 'banners'));
     }
 
     public function about()

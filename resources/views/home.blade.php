@@ -6,35 +6,25 @@
 <!-- 輪播圖 -->
 <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-indicators">
-        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="0" class="active"></button>
-        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="1"></button>
-        <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="2"></button>
+        @foreach($banners as $key => $banner)
+            <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="{{ $key }}" class="{{ $key === 0 ? 'active' : '' }}"></button>
+        @endforeach
     </div>
     <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="{{ asset('images/slider/slide1.jpg') }}" class="d-block w-100" alt="國際學生管理系統">
-            <div class="carousel-caption">
-                <h2>專業的國際學生管理系統</h2>
-                <p>為您的學校提供完整的學生管理解決方案</p>
-                <a href="{{ route('contact') }}" class="btn btn-primary">立即諮詢</a>
+        @foreach($banners as $key => $banner)
+            <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
+                <img src="{{ Storage::url($banner->image) }}" class="d-block w-100" alt="{{ $banner->title }}">
+                <div class="carousel-caption">
+                    <h2>{{ $banner->title }}</h2>
+                    @if($banner->description)
+                        <p>{{ $banner->description }}</p>
+                    @endif
+                    @if($banner->button_text && $banner->button_link)
+                        <a href="{{ $banner->button_link }}" class="btn btn-primary">{{ $banner->button_text }}</a>
+                    @endif
+                </div>
             </div>
-        </div>
-        <div class="carousel-item">
-            <img src="{{ asset('images/slider/slide2.jpg') }}" class="d-block w-100" alt="多元文化">
-            <div class="carousel-caption">
-                <h2>多元文化學習環境</h2>
-                <p>打造國際化的學習氛圍</p>
-                <a href="{{ route('about') }}" class="btn btn-primary">了解更多</a>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <img src="{{ asset('images/slider/slide3.jpg') }}" class="d-block w-100" alt="專業服務">
-            <div class="carousel-caption">
-                <h2>全方位的專業服務</h2>
-                <p>從入學到畢業，我們全程陪伴</p>
-                <a href="{{ route('services') }}" class="btn btn-primary">查看服務</a>
-            </div>
-        </div>
+        @endforeach
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon"></span>
