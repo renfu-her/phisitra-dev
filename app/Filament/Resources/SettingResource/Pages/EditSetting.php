@@ -53,12 +53,19 @@ class EditSetting extends Page
                             ->label('網站 Logo')
                             ->image()
                             ->directory('settings')
-                            ->imageEditor(),
+                            ->imageEditor()
+                            ->imageResizeMode('cover')
+                            ->imageCropAspectRatio('16:9'),
                         FileUpload::make('favicon')
                             ->label('網站 Favicon')
                             ->image()
                             ->directory('settings')
-                            ->imageEditor(),
+                            ->imageEditor()
+                            ->imageResizeMode('cover')
+                            ->imageCropAspectRatio('1:1')
+                            ->imageResizeTargetWidth('200')
+                            ->imageResizeTargetHeight('200')
+                            ->imagePreviewHeight('200'),
                     ])->columns(2),
 
                 Section::make('SEO 設定')
