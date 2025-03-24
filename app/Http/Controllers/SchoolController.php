@@ -11,14 +11,14 @@ class SchoolController extends Controller
 {
     public function index()
     {
-        $response = Http::get(route('api.v1.schools'));
+        $response = Http::withoutVerifying()->get(route('api.v1.schools'));
         $schools = $response->json();
         return view('schools.index', compact('schools'));
     }
 
     public function gallery()
     {
-        $response = Http::get(route('api.v1.highlights'));
+        $response = Http::withoutVerifying()->get(route('api.v1.highlights'));
         $galleries = $response->json();
         return view('schools.gallery', compact('galleries'));
     }

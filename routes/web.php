@@ -15,6 +15,10 @@ Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// 登入相關路由
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+
 Route::prefix('schools')->group(function () {
     Route::get('/', [SchoolController::class, 'index'])->name('schools');
     Route::get('/gallery', [SchoolController::class, 'gallery'])->name('schools.gallery');

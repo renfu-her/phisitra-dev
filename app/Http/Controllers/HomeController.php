@@ -11,19 +11,21 @@ class HomeController extends Controller
     public function index()
     {
         $setting = Setting::first();
-        return view('home', compact('setting'));
+        $response = Http::withoutVerifying()->get(route('api.v1.about'));
+        $about = $response->json();
+        return view('home', compact('setting', 'about'));
     }
 
     public function about()
     {
-        $response = Http::get(route('api.v1.about'));
+        $response = Http::withoutVerifying()->get(route('api.v1.about'));
         $about = $response->json();
         return view('about', compact('about'));
     }
 
     public function contact()
     {
-        $response = Http::get(route('api.v1.contact'));
+        $response = Http::withoutVerifying()->get(route('api.v1.contact'));
         $contact = $response->json();
         return view('contact', compact('contact'));
     }
@@ -37,15 +39,18 @@ class HomeController extends Controller
             'message' => 'required|string',
         ]);
 
-        // TODO: 實作寄信功能
-        // Mail::to(config('mail.from.address'))->send(new ContactFormMail($validated));
+        $response = Http::withoutVerifying()->post(route('api.v1.contact.send'), $validated);
 
-        return redirect()->back()->with('success', '訊息已成功送出，我們會盡快與您聯繫！');
+        if ($response->successful()) {
+            return back()->with('success', '訊息已成功發送！');
+        }
+
+        return back()->with('error', '發送失敗，請稍後再試。');
     }
 
     public function services()
     {
-        $response = Http::get(route('api.v1.services'));
+        $response = Http::withoutVerifying()->get(route('api.v1.services'));
         $services = $response->json();
         return view('services', compact('services'));
     }

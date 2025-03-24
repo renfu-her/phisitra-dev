@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 
@@ -10,7 +11,7 @@ class ProfileController extends Controller
 {
     public function index()
     {
-        $response = Http::get(route('api.v1.members'));
+        $response = Http::withoutVerifying()->get(route('api.v1.members'));
         $members = $response->json();
         return view('profile', compact('members'));
     }
@@ -36,7 +37,7 @@ class ProfileController extends Controller
             $data['password'] = bcrypt($request->password);
         }
 
-        $response = Http::put(route('api.v1.members.update'), $data);
+        $response = Http::withoutVerifying()->put(route('api.v1.members.update'), $data);
 
         if ($response->successful()) {
             return redirect()->route('profile')->with('success', '個人資料已更新');
