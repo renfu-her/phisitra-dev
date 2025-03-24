@@ -18,12 +18,7 @@ class SchoolHighlight extends Model
         'description',
         'media_type',
         'media_path',
-        'highlight_date',
         'sort_order'
-    ];
-
-    protected $casts = [
-        'highlight_date' => 'date:Y-m-d',
     ];
 
     protected static function boot()
