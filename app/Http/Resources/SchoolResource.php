@@ -14,6 +14,7 @@ class SchoolResource extends JsonResource
             'name' => $this->name,
             'country' => $this->country,
             'description' => $this->description,
+            'logo' => $this->logo,
         ];
     }
 } 
