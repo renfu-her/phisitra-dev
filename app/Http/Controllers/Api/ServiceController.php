@@ -12,8 +12,16 @@ class ServiceController extends Controller
     {
         $services = Service::orderBy('id')->get();
         
+        if ($services->isEmpty()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'No services found',
+                'data' => []
+            ]);
+        }
+        
         return response()->json([
-            'success' => true,
+            'status' => true,
             'message' => 'Successfully retrieved services list',
             'data' => ServiceResource::collection($services)
         ]);
@@ -21,8 +29,16 @@ class ServiceController extends Controller
     
     public function show(Service $service)
     {
+        if (!$service) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Service not found',
+                'data' => null
+            ]);
+        }
+        
         return response()->json([
-            'success' => true,
+            'status' => true,
             'message' => 'Successfully retrieved service details',
             'data' => new ServiceResource($service)
         ]);

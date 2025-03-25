@@ -10,10 +10,18 @@ class MemberController extends Controller
 {
     public function index()
     {
-        $members = Member::with('students')->orderBy('id')->get();
+        $members = Member::orderBy('id')->get();
+        
+        if ($members->isEmpty()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'No members found',
+                'data' => []
+            ]);
+        }
         
         return response()->json([
-            'success' => true,
+            'status' => true,
             'message' => 'Successfully retrieved members list',
             'data' => MemberResource::collection($members)
         ]);

@@ -12,8 +12,16 @@ class SchoolController extends Controller
     {
         $schools = School::orderBy('id')->get();
         
+        if ($schools->isEmpty()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'No schools found',
+                'data' => []
+            ]);
+        }
+        
         return response()->json([
-            'success' => true,
+            'status' => true,
             'message' => 'Successfully retrieved schools list',
             'data' => SchoolResource::collection($schools)
         ]);

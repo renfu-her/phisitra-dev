@@ -10,10 +10,18 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $students = Student::with('members')->orderBy('id')->get();
+        $students = Student::orderBy('id')->get();
+        
+        if ($students->isEmpty()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'No students found',
+                'data' => []
+            ]);
+        }
         
         return response()->json([
-            'success' => true,
+            'status' => true,
             'message' => 'Successfully retrieved students list',
             'data' => StudentResource::collection($students)
         ]);

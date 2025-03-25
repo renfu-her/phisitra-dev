@@ -14,14 +14,14 @@ class ContactController extends Controller
         
         if (!$contact) {
             return response()->json([
-                'success' => false,
+                'status' => false,
                 'message' => 'Contact information not found',
                 'data' => null
-            ], 404);
+            ]);
         }
         
         return response()->json([
-            'success' => true,
+            'status' => true,
             'message' => 'Successfully retrieved contact information',
             'data' => new ContactResource($contact)
         ]);

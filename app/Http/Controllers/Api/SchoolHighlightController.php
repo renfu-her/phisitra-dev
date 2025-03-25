@@ -10,11 +10,19 @@ class SchoolHighlightController extends Controller
 {
     public function index()
     {
-        $highlights = SchoolHighlight::orderBy('sort_order')->get();
+        $highlights = SchoolHighlight::orderBy('id')->get();
+        
+        if ($highlights->isEmpty()) {
+            return response()->json([
+                'status' => false,
+                'message' => 'No school highlights found',
+                'data' => []
+            ]);
+        }
         
         return response()->json([
-            'success' => true,
-            'message' => 'Successfully retrieved highlights list',
+            'status' => true,
+            'message' => 'Successfully retrieved school highlights list',
             'data' => SchoolHighlightResource::collection($highlights)
         ]);
     }
