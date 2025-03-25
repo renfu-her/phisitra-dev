@@ -3,119 +3,272 @@
 @section('title', $setting->meta_title ?? config('app.name'))
 
 @section('content')
-<!-- 輪播圖 -->
-<div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
-    <div class="carousel-indicators">
-        @foreach($banners as $key => $banner)
-            <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="{{ $key }}" class="{{ $key === 0 ? 'active' : '' }}"></button>
-        @endforeach
-    </div>
-    <div class="carousel-inner">
-        @foreach($banners as $key => $banner)
-            <div class="carousel-item {{ $key === 0 ? 'active' : '' }}" style="height: 450px;">
-                <img src="{{ Storage::url($banner->image) }}" class="d-block w-100 h-100" alt="{{ $banner->title }}" style="object-fit: cover;">
-                <div class="carousel-caption">
-                    <h2>{{ $banner->title }}</h2>
-                    @if($banner->description)
-                        <p>{{ $banner->description }}</p>
-                    @endif
-                    @if($banner->button_text && $banner->button_link)
-                        <a href="{{ $banner->button_link }}" class="btn btn-primary">{{ $banner->button_text }}</a>
-                    @endif
+<!--Slider Area Start-->
+<div class="slider-area">
+    <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            @foreach($banners as $key => $banner)
+                <button type="button" data-bs-target="#mainCarousel" data-bs-slide-to="{{ $key }}" class="{{ $key === 0 ? 'active' : '' }}"></button>
+            @endforeach
+        </div>
+        <div class="carousel-inner">
+            @foreach($banners as $key => $banner)
+                <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
+                    <img src="{{ Storage::url($banner->image) }}" class="d-block w-100" alt="{{ $banner->title }}">
+                    <div class="banner-content">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-7 col-md-7">
+                                    <div class="text-content">
+                                        <h1 class="title1">{{ $banner->title }}</h1>
+                                        @if($banner->description)
+                                            <p class="sub-title">{{ $banner->description }}</p>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        @endforeach
+            @endforeach
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
     </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#mainCarousel" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#mainCarousel" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </button>
 </div>
+<!--End of Slider Area-->
 
-<!-- 特色服務 -->
-<section class="py-5">
+<!--Activity Area Start-->
+<div class="activity-area">
     <div class="container">
-        <h2 class="text-center mb-5">我們的特色服務</h2>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card h-100 text-center">
-                    <div class="card-body">
-                        <i class="fas fa-user-graduate fa-3x text-primary mb-3"></i>
-                        <h3 class="card-title">學生管理</h3>
-                        <p class="card-text">完整的學生資料管理系統，包括個人資料、學籍資料、成績記錄等。</p>
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6 activity">
+                <div class="single-activity">
+                    <div class="single-activity-icon">
+                        <i class="fa fa-user-graduate"></i>
                     </div>
+                    <h4>學生管理</h4>
+                    <p>完整的學生資料管理系統，包括個人資料、學籍資料、成績記錄等。</p>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card h-100 text-center">
-                    <div class="card-body">
-                        <i class="fas fa-book fa-3x text-primary mb-3"></i>
-                        <h3 class="card-title">課程管理</h3>
-                        <p class="card-text">協助安排課程、管理課表、追蹤出席狀況，確保學習品質。</p>
+            <div class="col-lg-3 col-md-6 col-sm-6 activity">
+                <div class="single-activity">
+                    <div class="single-activity-icon">
+                        <i class="fa fa-book"></i>
                     </div>
+                    <h4>課程管理</h4>
+                    <p>協助安排課程、管理課表、追蹤出席狀況，確保學習品質。</p>
                 </div>
             </div>
-            <div class="col-md-4">
-                <div class="card h-100 text-center">
-                    <div class="card-body">
-                        <i class="fas fa-hands-helping fa-3x text-primary mb-3"></i>
-                        <h3 class="card-title">生活輔導</h3>
-                        <p class="card-text">提供生活諮詢、心理輔導、文化適應等全方位支援服務。</p>
+            <div class="col-lg-3 col-md-6 col-sm-6 activity">
+                <div class="single-activity mrg-res-top-md">
+                    <div class="single-activity-icon">
+                        <i class="fa fa-hands-helping"></i>
                     </div>
+                    <h4>生活輔導</h4>
+                    <p>提供生活諮詢、心理輔導、文化適應等全方位支援服務。</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-6 activity">
+                <div class="single-activity mrg-res-top-md">
+                    <div class="single-activity-icon">
+                        <i class="fa fa-globe"></i>
+                    </div>
+                    <h4>國際交流</h4>
+                    <p>促進國際文化交流，擴展學生視野，提供多元學習機會。</p>
                 </div>
             </div>
         </div>
     </div>
-</section>
+</div>
+<!--End of Activity Area-->
 
-<!-- 合作學校 -->
-<section class="py-5 bg-light">
+<!--Class Area Start-->
+<div class="class-area section-padding">
     <div class="container">
-        <h2 class="text-center mb-5">合作學校</h2>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title-wrapper">
+                    <div class="section-title">
+                        <h3>合作學校</h3>
+                        <p>我們的合作夥伴</p>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row g-4">
             <div class="col-md-3 col-sm-6">
-                <div class="text-center">
-                    <img src="{{ asset('images/schools/school1.png') }}" alt="合作學校" class="img-fluid mb-3" style="max-height: 80px;">
+                <div class="single-class">
+                    <div class="single-class-image">
+                        <img src="{{ asset('images/schools/school1.png') }}" alt="合作學校" class="img-fluid">
+                    </div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
-                <div class="text-center">
-                    <img src="{{ asset('images/schools/school2.png') }}" alt="合作學校" class="img-fluid mb-3" style="max-height: 80px;">
+                <div class="single-class">
+                    <div class="single-class-image">
+                        <img src="{{ asset('images/schools/school2.png') }}" alt="合作學校" class="img-fluid">
+                    </div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
-                <div class="text-center">
-                    <img src="{{ asset('images/schools/school3.png') }}" alt="合作學校" class="img-fluid mb-3" style="max-height: 80px;">
+                <div class="single-class">
+                    <div class="single-class-image">
+                        <img src="{{ asset('images/schools/school3.png') }}" alt="合作學校" class="img-fluid">
+                    </div>
                 </div>
             </div>
             <div class="col-md-3 col-sm-6">
-                <div class="text-center">
-                    <img src="{{ asset('images/schools/school4.png') }}" alt="合作學校" class="img-fluid mb-3" style="max-height: 80px;">
+                <div class="single-class">
+                    <div class="single-class-image">
+                        <img src="{{ asset('images/schools/school4.png') }}" alt="合作學校" class="img-fluid">
+                    </div>
                 </div>
             </div>
         </div>
         <div class="text-center mt-4">
-            <a href="{{ route('schools') }}" class="btn btn-outline-primary">查看更多合作學校</a>
+            <a href="{{ route('schools') }}" class="button-default">查看更多合作學校</a>
         </div>
     </div>
-</section>
+</div>
+<!--End of Class Area-->
 
-<!-- 聯絡我們 -->
-<section class="py-5">
+<!--Contact Area Start-->
+<div class="newsletter-area">
     <div class="container">
-        <div class="row align-items-center">
+        <div class="row">
             <div class="col-lg-6">
-                <h2 class="mb-4">需要協助？</h2>
-                <p class="lead">我們提供專業的諮詢服務，協助您解決所有問題。</p>
-                <p>無論是學校管理、學生服務，或是其他相關問題，我們都樂意為您提供協助。</p>
-                <a href="{{ route('contact') }}" class="btn btn-primary">聯絡我們</a>
+                <div class="contact-info">
+                    <h2>需要協助？</h2>
+                    <p class="lead">我們提供專業的諮詢服務，協助您解決所有問題。</p>
+                    <p>無論是學校管理、學生服務，或是其他相關問題，我們都樂意為您提供協助。</p>
+                    <a href="{{ route('contact') }}" class="button-default">聯絡我們</a>
+                </div>
             </div>
             <div class="col-lg-6">
-                <img src="{{ asset('images/contact.jpg') }}" alt="聯絡我們" class="img-fluid rounded shadow">
+                <form class="newsletter-container">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h4>立即諮詢</h4>
+                        </div>
+                        <div class="col-lg-6">
+                            <input type="text" name="name" placeholder="您的姓名">
+                            <input type="email" name="email" placeholder="電子郵件">
+                            <input type="text" name="subject" placeholder="主旨">
+                        </div>
+                        <div class="col-lg-6">
+                            <textarea name="message" placeholder="您的訊息"></textarea>
+                            <button type="submit" class="button-default">送出</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</section>
-@endsection 
+</div>
+<!--End of Contact Area-->
+@endsection
+
+@push('styles')
+<style>
+.slider-area {
+    position: relative;
+}
+
+.slider-area .carousel-item {
+    height: 450px;
+}
+
+.slider-area .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banner-content {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.banner-content .title1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.banner-content .sub-title {
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.activity-area {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.single-activity {
+    text-align: center;
+    padding: 30px 20px;
+    background: #fff;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.single-activity:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.single-activity-icon {
+    font-size: 40px;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.button-default {
+    display: inline-block;
+    padding: 12px 30px;
+    background: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.button-default:hover {
+    background: #0056b3;
+    color: #fff;
+}
+
+.newsletter-area {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.newsletter-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.newsletter-container input,
+.newsletter-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.newsletter-container textarea {
+    height: 120px;
+}
+</style>
+@endpush 
