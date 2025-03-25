@@ -44,11 +44,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="about-image">
-                                            <img src="{{ Storage::url($item['image']) }}" alt="{{ $item['title'] }}" class="img-fluid rounded shadow">
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
