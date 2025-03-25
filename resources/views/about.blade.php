@@ -55,47 +55,6 @@
                     </div>
                     @endforeach
 
-                    <!-- 我們的優勢 -->
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#featuresCollapse">
-                                我們的優勢
-                            </button>
-                        </h2>
-                        <div id="featuresCollapse" class="accordion-collapse collapse" data-bs-parent="#aboutAccordion">
-                            <div class="accordion-body">
-                                <div class="row">
-                                    <div class="col-lg-4 col-md-6">
-                                        <div class="single-feature">
-                                            <div class="feature-icon">
-                                                <i class="fas fa-award"></i>
-                                            </div>
-                                            <h4>專業團隊</h4>
-                                            <p>擁有豐富的教育經驗和專業知識，為學生提供最優質的服務。</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6">
-                                        <div class="single-feature">
-                                            <div class="feature-icon">
-                                                <i class="fas fa-globe"></i>
-                                            </div>
-                                            <h4>國際視野</h4>
-                                            <p>與世界各地的優質學校合作，為學生開啟國際教育的大門。</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-6">
-                                        <div class="single-feature">
-                                            <div class="feature-icon">
-                                                <i class="fas fa-users"></i>
-                                            </div>
-                                            <h4>個性化服務</h4>
-                                            <p>根據每位學生的需求提供量身定制的教育規劃和建議。</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
