@@ -11,17 +11,20 @@
             @foreach($schools['data'] as $school)
             <div class="col-md-4">
                 <div class="card h-100">
-                    <img src="{{ asset('storage/' . $school['logo']) }}" class="card-img-top" alt="{{ $school['name'] }}" style="height: 200px; object-fit: contain;">
+                    <div class="school-image">
+                        <img src="{{ asset('storage/' . $school['logo']) }}" alt="{{ $school['name'] }}">
+                    </div>
                     <div class="card-body">
                         <h5 class="card-title">{{ $school['name'] }}</h5>
-                        <p class="card-text">{{ $school['description'] }}</p>
                         <div class="d-flex align-items-center mb-2">
                             <i class="fas fa-map-marker-alt text-primary me-2"></i>
                             <span>{{ $school['location'] }}</span>
                         </div>
+                        @if($school['website_url'])
                         <a href="{{ $school['website_url'] }}" class="btn btn-outline-primary" target="_blank">
                             <i class="fas fa-external-link-alt me-2"></i>訪問網站
                         </a>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -40,4 +43,24 @@
         </div>
     @endif
 </div>
-@endsection 
+@endsection
+
+@push('styles')
+<style>
+.school-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.school-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+}
+</style>
+@endpush 
