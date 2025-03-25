@@ -24,70 +24,84 @@
 <!--About Area Start-->
 <div class="about-area section-padding">
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6">
-                <div class="about-content">
-                    <h2>{{ $about['data']['title'] }}</h2>
-                    <div class="about-text">
-                        {!! $about['data']['content'] !!}
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="accordion" id="aboutAccordion">
+                    @foreach($about['data'] as $index => $item)
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button {{ $index === 0 ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $index }}">
+                                {{ $item['title'] }}
+                            </button>
+                        </h2>
+                        <div id="collapse{{ $index }}" class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}" data-bs-parent="#aboutAccordion">
+                            <div class="accordion-body">
+                                <div class="row align-items-center">
+                                    <div class="col-lg-6">
+                                        <div class="about-content">
+                                            <div class="about-text">
+                                                {!! $item['content'] !!}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="about-image">
+                                            <img src="{{ Storage::url($item['image']) }}" alt="{{ $item['title'] }}" class="img-fluid rounded shadow">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="about-image">
-                    <img src="{{ Storage::url($about['data']['image']) }}" alt="關於我們" class="img-fluid rounded shadow">
+                    @endforeach
+
+                    <!-- 我們的優勢 -->
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#featuresCollapse">
+                                我們的優勢
+                            </button>
+                        </h2>
+                        <div id="featuresCollapse" class="accordion-collapse collapse" data-bs-parent="#aboutAccordion">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="single-feature">
+                                            <div class="feature-icon">
+                                                <i class="fas fa-award"></i>
+                                            </div>
+                                            <h4>專業團隊</h4>
+                                            <p>擁有豐富的教育經驗和專業知識，為學生提供最優質的服務。</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="single-feature">
+                                            <div class="feature-icon">
+                                                <i class="fas fa-globe"></i>
+                                            </div>
+                                            <h4>國際視野</h4>
+                                            <p>與世界各地的優質學校合作，為學生開啟國際教育的大門。</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="single-feature">
+                                            <div class="feature-icon">
+                                                <i class="fas fa-users"></i>
+                                            </div>
+                                            <h4>個性化服務</h4>
+                                            <p>根據每位學生的需求提供量身定制的教育規劃和建議。</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <!--End of About Area-->
-
-<!--Feature Area Start-->
-<div class="feature-area section-padding section-gray">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="section-title-wrapper">
-                    <div class="section-title">
-                        <h3>我們的優勢</h3>
-                        <p>為什麼選擇我們</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="single-feature">
-                    <div class="feature-icon">
-                        <i class="fas fa-award"></i>
-                    </div>
-                    <h4>專業團隊</h4>
-                    <p>{{ $about['data']['team_description'] ?? '擁有豐富的教育經驗和專業知識，為學生提供最優質的服務。' }}</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-feature">
-                    <div class="feature-icon">
-                        <i class="fas fa-globe"></i>
-                    </div>
-                    <h4>國際視野</h4>
-                    <p>{{ $about['data']['international_description'] ?? '與世界各地的優質學校合作，為學生開啟國際教育的大門。' }}</p>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-feature">
-                    <div class="feature-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h4>個性化服務</h4>
-                    <p>{{ $about['data']['service_description'] ?? '根據每位學生的需求提供量身定制的教育規劃和建議。' }}</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--End of Feature Area-->
 @else
 <div class="container py-5">
     <div class="text-center">
@@ -109,9 +123,8 @@
     padding: 80px 0;
 }
 
-.about-content h2 {
+.about-content {
     margin-bottom: 30px;
-    color: #333;
 }
 
 .about-text {
@@ -121,11 +134,6 @@
 
 .about-image img {
     width: 100%;
-}
-
-.feature-area {
-    background: #f8f9fa;
-    padding: 80px 0;
 }
 
 .single-feature {
@@ -158,8 +166,14 @@
     margin-bottom: 0;
 }
 
-.section-gray {
-    background: #f8f9fa;
+.accordion-button:not(.collapsed) {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(0,0,0,.125);
 }
 </style>
 @endpush 
