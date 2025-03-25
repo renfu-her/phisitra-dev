@@ -9,8 +9,8 @@
         
         <div class="bg-white rounded-lg shadow-lg p-8">
             <div class="mb-6">
-                <h2 class="text-2xl font-semibold mb-2">{{ $contact->name_zh }}</h2>
-                <p class="text-gray-600 mb-4">{{ $contact->name_en }}</p>
+                <h2 class="text-2xl font-semibold mb-2">{{ $contact['data']['name_zh'] }}</h2>
+                <p class="text-gray-600 mb-4">{{ $contact['data']['name_en'] }}</p>
             </div>
 
             <div class="space-y-4">
@@ -21,7 +21,7 @@
                     </svg>
                     <div>
                         <h3 class="font-semibold mb-1">地址</h3>
-                        <p class="text-gray-600">{{ $contact->address }}</p>
+                        <p class="text-gray-600">{{ $contact['data']['address'] }}</p>
                     </div>
                 </div>
 
@@ -31,7 +31,7 @@
                     </svg>
                     <div>
                         <h3 class="font-semibold mb-1">電話</h3>
-                        <p class="text-gray-600">{{ $contact->phone }}</p>
+                        <p class="text-gray-600">{{ $contact['data']['phone'] }}</p>
                     </div>
                 </div>
 
@@ -41,7 +41,7 @@
                     </svg>
                     <div>
                         <h3 class="font-semibold mb-1">傳真</h3>
-                        <p class="text-gray-600">{{ $contact->fax }}</p>
+                        <p class="text-gray-600">{{ $contact['data']['fax'] }}</p>
                     </div>
                 </div>
 
@@ -51,7 +51,7 @@
                     </svg>
                     <div>
                         <h3 class="font-semibold mb-1">Email</h3>
-                        <p class="text-gray-600">{{ $contact->email }}</p>
+                        <p class="text-gray-600">{{ $contact['data']['email'] }}</p>
                     </div>
                 </div>
             </div>
@@ -61,7 +61,7 @@
 @endsection
 
 @section('meta')
-<title>{{ $contact->seo_title ?? '聯絡我們' }}</title>
-<meta name="description" content="{{ $contact->seo_description }}">
-<meta name="keywords" content="{{ $contact->seo_keywords }}">
+<title>{{ $contact['data']['seo_title'] ?? '聯絡我們' }}</title>
+<meta name="description" content="{{ $contact['data']['seo_description'] }}">
+<meta name="keywords" content="{{ $contact['data']['seo_keywords'] }}">
 @endsection 
