@@ -71,6 +71,31 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- 聯絡表單 -->
+                    <div class="mt-5">
+                        <h2 class="h4 mb-4">聯絡表單</h2>
+                        <form action="{{ route('contact.store') }}" method="POST">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="name" class="form-label">姓名</label>
+                                <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">電子郵件</label>
+                                <input type="email" class="form-control" id="email" name="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="subject" class="form-label">主旨</label>
+                                <input type="text" class="form-control" id="subject" name="subject" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">訊息內容</label>
+                                <textarea class="form-control" id="message" name="message" rows="5" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">送出訊息</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
