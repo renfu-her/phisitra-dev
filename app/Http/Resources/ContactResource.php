@@ -11,9 +11,17 @@ class ContactResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'name_zh' => $this->name_zh,
+            'name_en' => $this->name_en,
             'address' => $this->address,
             'phone' => $this->phone,
+            'fax' => $this->fax,
             'email' => $this->email,
+            'seo' => [
+                'title' => $this->seo_title,
+                'description' => $this->seo_description,
+                'keywords' => $this->seo_keywords,
+            ],
         ];
     }
 } 
