@@ -205,13 +205,7 @@
     <footer class="footer-area">
         <div class="container">
             <div class="row">
-                <div class="col-lg-4 col-md-6">
-                    <div class="footer-widget">
-                        <h4>關於我們</h4>
-                        <p>{{ $setting->description ?? '' }}</p>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-6">
+                <div class="col-lg-6 col-md-6">
                     <div class="footer-widget">
                         <h4>快速連結</h4>
                         <ul>
@@ -222,7 +216,7 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-6 col-md-6">
                     <div class="footer-widget">
                         <h4>聯絡資訊</h4>
                         <ul>
@@ -231,22 +225,6 @@
                             <li><i class="fas fa-fax"></i> {{ $contact->fax ?? '' }}</li>
                             <li><i class="fas fa-envelope"></i> {{ $contact->email ?? '' }}</li>
                         </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="footer-widget">
-                        <h4>追蹤我們</h4>
-                        <div class="social-links">
-                            @if($setting->facebook ?? '')
-                                <a href="{{ $setting->facebook }}" target="_blank"><i class="fab fa-facebook"></i></a>
-                            @endif
-                            @if($setting->instagram ?? '')
-                                <a href="{{ $setting->instagram }}" target="_blank"><i class="fab fa-instagram"></i></a>
-                            @endif
-                            @if($setting->line ?? '')
-                                <a href="{{ $setting->line }}" target="_blank"><i class="fab fa-line"></i></a>
-                            @endif
-                        </div>
                     </div>
                 </div>
             </div>
