@@ -46,49 +46,6 @@
     </div>
 </div>
 <!--End of Service Area-->
-
-<!--Contact Area Start-->
-<div class="contact-area section-padding section-gray">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="section-title-wrapper">
-                    <div class="section-title">
-                        <h3>需要協助？</h3>
-                        <p>聯絡我們了解更多服務細節</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="contact-form">
-                    <form action="{{ route('contact.store') }}" method="POST">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="text" name="name" placeholder="您的姓名" required>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="email" name="email" placeholder="電子郵件" required>
-                            </div>
-                            <div class="col-md-12">
-                                <input type="text" name="subject" placeholder="主旨" required>
-                            </div>
-                            <div class="col-md-12">
-                                <textarea name="message" placeholder="您的訊息" required></textarea>
-                            </div>
-                            <div class="col-md-12 text-center">
-                                <button type="submit" class="button-default">送出訊息</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--End of Contact Area-->
 @else
 <div class="container py-5">
     <div class="text-center">
@@ -108,6 +65,7 @@
 
 .service-area {
     padding: 80px 0;
+    background: #f8f9fa;
 }
 
 .single-service {
@@ -116,6 +74,7 @@
     border-radius: 10px;
     transition: all 0.3s ease;
     height: 100%;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
 .single-service:hover {
@@ -138,34 +97,6 @@
 .service-text {
     color: #666;
     line-height: 1.8;
-}
-
-.contact-area {
-    background: #f8f9fa;
-}
-
-.contact-form {
-    background: #fff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.contact-form textarea {
-    height: 150px;
-}
-
-.section-gray {
-    background: #f8f9fa;
 }
 </style>
 @endpush 
