@@ -85,9 +85,10 @@ class Student extends Model
         });
     }
 
-    public function members(): BelongsToMany
+    public function members()
     {
-        return $this->belongsToMany(Member::class)->withTimestamps();
+        return $this->belongsToMany(Member::class)
+            ->withTimestamps();
     }
 
     // 獲取公開資料

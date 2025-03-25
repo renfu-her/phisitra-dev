@@ -29,7 +29,7 @@ class Member extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function students(): BelongsToMany
+    public function students()
     {
         return $this->belongsToMany(Student::class)
             ->withTimestamps();

@@ -58,4 +58,11 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
     // 會員
     Route::get('members', [MemberController::class, 'index'])->name('members');
     Route::get('members/{member}', [MemberController::class, 'show'])->name('members.show');
+});
+
+// 學生相關路由
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/students', [App\Http\Controllers\Api\StudentController::class, 'index']);
+    Route::post('/students/{student}/toggle', [App\Http\Controllers\Api\StudentController::class, 'toggleStudent']);
+    Route::get('/students/selected', [App\Http\Controllers\Api\StudentController::class, 'getSelectedStudents']);
 }); 
