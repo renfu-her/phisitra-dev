@@ -11,6 +11,8 @@ class AboutController extends Controller
     public function index()
     {
         $about = About::orderBy('id')->where('is_active', 1)->get();
+
+        dd($about);
         
         if (!$about) {
             return response()->json([
