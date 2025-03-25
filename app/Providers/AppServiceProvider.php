@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Setting;
+use App\Models\Contact;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Cache;
@@ -28,7 +29,9 @@ class AppServiceProvider extends ServiceProvider
                 return Setting::first() ?? new Setting();
             });
             
+            $contact = Contact::where('id', 1)->first();
             $view->with('setting', $setting);
+            $view->with('contact', $contact);
         });
     }
 }

@@ -121,9 +121,9 @@
             <div class="row">
                 <div class="col-lg-7 col-md-8">
                     <div class="header-info">
-                        <span><i class="fas fa-map-marker-alt"></i>{{ $setting->address ?? '' }}</span>
-                        <span class="ms-3"><i class="fas fa-phone"></i>{{ $setting->phone ?? '' }}</span>
-                        <span class="ms-3"><i class="fas fa-envelope"></i>{{ $setting->email ?? '' }}</span>
+                        <span><i class="fas fa-map-marker-alt"></i>{{ $contact->address ?? '' }}</span>
+                        <span class="ms-3"><i class="fas fa-phone"></i>{{ $contact->phone ?? '' }}</span>
+                        <span class="ms-3"><i class="fas fa-envelope"></i>{{ $contact->email ?? '' }}</span>
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-4 text-end">
@@ -226,9 +226,10 @@
                     <div class="footer-widget">
                         <h4>聯絡資訊</h4>
                         <ul>
-                            <li><i class="fas fa-map-marker-alt"></i> {{ $setting->address ?? '' }}</li>
-                            <li><i class="fas fa-phone"></i> {{ $setting->phone ?? '' }}</li>
-                            <li><i class="fas fa-envelope"></i> {{ $setting->email ?? '' }}</li>
+                            <li><i class="fas fa-map-marker-alt"></i> {{ $contact->address ?? '' }}</li>
+                            <li><i class="fas fa-phone"></i> {{ $contact->phone ?? '' }}</li>
+                            <li><i class="fas fa-fax"></i> {{ $contact->fax ?? '' }}</li>
+                            <li><i class="fas fa-envelope"></i> {{ $contact->email ?? '' }}</li>
                         </ul>
                     </div>
                 </div>
