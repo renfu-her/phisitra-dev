@@ -15,9 +15,14 @@ class HomeController extends Controller
         $banners = Banner::where('is_active', true)
             ->orderBy('order')
             ->get();
-        $response = Http::withoutVerifying()->get(route('api.v1.about'));
-        $about = $response->json();
-        return view('home', compact('setting', 'about', 'banners'));
+            
+        $aboutResponse = Http::withoutVerifying()->get(route('api.v1.about'));
+        $about = $aboutResponse->json();
+        
+        $schoolsResponse = Http::withoutVerifying()->get(route('api.v1.schools'));
+        $schools = collect($schoolsResponse->json())->take(4);
+        
+        return view('home', compact('setting', 'about', 'banners', 'schools'));
     }
 
     public function about()

@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Setting;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Cache;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +22,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // 從快取中獲取設定，如果快取不存在則從資料庫獲取並快取
+        View::composer('*', function ($view) {
+            $setting = Cache::remember('site_settings', 3600, function () {
+                return Setting::first() ?? new Setting();
+            });
+            
+            $view->with('setting', $setting);
+        });
     }
 }

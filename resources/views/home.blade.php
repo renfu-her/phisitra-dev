@@ -101,34 +101,23 @@
             </div>
         </div>
         <div class="row g-4">
-            <div class="col-md-3 col-sm-6">
-                <div class="single-class">
-                    <div class="single-class-image">
-                        <img src="{{ asset('images/schools/school1.png') }}" alt="合作學校" class="img-fluid">
+            @foreach($schools as $school)
+                <div class="col-md-3 col-sm-6">
+                    <div class="single-class">
+                        <div class="single-class-image">
+                            <a href="{{ route('schools.show', $school['id']) }}">
+                                <img src="{{ Storage::url($school['logo']) }}" alt="{{ $school['name'] }}" class="img-fluid">
+                            </a>
+                        </div>
+                        <div class="single-class-text">
+                            <h4><a href="{{ route('schools.show', $school['id']) }}">{{ $school['name'] }}</a></h4>
+                            @if($school['location'])
+                                <p><i class="fas fa-map-marker-alt"></i> {{ $school['location'] }}</p>
+                            @endif
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="single-class">
-                    <div class="single-class-image">
-                        <img src="{{ asset('images/schools/school2.png') }}" alt="合作學校" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="single-class">
-                    <div class="single-class-image">
-                        <img src="{{ asset('images/schools/school3.png') }}" alt="合作學校" class="img-fluid">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6">
-                <div class="single-class">
-                    <div class="single-class-image">
-                        <img src="{{ asset('images/schools/school4.png') }}" alt="合作學校" class="img-fluid">
-                    </div>
-                </div>
-            </div>
+            @endforeach
         </div>
         <div class="text-center mt-4">
             <a href="{{ route('schools') }}" class="button-default">查看更多合作學校</a>

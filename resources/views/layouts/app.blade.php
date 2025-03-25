@@ -10,7 +10,7 @@
     <title>@yield('title', config('app.name'))</title>
 
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ Storage::url($setting->favicon ?? 'favicon.ico') }}">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
@@ -137,7 +137,7 @@
                 <div class="col-lg-3 col-md-12">
                     <div class="logo">
                         <a href="{{ route('home') }}">
-                            <img src="{{ asset('images/logo.png') }}" alt="{{ config('app.name') }}">
+                            <img src="{{ Storage::url($setting->logo ?? 'images/logo.png') }}" alt="{{ config('app.name') }}">
                         </a>
                     </div>
                 </div>
