@@ -93,6 +93,7 @@ class StudentResource extends Resource
                     
                 Forms\Components\Textarea::make('overseas_address')
                     ->label('海外地址')
+                    ->nullable()
                     ->rows(3),
                     
                 Forms\Components\TextInput::make('school_name')
