@@ -145,7 +145,7 @@
                     <h2>需要協助？</h2>
                     <p class="lead">我們提供專業的諮詢服務，協助您解決所有問題。</p>
                     <p>無論是學校管理、學生服務，或是其他相關問題，我們都樂意為您提供協助。</p>
-                    <a href="{{ route('contact') }}" class="button-default">聯絡我們</a>
+                    <a href="{{ route('contact.index') }}" class="button-default">聯絡我們</a>
                 </div>
             </div>
             <div class="col-lg-6">
