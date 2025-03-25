@@ -105,6 +105,6 @@
 
 @section('meta')
 <title>{{ $contact['data']['seo_title'] ?? '聯絡我們' }}</title>
-<meta name="description" content="{{ $contact['data']['seo_description'] }}">
-<meta name="keywords" content="{{ $contact['data']['seo_keywords'] }}">
+<meta name="description" content="{{ $contact['data']['seo_description'] ?? '' }}">
+<meta name="keywords" content="{{ $contact['data']['seo_keywords'] ?? '' }}">
 @endsection 
