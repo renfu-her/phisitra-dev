@@ -18,7 +18,12 @@ class SchoolHighlight extends Model
         'description',
         'media_type',
         'media_path',
-        'sort_order'
+        'sort_order',
+        'is_active'
+    ];
+
+    protected $casts = [
+        'is_active' => 'boolean'
     ];
 
     protected static function boot()

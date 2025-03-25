@@ -17,6 +17,7 @@ class SchoolHighlightResource extends JsonResource
             'media_type' => $this->media_type,
             'image' => $this->media_path,
             'sort_order' => $this->sort_order,
+            'is_active' => $this->is_active,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
