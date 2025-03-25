@@ -16,15 +16,20 @@
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">{{ $school['name'] }}</h5>
-                        <div class="d-flex align-items-center mb-2">
+                        <div class="d-flex align-items-center mb-3">
                             <i class="fas fa-map-marker-alt text-primary me-2"></i>
                             <span>{{ $school['location'] }}</span>
                         </div>
-                        @if($school['website_url'])
-                        <a href="{{ $school['website_url'] }}" class="btn btn-outline-primary" target="_blank">
-                            <i class="fas fa-external-link-alt me-2"></i>訪問網站
-                        </a>
-                        @endif
+                        <div class="d-flex gap-2">
+                            <a href="{{ route('schools.show', $school['id']) }}" class="btn btn-primary">
+                                <i class="fas fa-info-circle me-2"></i>瀏覽學校
+                            </a>
+                            @if($school['website_url'])
+                            <a href="{{ $school['website_url'] }}" class="btn btn-outline-primary" target="_blank">
+                                <i class="fas fa-external-link-alt me-2"></i>訪問網站
+                            </a>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
