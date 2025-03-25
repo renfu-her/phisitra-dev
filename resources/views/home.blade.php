@@ -209,13 +209,13 @@
 
 .activity-area {
     padding: 80px 0;
-    background: #f8f9fa;
+    background: #fff;
 }
 
 .single-activity {
     text-align: center;
     padding: 30px 20px;
-    background: #fff;
+    background: #f8f9fa;
     border-radius: 10px;
     transition: all 0.3s ease;
 }
@@ -248,13 +248,14 @@
 
 .newsletter-area {
     padding: 80px 0;
-    background: #f8f9fa;
+    background: #fff;
 }
 
 .newsletter-container {
-    background: #fff;
+    background: #f8f9fa;
     padding: 30px;
     border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
 }
 
 .newsletter-container input,
