@@ -34,8 +34,9 @@ class BackendPanelProvider extends PanelProvider
             ->navigationGroups([
                 '網站管理',
                 '合作學校',
-                '會員管理',
                 '學生管理',
+                '會員管理',
+                '系統設定'
             ])
             ->defaultThemeMode(ThemeMode::Light)
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
