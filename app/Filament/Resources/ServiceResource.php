@@ -38,8 +38,33 @@ class ServiceResource extends Resource
                 Forms\Components\FileUpload::make('image')
                     ->label('圖片')
                     ->image()
+                    ->imageEditor()
                     ->directory('services')
-                    ->columnSpanFull(),
+                    ->columnSpanFull()
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->downloadable()
+                    ->openable()
+                    ->getUploadedFileNameForStorageUsing(
+                        fn($file): string => (string) str(Str::uuid7() . '.webp')
+                    )
+                    ->saveUploadedFileUsing(function ($file) {
+                        $manager = new ImageManager(new Driver());
+                        $image = $manager->read($file);
+                        $image->cover(800, 600);
+                        $filename = Str::uuid7()->toString() . '.webp';
+
+                        if (!file_exists(storage_path('app/public/services'))) {
+                            mkdir(storage_path('app/public/services'), 0755, true);
+                        }
+
+                        $image->toWebp(80)->save(storage_path('app/public/services/' . $filename));
+                        return 'services/' . $filename;
+                    })
+                    ->deleteUploadedFileUsing(function ($file) {
+                        if ($file) {
+                            Storage::disk('public')->delete($file);
+                        }
+                    }),
                     
                 Forms\Components\RichEditor::make('description')
                     ->label('描述')
@@ -88,7 +113,11 @@ class ServiceResource extends Resource
             ])
             ->defaultSort('order')
             ->filters([
-                //
+                Tables\Filters\TernaryFilter::make('is_active')
+                    ->label('狀態')
+                    ->trueLabel('啟用')
+                    ->falseLabel('停用')
+                    ->placeholder('全部'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
