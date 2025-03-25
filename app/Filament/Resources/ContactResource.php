@@ -12,8 +12,12 @@ class ContactResource extends Resource
 {
     protected static ?string $model = Contact::class;
     protected static ?string $navigationIcon = 'heroicon-o-information-circle';
+    
+    protected static ?string $navigationGroup = '網站管理';
     protected static ?string $navigationLabel = '聯絡資訊';
     protected static ?string $modelLabel = '聯絡資訊';
+
+    protected static ?int $navigationSort = 4;
     protected static bool $shouldRegisterNavigation = true;
 
     public static function form(Form $form): Form
@@ -56,8 +60,17 @@ class ContactResource extends Resource
 
     public static function getPages(): array
     {
+        $contact = Contact::first() ?? Contact::create([
+            'name_zh' => '品閎投資有限公司',
+            'name_en' => 'PING HUNG INVESTMENT CO. LTD.',
+            'address' => '台北市中山區復興北路58號12樓',
+            'phone' => '(02) 8772-3812',
+            'fax' => '(02) 2775-2373',
+            'email' => 'phi87723812@gmail.com'
+        ]);
+
         return [
-            'edit' => Pages\EditContact::route('/edit/{record}'),
+            'index' => Pages\EditContact::route('/'),
         ];
     }
 } 
