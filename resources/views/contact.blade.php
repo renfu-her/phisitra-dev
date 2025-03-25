@@ -3,281 +3,65 @@
 @section('title', '聯絡我們 - ' . config('app.name'))
 
 @section('content')
-@if($contact['status'] ?? false)
-<!--Page Title Area Start-->
-<div class="page-title-area section-padding" style="background: #f8f9fa;">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="section-title-wrapper">
-                    <div class="section-title">
-                        <h3>聯絡我們</h3>
-                        <p>我們期待聽到您的聲音</p>
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-8 text-center">聯絡我們</h1>
+        
+        <div class="bg-white rounded-lg shadow-lg p-8">
+            <div class="mb-6">
+                <h2 class="text-2xl font-semibold mb-2">{{ $contact->name_zh }}</h2>
+                <p class="text-gray-600 mb-4">{{ $contact->name_en }}</p>
+            </div>
+
+            <div class="space-y-4">
+                <div class="flex items-start">
+                    <svg class="w-6 h-6 text-gray-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <div>
+                        <h3 class="font-semibold mb-1">地址</h3>
+                        <p class="text-gray-600">{{ $contact->address }}</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start">
+                    <svg class="w-6 h-6 text-gray-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                    </svg>
+                    <div>
+                        <h3 class="font-semibold mb-1">電話</h3>
+                        <p class="text-gray-600">{{ $contact->phone }}</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start">
+                    <svg class="w-6 h-6 text-gray-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"/>
+                    </svg>
+                    <div>
+                        <h3 class="font-semibold mb-1">傳真</h3>
+                        <p class="text-gray-600">{{ $contact->fax }}</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start">
+                    <svg class="w-6 h-6 text-gray-600 mr-3 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    </svg>
+                    <div>
+                        <h3 class="font-semibold mb-1">Email</h3>
+                        <p class="text-gray-600">{{ $contact->email }}</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!--End of Page Title Area-->
-
-<!--Contact Info Area Start-->
-<div class="contact-info-area section-padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4 col-md-6">
-                <div class="single-contact-info">
-                    <div class="contact-icon">
-                        <i class="fas fa-map-marker-alt"></i>
-                    </div>
-                    <div class="contact-text">
-                        <h4>地址</h4>
-                        <p>{{ $contact['data']['address'] }}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-contact-info">
-                    <div class="contact-icon">
-                        <i class="fas fa-phone"></i>
-                    </div>
-                    <div class="contact-text">
-                        <h4>電話</h4>
-                        <p>{{ $contact['data']['phone'] }}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6">
-                <div class="single-contact-info">
-                    <div class="contact-icon">
-                        <i class="fas fa-envelope"></i>
-                    </div>
-                    <div class="contact-text">
-                        <h4>電子郵件</h4>
-                        <p>{{ $contact['data']['email'] }}</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--End of Contact Info Area-->
-
-<!--Contact Form Area Start-->
-<div class="contact-form-area section-padding section-gray">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <div class="contact-form">
-                    <h3>發送訊息</h3>
-                    @if(session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
-                    @endif
-                    @if(session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
-                    <form action="{{ route('contact.send') }}" method="POST">
-                        @csrf
-                        <div class="row">
-                            <div class="col-md-6">
-                                <input type="text" name="name" placeholder="您的姓名" required>
-                            </div>
-                            <div class="col-md-6">
-                                <input type="email" name="email" placeholder="電子郵件" required>
-                            </div>
-                            <div class="col-md-12">
-                                <input type="text" name="subject" placeholder="主旨" required>
-                            </div>
-                            <div class="col-md-12">
-                                <textarea name="message" placeholder="您的訊息" required></textarea>
-                            </div>
-                            <div class="col-md-12">
-                                <button type="submit" class="button-default">送出訊息</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="contact-info-sidebar">
-                    <h3>營業時間</h3>
-                    <ul>
-                        @foreach($contact['data']['business_hours'] as $hours)
-                            <li>
-                                <span>{{ $hours['day'] }}：</span>
-                                <span>{{ $hours['hours'] }}</span>
-                            </li>
-                        @endforeach
-                    </ul>
-                    <div class="social-links mt-4">
-                        <h3>社群媒體</h3>
-                        @if($contact['data']['facebook'])
-                            <a href="{{ $contact['data']['facebook'] }}" target="_blank"><i class="fab fa-facebook"></i></a>
-                        @endif
-                        @if($contact['data']['instagram'])
-                            <a href="{{ $contact['data']['instagram'] }}" target="_blank"><i class="fab fa-instagram"></i></a>
-                        @endif
-                        @if($contact['data']['line'])
-                            <a href="{{ $contact['data']['line'] }}" target="_blank"><i class="fab fa-line"></i></a>
-                        @endif
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--End of Contact Form Area-->
-
-<!--Map Area Start-->
-@if($contact['data']['google_map'])
-<div class="map-area">
-    <iframe
-        src="https://www.google.com/maps/embed?pb={{ $contact['data']['google_map'] }}"
-        width="100%"
-        height="450"
-        style="border:0;"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
-</div>
-@endif
-<!--End of Map Area-->
-@else
-<div class="container py-5">
-    <div class="text-center">
-        <h1 class="mb-4">聯絡我們</h1>
-        <p class="lead">資料不存在</p>
-    </div>
-</div>
-@endif
 @endsection
 
-@push('styles')
-<style>
-.page-title-area {
-    padding: 60px 0;
-    text-align: center;
-}
-
-.contact-info-area {
-    padding: 80px 0;
-}
-
-.single-contact-info {
-    text-align: center;
-    padding: 30px;
-    background: #fff;
-    border-radius: 10px;
-    margin-bottom: 30px;
-    transition: all 0.3s ease;
-}
-
-.single-contact-info:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-.contact-icon {
-    font-size: 40px;
-    color: #007bff;
-    margin-bottom: 20px;
-}
-
-.contact-text h4 {
-    margin-bottom: 15px;
-    color: #333;
-}
-
-.contact-text p {
-    color: #666;
-    margin-bottom: 0;
-}
-
-.contact-form-area {
-    background: #f8f9fa;
-    padding: 80px 0;
-}
-
-.contact-form {
-    background: #fff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
-.contact-form h3 {
-    margin-bottom: 30px;
-    color: #333;
-}
-
-.contact-form input,
-.contact-form textarea {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.contact-form textarea {
-    height: 150px;
-}
-
-.contact-info-sidebar {
-    background: #fff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
-.contact-info-sidebar h3 {
-    margin-bottom: 20px;
-    color: #333;
-}
-
-.contact-info-sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.contact-info-sidebar ul li {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 15px;
-    color: #666;
-}
-
-.social-links a {
-    display: inline-block;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-    background: #f8f9fa;
-    color: #007bff;
-    border-radius: 50%;
-    margin-right: 10px;
-    transition: all 0.3s ease;
-}
-
-.social-links a:hover {
-    background: #007bff;
-    color: #fff;
-}
-
-.map-area {
-    height: 450px;
-}
-
-.map-area iframe {
-    width: 100%;
-    height: 100%;
-}
-</style>
-@endpush 
+@section('meta')
+<title>{{ $contact->seo_title ?? '聯絡我們' }}</title>
+<meta name="description" content="{{ $contact->seo_description }}">
+<meta name="keywords" content="{{ $contact->seo_keywords }}">
+@endsection 

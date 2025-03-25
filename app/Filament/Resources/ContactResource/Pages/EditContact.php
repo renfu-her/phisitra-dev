@@ -3,7 +3,6 @@
 namespace App\Filament\Resources\ContactResource\Pages;
 
 use App\Filament\Resources\ContactResource;
-use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 
 class EditContact extends EditRecord
@@ -12,13 +11,11 @@ class EditContact extends EditRecord
 
     protected function getHeaderActions(): array
     {
-        return [
-            Actions\DeleteAction::make(),
-        ];
+        return [];
     }
 
     protected function getRedirectUrl(): string
     {
-        return $this->getResource()::getUrl('index');
+        return $this->getResource()::getUrl('edit', ['record' => $this->getRecord()]);
     }
 } 

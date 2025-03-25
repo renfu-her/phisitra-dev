@@ -10,13 +10,12 @@ class Contact extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'email',
-        'phone',
-        'message',
-        'status',
-        'address',
-        'google_map_link',
+        'name_zh',          // 中文名稱
+        'name_en',          // 英文名稱
+        'address',          // 地址
+        'phone',            // 電話
+        'fax',             // 傳真
+        'email',           // Email
         'seo_title',
         'seo_description',
         'seo_keywords'

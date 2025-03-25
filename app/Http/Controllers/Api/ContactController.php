@@ -3,27 +3,18 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\ContactResource;
 use App\Models\Contact;
+use Illuminate\Http\JsonResponse;
 
 class ContactController extends Controller
 {
-    public function index()
+    public function index(): JsonResponse
     {
-        $contact = Contact::orderBy('id')->where('is_active', 1)->get();
-        
-        if (!$contact) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Contact information not found',
-                'data' => null
-            ]);
-        }
+        $contact = Contact::first();
         
         return response()->json([
-            'status' => true,
-            'message' => 'Successfully retrieved contact information',
-            'data' => new ContactResource($contact)
+            'status' => 'success',
+            'data' => $contact
         ]);
     }
 } 
