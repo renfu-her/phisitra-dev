@@ -119,14 +119,7 @@
     <div class="header-top">
         <div class="container">
             <div class="row">
-                <div class="col-lg-7 col-md-8">
-                    <div class="header-info">
-                        <span><i class="fas fa-map-marker-alt"></i>{{ $contact->address ?? '' }}</span>
-                        <span class="ms-3"><i class="fas fa-phone"></i>{{ $contact->phone ?? '' }}</span>
-                        <span class="ms-3"><i class="fas fa-envelope"></i>{{ $contact->email ?? '' }}</span>
-                    </div>
-                </div>
-                <div class="col-lg-5 col-md-4 text-end">
+                <div class="col-lg-12 text-end">
                     @if(session('user'))
                         <div class="d-inline-block">
                             <span class="me-3">{{ session('user.name') }}</span>
