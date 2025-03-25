@@ -62,6 +62,11 @@ class SchoolHighlightResource extends Resource
                     ->label('排序')
                     ->numeric()
                     ->default(0),
+
+                Forms\Components\Toggle::make('is_active')
+                    ->label('啟用')
+                    ->inline(false)
+                    ->default(true),
             ])->columns(2);
     }
 
@@ -80,6 +85,10 @@ class SchoolHighlightResource extends Resource
                 Tables\Columns\TextColumn::make('sort_order')
                     ->label('排序')
                     ->sortable(),
+
+                Tables\Columns\ToggleColumn::make('is_active')
+                    ->label('啟用')
+                    ->sortable(),
                     
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('建立時間')
@@ -88,7 +97,8 @@ class SchoolHighlightResource extends Resource
             ])
             ->defaultSort('sort_order')
             ->filters([
-                //
+                Tables\Filters\TernaryFilter::make('is_active')
+                    ->label('啟用狀態')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
