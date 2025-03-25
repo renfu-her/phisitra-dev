@@ -17,7 +17,7 @@
 
     <!-- Style CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 
     <!-- 自定義樣式 -->
@@ -126,6 +126,44 @@
                         <span class="ms-3"><i class="fas fa-envelope"></i>{{ $setting->email ?? '' }}</span>
                     </div>
                 </div>
+                <div class="col-lg-5 col-md-4 text-end">
+                    @if(session('user'))
+                        <div class="d-inline-block">
+                            <span class="me-3">{{ session('user.name') }}</span>
+                            <a href="javascript:void(0)" onclick="logout()" class="btn btn-outline-secondary btn-sm">登出</a>
+                        </div>
+                    @else
+                        <a href="javascript:void(0)" onclick="showLoginModal()" class="btn btn-outline-primary btn-sm">登入</a>
+                    @endif
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 登入 Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">登入</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">電子郵件</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">密碼</label>
+                            <input type="password" class="form-control" id="password" required>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" onclick="login()">登入</button>
+                </div>
             </div>
         </div>
     </div>
@@ -224,5 +262,70 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
     @stack('scripts')
+
+    @push('scripts')
+    <script>
+    let loginModal;
+
+    document.addEventListener('DOMContentLoaded', function() {
+        loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+    });
+
+    function showLoginModal() {
+        loginModal.show();
+    }
+
+    function login() {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        fetch('/api/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            },
+            body: JSON.stringify({ email, password })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                loginModal.hide();
+                window.location.reload();
+            } else {
+                alert(data.message || '登入失敗');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('登入失敗');
+        });
+    }
+
+    function logout() {
+        if (!confirm('確定要登出嗎？')) return;
+
+        fetch('/api/auth/logout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                window.location.reload();
+            } else {
+                alert(data.message || '登出失敗');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('登出失敗');
+        });
+    }
+    </script>
+    @endpush
 </body>
 </html> 
