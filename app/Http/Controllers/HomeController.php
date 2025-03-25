@@ -32,8 +32,7 @@ class HomeController extends Controller
     {
         $response = Http::withoutVerifying()->get($this->apiUrl . '/about');
         $about = $response->json();
-        dd($about);
-        
+
         return view('about', compact('about'));
     }
 
