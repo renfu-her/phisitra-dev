@@ -9,12 +9,7 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
-    protected $apiUrl;
-
-    public function __construct()
-    {
-        $this->apiUrl = config('app.api_url');
-    }
+    protected $apiUrl = 'https://phisitra.dev-vue.com/api/v1';
 
     public function index()
     {
