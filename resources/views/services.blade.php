@@ -28,13 +28,15 @@
             @foreach($services['data'] as $service)
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="single-service">
-                    <div class="service-icon">
-                        <i class="{{ $service['icon'] }}"></i>
+                    @if($service['image'])
+                    <div class="service-image mb-4">
+                        <img src="{{ Storage::url($service['image']) }}" alt="{{ $service['title'] }}" class="img-fluid rounded">
                     </div>
+                    @endif
                     <div class="service-content">
                         <h4>{{ $service['title'] }}</h4>
                         <div class="service-text">
-                            {!! $service['content'] !!}
+                            {!! $service['description'] !!}
                         </div>
                     </div>
                 </div>
@@ -121,10 +123,11 @@
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-.service-icon {
-    font-size: 40px;
-    color: #007bff;
-    margin-bottom: 20px;
+.service-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 .service-content h4 {
