@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="section-title-wrapper">
+                <div class="section-title-wrapper text-center">
                     <div class="section-title">
                         <h3>合作學校</h3>
                         <p>我們的優質合作夥伴</p>
@@ -29,7 +29,7 @@
             <div class="col-lg-4 col-md-6">
                 <div class="single-school">
                     <div class="school-image">
-                        <img src="{{ Storage::url($school['logo']) }}" alt="{{ $school['name'] }}" class="img-fluid">
+                        <img src="{{ Storage::url($school['logo']) }}" alt="{{ $school['name'] }}">
                     </div>
                     <div class="school-content">
                         <h4>{{ $school['name'] }}</h4>
@@ -38,9 +38,6 @@
                             @if($school['website_url'])
                                 <p><i class="fas fa-globe"></i> <a href="{{ $school['website_url'] }}" target="_blank">訪問網站</a></p>
                             @endif
-                        </div>
-                        <div class="school-description">
-                            {!! $school['description'] !!}
                         </div>
                         <div class="school-meta">
                             <span><i class="fas fa-calendar"></i> 合作開始：{{ $school['cooperation_date'] }}</span>
@@ -59,7 +56,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="section-title-wrapper">
+                <div class="section-title-wrapper text-center">
                     <div class="section-title">
                         <h3>想了解更多？</h3>
                         <p>歡迎與我們聯繫，了解更多合作學校資訊</p>
@@ -110,7 +107,6 @@
 <style>
 .page-title-area {
     padding: 60px 0;
-    text-align: center;
 }
 
 .schools-area {
@@ -124,50 +120,59 @@
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     transition: all 0.3s ease;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .single-school:hover {
-    transform: translateY(-10px);
+    transform: translateY(-5px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
 .school-image {
     height: 200px;
     overflow: hidden;
+    background: #f8f9fa;
+    padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #f8f9fa;
-    padding: 20px;
 }
 
 .school-image img {
-    max-height: 100%;
-    width: auto;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .school-content {
-    padding: 30px;
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .school-content h4 {
     margin-bottom: 15px;
     color: #333;
+    font-size: 1.2rem;
 }
 
 .school-info {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
 .school-info p {
     color: #666;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
 }
 
 .school-info i {
     color: #007bff;
-    margin-right: 10px;
+    width: 20px;
+    margin-right: 8px;
 }
 
 .school-info a {
@@ -179,16 +184,12 @@
     text-decoration: underline;
 }
 
-.school-description {
-    color: #666;
-    line-height: 1.8;
-    margin-bottom: 20px;
-}
-
 .school-meta {
-    padding-top: 20px;
+    margin-top: auto;
+    padding-top: 15px;
     border-top: 1px solid #eee;
     color: #666;
+    font-size: 0.9rem;
 }
 
 .school-meta i {
@@ -218,6 +219,20 @@
 
 .contact-form textarea {
     height: 150px;
+}
+
+.button-default {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.button-default:hover {
+    background: #0056b3;
 }
 
 .section-gray {
