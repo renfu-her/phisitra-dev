@@ -269,5 +269,87 @@
 .newsletter-container textarea {
     height: 120px;
 }
+
+.single-class {
+    background: #fff;
+    border-radius: 10px;
+    padding: 15px;
+    height: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.single-class:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.single-class-image {
+    height: 150px;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.single-class-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.single-class-text {
+    text-align: center;
+    padding: 0 10px;
+}
+
+.single-class-text h4 {
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.single-class-text h4 a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.single-class-text h4 a:hover {
+    color: #007bff;
+}
+
+.single-class-text p {
+    color: #666;
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+.single-class-text i {
+    color: #007bff;
+    margin-right: 5px;
+}
+
+.class-area {
+    padding: 80px 0;
+    background: #f8f9fa;
+}
+
+.section-title-wrapper {
+    margin-bottom: 40px;
+}
+
+.section-title {
+    text-align: center;
+}
+
+.section-title h3 {
+    font-size: 32px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.section-title p {
+    color: #666;
+    font-size: 16px;
+}
 </style>
 @endpush 
