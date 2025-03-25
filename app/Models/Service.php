@@ -11,19 +11,18 @@ class Service extends Model
 
     protected $fillable = [
         'title',
-        'description',
         'image',
-        'icon',
+        'description',
         'order',
         'is_active',
-        'seo_title',
-        'seo_description',
-        'seo_keywords'
+        'meta_title',
+        'meta_description',
+        'meta_keywords'
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
-        'order' => 'integer',
+        'order' => 'integer'
     ];
 
     protected function getDefaultSeoDescription(): string

@@ -30,60 +30,85 @@ class ServiceResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('title')
-                    ->label('標題')
-                    ->required()
-                    ->maxLength(255),
-                    
-                Forms\Components\FileUpload::make('image')
-                    ->label('圖片')
-                    ->image()
-                    ->imageEditor()
-                    ->directory('services')
-                    ->columnSpanFull()
-                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
-                    ->downloadable()
-                    ->openable()
-                    ->getUploadedFileNameForStorageUsing(
-                        fn($file): string => (string) str(Str::uuid7() . '.webp')
-                    )
-                    ->saveUploadedFileUsing(function ($file) {
-                        $manager = new ImageManager(new Driver());
-                        $image = $manager->read($file);
-                        $image->cover(800, 600);
-                        $filename = Str::uuid7()->toString() . '.webp';
+                Forms\Components\Section::make('基本資訊')
+                    ->schema([
+                        Forms\Components\TextInput::make('title')
+                            ->label('標題')
+                            ->required()
+                            ->maxLength(255),
+                            
+                        Forms\Components\FileUpload::make('image')
+                            ->label('圖片')
+                            ->image()
+                            ->imageEditor()
+                            ->directory('services')
+                            ->columnSpanFull()
+                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                            ->downloadable()
+                            ->openable()
+                            ->getUploadedFileNameForStorageUsing(
+                                fn($file): string => (string) str(Str::uuid7() . '.webp')
+                            )
+                            ->saveUploadedFileUsing(function ($file) {
+                                $manager = new ImageManager(new Driver());
+                                $image = $manager->read($file);
+                                $image->cover(800, 600);
+                                $filename = Str::uuid7()->toString() . '.webp';
 
-                        if (!file_exists(storage_path('app/public/services'))) {
-                            mkdir(storage_path('app/public/services'), 0755, true);
-                        }
+                                if (!file_exists(storage_path('app/public/services'))) {
+                                    mkdir(storage_path('app/public/services'), 0755, true);
+                                }
 
-                        $image->toWebp(80)->save(storage_path('app/public/services/' . $filename));
-                        return 'services/' . $filename;
-                    })
-                    ->deleteUploadedFileUsing(function ($file) {
-                        if ($file) {
-                            Storage::disk('public')->delete($file);
-                        }
-                    }),
+                                $image->toWebp(80)->save(storage_path('app/public/services/' . $filename));
+                                return 'services/' . $filename;
+                            })
+                            ->deleteUploadedFileUsing(function ($file) {
+                                if ($file) {
+                                    Storage::disk('public')->delete($file);
+                                }
+                            }),
+                            
+                        Forms\Components\RichEditor::make('description')
+                            ->label('描述')
+                            ->required()
+                            ->columnSpanFull(),
+                            
+                        Forms\Components\TextInput::make('order')
+                            ->label('排序')
+                            ->numeric()
+                            ->default(0),
+                            
+                        Forms\Components\Toggle::make('is_active')
+                            ->label('啟用')
+                            ->default(true),
+                    ]),
                     
-                Forms\Components\RichEditor::make('description')
-                    ->label('描述')
-                    ->required()
-                    ->columnSpanFull(),
-                    
-                Forms\Components\TextInput::make('order')
-                    ->label('排序')
-                    ->numeric()
-                    ->default(0),
-                    
-                Forms\Components\Toggle::make('is_active')
-                    ->label('啟用')
-                    ->default(true),
-                    
-                Forms\Components\TextInput::make('meta_description')
-                    ->label('Meta 描述')
-                    ->maxLength(255)
-                    ->columnSpanFull(),
+                Forms\Components\Section::make('SEO 設定')
+                    ->schema([
+                        Forms\Components\TextInput::make('meta_title')
+                            ->label('Meta 標題')
+                            ->maxLength(255)
+                            ->helperText('建議長度：50-60 字元')
+                            ->placeholder('如果未填寫，將使用標題作為 Meta 標題')
+                            ->columnSpanFull(),
+                            
+                        Forms\Components\Textarea::make('meta_description')
+                            ->label('Meta 描述')
+                            ->maxLength(255)
+                            ->helperText('建議長度：150-160 字元')
+                            ->placeholder('如果未填寫，將使用描述的前 160 字元')
+                            ->columnSpanFull(),
+                            
+                        Forms\Components\TextInput::make('meta_keywords')
+                            ->label('Meta 關鍵字')
+                            ->maxLength(255)
+                            ->helperText('請用逗號分隔關鍵字')
+                            ->placeholder('例如：教育服務,學校課程,教學培訓')
+                            ->columnSpanFull(),
+                    ])
+                    ->collapsible()
+                    ->description('設定網頁的 SEO 相關資訊，有助於提升搜尋引擎排名')
+                    ->icon('heroicon-o-magnifying-glass'),
             ]);
     }
 
