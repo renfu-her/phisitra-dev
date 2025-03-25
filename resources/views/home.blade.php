@@ -101,23 +101,33 @@
             </div>
         </div>
         <div class="row g-4">
-            @foreach($schools as $school)
+            @forelse($schools as $school)
                 <div class="col-md-3 col-sm-6">
                     <div class="single-class">
                         <div class="single-class-image">
-                            <a href="{{ route('schools.show', $school['id']) }}">
-                                <img src="{{ Storage::url($school['logo']) }}" alt="{{ $school['name'] }}" class="img-fluid">
+                            <a href="{{ route('schools.show', $school['id'] ?? '') }}">
+                                <img src="{{ $school['logo'] ? Storage::url($school['logo']) : asset('images/no-image.png') }}" 
+                                     alt="{{ $school['name'] ?? '未命名學校' }}" 
+                                     class="img-fluid">
                             </a>
                         </div>
                         <div class="single-class-text">
-                            <h4><a href="{{ route('schools.show', $school['id']) }}">{{ $school['name'] }}</a></h4>
-                            @if($school['location'])
+                            <h4>
+                                <a href="{{ route('schools.show', $school['id'] ?? '') }}">
+                                    {{ $school['name'] ?? '未命名學校' }}
+                                </a>
+                            </h4>
+                            @if(!empty($school['location']))
                                 <p><i class="fas fa-map-marker-alt"></i> {{ $school['location'] }}</p>
                             @endif
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="col-12 text-center">
+                    <p>目前沒有合作學校資料</p>
+                </div>
+            @endforelse
         </div>
         <div class="text-center mt-4">
             <a href="{{ route('schools') }}" class="button-default">查看更多合作學校</a>

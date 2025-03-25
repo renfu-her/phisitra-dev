@@ -20,7 +20,8 @@ class HomeController extends Controller
         $about = $aboutResponse->json();
         
         $schoolsResponse = Http::withoutVerifying()->get(route('api.v1.schools'));
-        $schools = collect($schoolsResponse->json())->take(4);
+        $schoolsData = $schoolsResponse->json();
+        $schools = collect($schoolsData['data'] ?? [])->take(4);
         
         return view('home', compact('setting', 'about', 'banners', 'schools'));
     }
