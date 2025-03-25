@@ -15,7 +15,9 @@ class AboutResource extends JsonResource
             'title' => $this->title,
             'content' => $this->content,
             'image' => $this->image ? Storage::url($this->image) : null,
-            'is_active' => (bool) $this->is_active,
+            'seo_title' => $this->seo_title,
+            'seo_description' => $this->seo_description,
+            'seo_keywords' => $this->seo_keywords,
         ];
     }
 } 
