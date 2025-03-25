@@ -37,7 +37,7 @@ class HomeController extends Controller
     {
         $response = Http::withoutVerifying()->get(route('api.v1.contact'));
         $contact = $response->json();
-        dd($contact);
+        
         return view('contact', compact('contact'));
     }
 
