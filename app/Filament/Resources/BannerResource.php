@@ -96,9 +96,9 @@ class BannerResource extends Resource
                     ->label('排序')
                     ->sortable(),
                     
-                Tables\Columns\IconColumn::make('is_active')
+                Tables\Columns\ToggleColumn::make('is_active')
                     ->label('狀態')
-                    ->boolean(),
+                    ->sortable(),
                     
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('更新時間')

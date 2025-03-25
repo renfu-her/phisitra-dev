@@ -81,9 +81,9 @@ class MemberResource extends Resource
                 Tables\Columns\TextColumn::make('phone')
                     ->label('電話'),
                     
-                Tables\Columns\IconColumn::make('is_active')
+                Tables\Columns\ToggleColumn::make('is_active')
                     ->label('狀態')
-                    ->boolean(),
+                    ->sortable(),
 
                 Tables\Columns\TextColumn::make('students_count')
                     ->label('學生數量')
