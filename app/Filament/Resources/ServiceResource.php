@@ -41,11 +41,6 @@ class ServiceResource extends Resource
                     ->directory('services')
                     ->columnSpanFull(),
                     
-                Forms\Components\FileUpload::make('icon')
-                    ->label('圖示')
-                    ->image()
-                    ->directory('services/icons'),
-                    
                 Forms\Components\RichEditor::make('description')
                     ->label('描述')
                     ->required()
@@ -77,9 +72,6 @@ class ServiceResource extends Resource
                     
                 Tables\Columns\ImageColumn::make('image')
                     ->label('圖片'),
-                    
-                Tables\Columns\ImageColumn::make('icon')
-                    ->label('圖示'),
                     
                 Tables\Columns\TextColumn::make('order')
                     ->label('排序')
