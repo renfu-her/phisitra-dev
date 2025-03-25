@@ -15,50 +15,50 @@
                     </div>
 
                     <!-- 聯絡資訊 -->
-                    <div class="d-flex flex-column gap-3">
+                    <div class="row row-cols-2 g-4"></div>
                         <!-- 營業時間 -->
-                        <div class="d-flex align-items-center">
-                            <div class="d-flex align-items-center" style="width: 120px;">
-                                <i class="bi bi-clock me-2"></i>
-                                <span>營業時間</span>
+                        <div class="col text-center">
+                            <div class="mb-2">
+                                <i class="bi bi-clock fs-3"></i>
                             </div>
-                            <div>週一至週五 9:00-18:00</div>
+                            <div class="fw-bold fs-5 mb-1">營業時間</div>
+                            <div class="fs-6">週一至週五<br>9:00-18:00</div>
                         </div>
 
                         <!-- 地址 -->
-                        <div class="d-flex align-items-center">
-                            <div class="d-flex align-items-center" style="width: 120px;">
-                                <i class="bi bi-geo-alt me-2"></i>
-                                <span>地址</span>
+                        <div class="col text-center">
+                            <div class="mb-2">
+                                <i class="bi bi-geo-alt fs-3"></i>
                             </div>
-                            <div>{{ $contact['data']['address'] }}</div>
+                            <div class="fw-bold fs-5 mb-1">地址</div>
+                            <div class="fs-6">{{ $contact['data']['address'] }}</div>
                         </div>
 
                         <!-- 電話 -->
-                        <div class="d-flex align-items-center">
-                            <div class="d-flex align-items-center" style="width: 120px;">
-                                <i class="bi bi-telephone me-2"></i>
-                                <span>電話</span>
+                        <div class="col text-center">
+                            <div class="mb-2">
+                                <i class="bi bi-telephone fs-3"></i>
                             </div>
-                            <div>{{ $contact['data']['phone'] }}</div>
+                            <div class="fw-bold fs-5 mb-1">電話</div>
+                            <div class="fs-6">{{ $contact['data']['phone'] }}</div>
                         </div>
 
                         <!-- 傳真 -->
-                        <div class="d-flex align-items-center">
-                            <div class="d-flex align-items-center" style="width: 120px;">
-                                <i class="bi bi-printer me-2"></i>
-                                <span>傳真</span>
+                        <div class="col text-center">
+                            <div class="mb-2">
+                                <i class="bi bi-printer fs-3"></i>
                             </div>
-                            <div>{{ $contact['data']['fax'] }}</div>
+                            <div class="fw-bold fs-5 mb-1">傳真</div>
+                            <div class="fs-6">{{ $contact['data']['fax'] }}</div>
                         </div>
 
                         <!-- Email -->
-                        <div class="d-flex align-items-center">
-                            <div class="d-flex align-items-center" style="width: 120px;">
-                                <i class="bi bi-envelope me-2"></i>
-                                <span>Email</span>
+                        <div class="col text-center">
+                            <div class="mb-2">
+                                <i class="bi bi-envelope fs-3"></i>
                             </div>
-                            <div>{{ $contact['data']['email'] }}</div>
+                            <div class="fw-bold fs-5 mb-1">Email</div>
+                            <div class="fs-6">{{ $contact['data']['email'] }}</div>
                         </div>
                     </div>
                 </div>
