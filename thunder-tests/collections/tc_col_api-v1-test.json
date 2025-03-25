@@ -1,0 +1,26 @@
+{
+    "_id": "b9956d8e-aa12-4bed-9b96-ff4adb0fd4e8",
+    "colName": "API v1 test",
+    "created": "2025-03-25T02:46:48.949Z",
+    "sortNum": 10000,
+    "folders": [],
+    "requests": [
+        {
+            "_id": "1a7ba47c-5337-4405-8209-07e523d725e6",
+            "colId": "b9956d8e-aa12-4bed-9b96-ff4adb0fd4e8",
+            "containerId": "",
+            "name": "about",
+            "url": "/about",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2025-03-25T02:47:30.646Z",
+            "modified": "2025-03-25T02:47:35.397Z",
+            "headers": []
+        }
+    ],
+    "settings": {
+        "options": {
+            "baseUrl": "https://phisitra-dev.test/api/v1"
+        }
+    }
+}
