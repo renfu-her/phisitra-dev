@@ -22,14 +22,7 @@ class ServiceController extends Controller
                     'id' => $service->id,
                     'title' => $service->title,
                     'description' => $service->description,
-                    'image' => $service->image ? Storage::url($service->image) : null,
-                    'order' => $service->order,
-                    'is_active' => $service->is_active,
-                    'meta_title' => $service->meta_title,
-                    'meta_description' => $service->meta_description,
-                    'meta_keywords' => $service->meta_keywords,
-                    'created_at' => $service->created_at,
-                    'updated_at' => $service->updated_at,
+                    'image' => $service->image,
                 ];
             })
         ]);
