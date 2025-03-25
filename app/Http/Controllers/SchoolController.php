@@ -9,23 +9,25 @@ use Illuminate\Support\Facades\Http;
 
 class SchoolController extends Controller
 {
+    protected $apiUrl = 'https://phisitra.dev-vue.com/api/v1';
+
     public function index()
     {
-        $response = Http::withoutVerifying()->get(route('api.v1.schools'));
+        $response = Http::withoutVerifying()->get($this->apiUrl . '/schools');
         $schools = $response->json();
         return view('schools.index', compact('schools'));
     }
 
     public function gallery()
     {
-        $response = Http::withoutVerifying()->get(route('api.v1.highlights'));
+        $response = Http::withoutVerifying()->get($this->apiUrl . '/highlights');
         $galleries = $response->json();
         return view('schools.gallery', compact('galleries'));
     }
 
     public function show($id)
     {
-        $response = Http::withoutVerifying()->get(route('api.v1.schools.show', ['school' => $id]));
+        $response = Http::withoutVerifying()->get($this->apiUrl . '/schools/' . $id);
         $school = $response->json();
         
         if (!$school) {

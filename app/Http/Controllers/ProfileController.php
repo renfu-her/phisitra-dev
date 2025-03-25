@@ -9,9 +9,11 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
+    protected $apiUrl = 'https://phisitra.dev-vue.com/api/v1';
+
     public function index()
     {
-        $response = Http::withoutVerifying()->get(route('api.v1.members'));
+        $response = Http::withoutVerifying()->get($this->apiUrl . '/members');
         $members = $response->json();
         return view('profile', compact('members'));
     }
@@ -37,7 +39,8 @@ class ProfileController extends Controller
             $data['password'] = bcrypt($request->password);
         }
 
-        $response = Http::withoutVerifying()->put(route('api.v1.members.update'), $data);
+        $response = Http::withoutVerifying()
+            ->put($this->apiUrl . '/members', $data);
 
         if ($response->successful()) {
             return redirect()->route('profile')->with('success', '個人資料已更新');
