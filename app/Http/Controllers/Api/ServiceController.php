@@ -10,7 +10,7 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        $services = Service::orderBy('id')->get();
+        $services = Service::orderBy('id')->where('is_active', 1)->get();
         
         if ($services->isEmpty()) {
             return response()->json([

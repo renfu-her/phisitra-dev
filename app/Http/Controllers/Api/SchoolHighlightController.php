@@ -10,7 +10,7 @@ class SchoolHighlightController extends Controller
 {
     public function index()
     {
-        $highlights = SchoolHighlight::orderBy('id')->get();
+        $highlights = SchoolHighlight::orderBy('id')->where('is_active', 1)->get();
         
         if ($highlights->isEmpty()) {
             return response()->json([

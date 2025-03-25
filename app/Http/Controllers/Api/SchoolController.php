@@ -10,7 +10,7 @@ class SchoolController extends Controller
 {
     public function index()
     {
-        $schools = School::orderBy('id')->get();
+        $schools = School::orderBy('id')->where('is_active', 1)->get();
         
         if ($schools->isEmpty()) {
             return response()->json([

@@ -68,6 +68,11 @@ class ContactResource extends Resource
                     ->label('Google地圖連結')
                     ->url()
                     ->columnSpanFull(),
+                    
+                Forms\Components\Toggle::make('is_active')
+                    ->label('啟用')
+                    ->inline(false)
+                    ->default(true),
             ]);
     }
 
@@ -85,6 +90,10 @@ class ContactResource extends Resource
                     
                 Tables\Columns\TextColumn::make('phone')
                     ->label('電話'),
+                    
+                Tables\Columns\IconColumn::make('is_active')
+                    ->label('啟用')
+                    ->boolean(),
                     
                 Tables\Columns\TextColumn::make('status')
                     ->label('狀態')

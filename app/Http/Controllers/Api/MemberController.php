@@ -10,7 +10,7 @@ class MemberController extends Controller
 {
     public function index()
     {
-        $members = Member::orderBy('id')->get();
+        $members = Member::orderBy('id')->where('is_active', 1)->get();
         
         if ($members->isEmpty()) {
             return response()->json([

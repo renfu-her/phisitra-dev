@@ -10,7 +10,7 @@ class AboutController extends Controller
 {
     public function index()
     {
-        $about = About::first();
+        $about = About::orderBy('id')->where('is_active', 1)->get();
         
         if (!$about) {
             return response()->json([

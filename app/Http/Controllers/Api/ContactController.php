@@ -10,7 +10,7 @@ class ContactController extends Controller
 {
     public function index()
     {
-        $contact = Contact::first();
+        $contact = Contact::orderBy('id')->where('is_active', 1)->get();
         
         if (!$contact) {
             return response()->json([
