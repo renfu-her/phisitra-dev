@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Storage;
 
 class SchoolHighlightResource extends JsonResource
 {
@@ -14,7 +15,7 @@ class SchoolHighlightResource extends JsonResource
             'title' => $this->title,
             'description' => $this->description,
             'media_type' => $this->media_type,
-            'media_path' => $this->media_path,
+            'image' => $this->media_path,
             'sort_order' => $this->sort_order,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
