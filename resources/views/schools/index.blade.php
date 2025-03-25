@@ -39,16 +39,16 @@
         <!-- 合作花絮輪播 -->
         <div class="mt-5 mb-5">
             <h2 class="text-center mb-4">合作花絮</h2>
-            @if($highlights['status'] ?? false)
+            @if($highlights)
                 <div id="schoolGalleryCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
-                        @foreach($highlights['data']->chunk(4) as $chunk)
+                        @foreach(collect($highlights)->chunk(4) as $chunk)
                             <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
                                 <div class="row">
                                     @foreach($chunk as $highlight)
                                         <div class="col-md-3">
                                             <div class="gallery-image">
-                                                <img src="{{ asset('storage/' . $highlight['image']) }}" alt="{{ $highlight['title'] }}">
+                                                <img src="{{ asset('storage/' . $highlight['media_path']) }}" alt="{{ $highlight['title'] }}">
                                                 <div class="gallery-caption">
                                                     <h6 class="mb-0">{{ $highlight['title'] }}</h6>
                                                 </div>
