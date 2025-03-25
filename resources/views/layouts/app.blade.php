@@ -121,7 +121,7 @@
             <div class="row">
                 <div class="col-lg-7 col-md-8">
                     <div class="header-info">
-                        <span><i class="far fa-clock"></i>營業時間：週一至週五 9:00-18:00</span>
+                        <span><i class="fas fa-map-marker-alt"></i>{{ $setting->address ?? '' }}</span>
                         <span class="ms-3"><i class="fas fa-phone"></i>{{ $setting->phone ?? '' }}</span>
                         <span class="ms-3"><i class="fas fa-envelope"></i>{{ $setting->email ?? '' }}</span>
                     </div>
