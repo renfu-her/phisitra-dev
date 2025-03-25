@@ -22,4 +22,16 @@ class SchoolController extends Controller
         $galleries = $response->json();
         return view('schools.gallery', compact('galleries'));
     }
+
+    public function show($id)
+    {
+        $response = Http::withoutVerifying()->get(route('api.v1.schools.show', ['school' => $id]));
+        $school = $response->json();
+        
+        if (!$school) {
+            abort(404);
+        }
+        
+        return view('schools.show', compact('school'));
+    }
 } 

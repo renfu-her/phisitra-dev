@@ -22,4 +22,5 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 Route::prefix('schools')->group(function () {
     Route::get('/', [SchoolController::class, 'index'])->name('schools');
     Route::get('/gallery', [SchoolController::class, 'gallery'])->name('schools.gallery');
+    Route::get('/{school}', [SchoolController::class, 'show'])->name('schools.show');
 });
