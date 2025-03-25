@@ -10,8 +10,8 @@
                 <div class="card-body">
                     <!-- 公司名稱 -->
                     <div class="mb-4 pb-3 border-bottom">
-                        <h1 class="h3">{{ $contact['data']['name_zh'] }}</h1>
-                        <p class="text-muted">{{ $contact['data']['name_en'] }}</p>
+                        <h1 class="h3">{{ $contact->name_zh }}</h1>
+                        <p class="text-muted">{{ $contact->name_en }}</p>
                     </div>
 
                     <!-- 聯絡資訊 -->
@@ -34,7 +34,7 @@
                             </div>
                             <div>
                                 <div class="fw-bold">地址</div>
-                                <div>{{ $contact['data']['address'] }}</div>
+                                <div>{{ $contact->address }}</div>
                             </div>
                         </div>
 
@@ -45,7 +45,7 @@
                             </div>
                             <div>
                                 <div class="fw-bold">電話</div>
-                                <div>{{ $contact['data']['phone'] }}</div>
+                                <div>{{ $contact->phone }}</div>
                             </div>
                         </div>
 
@@ -56,7 +56,7 @@
                             </div>
                             <div>
                                 <div class="fw-bold">傳真</div>
-                                <div>{{ $contact['data']['fax'] }}</div>
+                                <div>{{ $contact->fax }}</div>
                             </div>
                         </div>
 
@@ -67,7 +67,7 @@
                             </div>
                             <div>
                                 <div class="fw-bold">Email</div>
-                                <div>{{ $contact['data']['email'] }}</div>
+                                <div>{{ $contact->email }}</div>
                             </div>
                         </div>
                     </div>
@@ -104,7 +104,7 @@
 @endsection
 
 @section('meta')
-<title>{{ $contact['data']['seo_title'] ?? '聯絡我們' }}</title>
-<meta name="description" content="{{ $contact['data']['seo_description'] ?? '' }}">
-<meta name="keywords" content="{{ $contact['data']['seo_keywords'] ?? '' }}">
+<title>{{ $contact->seo_title ?? '聯絡我們' }}</title>
+<meta name="description" content="{{ $contact->seo_description ?? '' }}">
+<meta name="keywords" content="{{ $contact->seo_keywords ?? '' }}">
 @endsection 

@@ -13,7 +13,8 @@ class ContactController extends Controller
 
     public function index()
     {
-        $contact = Http::withoutVerifying()->get($this->apiUrl . '/contact')->json();
+        $response = Http::withoutVerifying()->get($this->apiUrl . '/contact')->json();
+        $contact = $response['data'];
         return view('contact', compact('contact'));
     }
 
