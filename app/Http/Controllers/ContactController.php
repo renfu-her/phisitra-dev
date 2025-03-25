@@ -4,13 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
+    protected $apiUrl;
+
+    public function __construct()
+    {
+        $this->apiUrl = config('app.api_url');
+    }
+
     public function index()
     {
-        return view('contact');
+        $contact = Http::withoutVerifying()->get($this->apiUrl . '/contact')->json();
+        return view('contact', compact('contact'));
     }
 
     public function store(Request $request)
