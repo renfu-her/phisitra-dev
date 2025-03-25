@@ -53,10 +53,10 @@
                             </div>
                         @endif
                         
-                        @if(!empty($school['contact']))
+                        @if(!empty($school['contact.index']))
                             <div class="info-item">
                                 <h4>聯絡方式</h4>
-                                <p>{!! nl2br(e($school['contact'])) !!}</p>
+                                <p>{!! nl2br(e($school['contact.index'])) !!}</p>
                             </div>
                         @endif
                     </div>

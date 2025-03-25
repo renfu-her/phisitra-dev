@@ -187,7 +187,7 @@
                                 <li><a href="{{ route('about') }}">關於我們</a></li>
                                 <li><a href="{{ route('services') }}">服務項目</a></li>
                                 <li><a href="{{ route('schools') }}">合作學校</a></li>
-                                <li><a href="{{ route('contact') }}">聯絡我們</a></li>
+                                <li><a href="{{ route('contact.index') }}">聯絡我們</a></li>
                             </ul>
                         </nav>
                     </div>

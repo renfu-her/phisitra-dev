@@ -78,7 +78,7 @@
         <div class="text-center mt-5">
             <h3>想要成為合作學校？</h3>
             <p class="lead">我們歡迎更多優秀的學校加入我們的合作夥伴行列</p>
-            <a href="{{ route('contact') }}" class="btn btn-primary">聯絡我們</a>
+            <a href="{{ route('contact.index') }}" class="btn btn-primary">聯絡我們</a>
         </div>
     @else
         <div class="text-center">
