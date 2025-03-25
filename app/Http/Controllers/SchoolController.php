@@ -13,9 +13,13 @@ class SchoolController extends Controller
 
     public function index()
     {
-        $response = Http::withoutVerifying()->get($this->apiUrl . '/schools');
-        $schools = $response->json();
-        return view('schools.index', compact('schools'));
+        $schoolsResponse = Http::withoutVerifying()->get($this->apiUrl . '/schools');
+        $schools = $schoolsResponse->json();
+
+        $highlightsResponse = Http::withoutVerifying()->get($this->apiUrl . '/highlights');
+        $highlights = $highlightsResponse->json();
+
+        return view('schools.index', compact('schools', 'highlights'));
     }
 
     public function gallery()

@@ -37,40 +37,42 @@
         </div>
 
         <!-- 合作花絮輪播 -->
-        <div class="mt-5 mb-5" id="highlights-carousel">
+        <div class="mt-5 mb-5">
             <h2 class="text-center mb-4">合作花絮</h2>
-            <div v-if="loading" class="text-center">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">載入中...</span>
-                </div>
-            </div>
-            <div v-else-if="highlights.length" class="carousel slide" id="schoolGalleryCarousel" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div v-for="(group, index) in highlightGroups" :key="index" :class="['carousel-item', index === 0 ? 'active' : '']">
-                        <div class="row">
-                            <div v-for="highlight in group" :key="highlight.id" class="col-md-3">
-                                <div class="gallery-image">
-                                    <img :src="highlight.image_url" :alt="highlight.title">
-                                    <div class="gallery-caption">
-                                        <h6 class="mb-0">@{{ highlight.title }}</h6>
-                                    </div>
+            @if($highlights['status'] ?? false)
+                <div id="schoolGalleryCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        @foreach($highlights['data']->chunk(4) as $chunk)
+                            <div class="carousel-item {{ $loop->first ? 'active' : '' }}">
+                                <div class="row">
+                                    @foreach($chunk as $highlight)
+                                        <div class="col-md-3">
+                                            <div class="gallery-image">
+                                                <img src="{{ asset('storage/' . $highlight['image']) }}" alt="{{ $highlight['title'] }}">
+                                                <div class="gallery-caption">
+                                                    <h6 class="mb-0">{{ $highlight['title'] }}</h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#schoolGalleryCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">上一頁</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#schoolGalleryCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">下一頁</span>
+                    </button>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#schoolGalleryCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">上一頁</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#schoolGalleryCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">下一頁</span>
-                </button>
-            </div>
-            <div v-else class="text-center">
-                <p class="lead">目前沒有合作花絮</p>
-            </div>
+            @else
+                <div class="text-center">
+                    <p class="lead">目前沒有合作花絮</p>
+                </div>
+            @endif
         </div>
 
         <div class="text-center mt-5">
@@ -149,43 +151,4 @@
     padding: 0 30px;
 }
 </style>
-@endpush
-
-@push('scripts')
-<script>
-new Vue({
-    el: '#highlights-carousel',
-    data: {
-        highlights: [],
-        loading: true
-    },
-    computed: {
-        highlightGroups() {
-            const groups = [];
-            for (let i = 0; i < this.highlights.length; i += 4) {
-                groups.push(this.highlights.slice(i, i + 4));
-            }
-            return groups;
-        }
-    },
-    mounted() {
-        this.fetchHighlights();
-    },
-    methods: {
-        async fetchHighlights() {
-            try {
-                const response = await fetch('/api/highlights');
-                const result = await response.json();
-                if (result.status) {
-                    this.highlights = result.data;
-                }
-            } catch (error) {
-                console.error('無法載入合作花絮:', error);
-            } finally {
-                this.loading = false;
-            }
-        }
-    }
-});
-</script>
 @endpush 
