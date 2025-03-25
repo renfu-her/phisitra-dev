@@ -13,7 +13,7 @@ class ServiceResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'description' => $this->description,
-            'icon' => $this->icon,
+            'image' => $this->image,
         ];
     }
 } 
