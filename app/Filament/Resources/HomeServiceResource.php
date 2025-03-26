@@ -30,7 +30,8 @@ class HomeServiceResource extends Resource
                 Forms\Components\TextInput::make('icon')
                     ->label('圖標')
                     ->required()
-                    ->helperText('使用 FontAwesome 6 圖標，例如：fa-user-graduate'),
+                    ->helperText(view('filament.components.fontawesome-helper')->render())
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('title')
                     ->label('標題')
                     ->required()
