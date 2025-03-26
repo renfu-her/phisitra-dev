@@ -51,9 +51,9 @@
                                                 <div class="gallery-video">
                                                     <div class="video-wrapper">
                                                         <iframe 
-                                                            src="{{ asset('storage/' . $highlight['image']) }}" 
+                                                            src="{{ asset('storage/' . $highlight['image']) }}?autoplay=0" 
                                                             frameborder="0" 
-                                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                                            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                                             allowfullscreen>
                                                         </iframe>
                                                     </div>
