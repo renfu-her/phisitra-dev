@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', $data['name'] . ' - ' . config('app.name'))
+@section('title', $school['data']['name'] . ' - ' . config('app.name'))
 
 @section('content')
 <div class="school-detail-area section-padding">
@@ -9,24 +9,24 @@
             <div class="col-lg-8">
                 <div class="school-detail-content">
                     <div class="school-header mb-4">
-                        <h1>{{ $data['name'] }}</h1>
-                        @if(!empty($data['location']))
+                        <h1>{{ $school['data']['name'] }}</h1>
+                        @if(!empty($school['data']['location']))
                             <p class="location">
-                                <i class="fas fa-map-marker-alt"></i> {{ $data['location'] }}
+                                <i class="fas fa-map-marker-alt"></i> {{ $school['data']['location'] }}
                             </p>
                         @endif
-                        @if(!empty($data['country']))
+                        @if(!empty($school['data']['country']))
                             <p class="country">
-                                <i class="fas fa-globe"></i> {{ $data['country'] }}
+                                <i class="fas fa-globe"></i> {{ $school['data']['country'] }}
                             </p>
                         @endif
                     </div>
 
-                    @if(!empty($data['description']))
+                    @if(!empty($school['data']['description']))
                         <div class="school-description mb-4">
                             <h3>學校簡介</h3>
                             <div class="content">
-                                {!! $data['description'] !!}
+                                {!! $school['data']['description'] !!}
                             </div>
                         </div>
                     @endif
@@ -36,23 +36,23 @@
             <div class="col-lg-4">
                 <div class="school-sidebar">
                     <div class="school-logo mb-4">
-                        <img src="{{ !empty($data['logo']) ? Storage::url($data['logo']) : asset('images/no-image.png') }}" 
-                             alt="{{ $data['name'] }}" 
+                        <img src="{{ !empty($school['data']['logo']) ? Storage::url($school['data']['logo']) : asset('images/no-image.png') }}" 
+                             alt="{{ $school['data']['name'] }}" 
                              class="img-fluid">
                     </div>
                     
                     <div class="school-info">
-                        @if(!empty($data['website_url']))
+                        @if(!empty($school['data']['website_url']))
                             <div class="info-item">
                                 <h4>官方網站</h4>
-                                <p><a href="{{ $data['website_url'] }}" target="_blank" rel="noopener noreferrer">訪問網站 <i class="fas fa-external-link-alt"></i></a></p>
+                                <p><a href="{{ $school['data']['website_url'] }}" target="_blank" rel="noopener noreferrer">訪問網站 <i class="fas fa-external-link-alt"></i></a></p>
                             </div>
                         @endif
 
-                        @if(!empty($data['seo_keywords']))
+                        @if(!empty($school['data']['seo_keywords']))
                             <div class="info-item">
                                 <h4>關鍵字</h4>
-                                <p>{{ $data['seo_keywords'] }}</p>
+                                <p>{{ $school['data']['seo_keywords'] }}</p>
                             </div>
                         @endif
                     </div>
