@@ -20,12 +20,12 @@
                             <i class="fas fa-map-marker-alt text-primary me-2"></i>
                             <span>{{ $school['location'] }}</span>
                         </div>
-                        <div class="button-group mt-auto">
-                            <a href="{{ route('schools.show', $school['id']) }}" class="btn btn-primary w-100 mb-2">
+                        <div class="button-group mt-auto d-flex gap-2">
+                            <a href="{{ route('schools.show', $school['id']) }}" class="btn btn-primary flex-fill">
                                 <i class="fas fa-info-circle me-2"></i>瀏覽學校
                             </a>
                             @if($school['website_url'])
-                            <a href="{{ $school['website_url'] }}" class="btn btn-outline-primary w-100" target="_blank">
+                            <a href="{{ $school['website_url'] }}" class="btn btn-outline-primary flex-fill" target="_blank">
                                 <i class="fas fa-external-link-alt me-2"></i>訪問網站
                             </a>
                             @endif
@@ -210,6 +210,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    white-space: nowrap;
 }
 </style>
 @endpush 
