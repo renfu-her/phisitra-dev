@@ -47,7 +47,7 @@
                                 <div class="row">
                                     @foreach($chunk as $highlight)
                                         <div class="col-md-3">
-                                            @if($highlight['media_type'] === 'movie')
+                                            @if($highlight['media_type'] === 'video')
                                                 <div class="gallery-video">
                                                     <div class="video-wrapper">
                                                         <iframe 
