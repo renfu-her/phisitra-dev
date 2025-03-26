@@ -47,12 +47,28 @@
                                 <div class="row">
                                     @foreach($chunk as $highlight)
                                         <div class="col-md-3">
-                                            <div class="gallery-image">
-                                                <img src="{{ asset('storage/' . $highlight['image']) }}" alt="{{ $highlight['title'] }}">
-                                                <div class="gallery-caption">
-                                                    <h6 class="mb-0">{{ $highlight['title'] }}</h6>
+                                            @if($highlight['type'] === 'video')
+                                                <div class="gallery-video">
+                                                    <div class="video-wrapper">
+                                                        <iframe 
+                                                            src="{{ $highlight['url'] }}" 
+                                                            frameborder="0" 
+                                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                                            allowfullscreen>
+                                                        </iframe>
+                                                    </div>
+                                                    <div class="gallery-caption">
+                                                        <h6 class="mb-0">{{ $highlight['title'] }}</h6>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            @else
+                                                <div class="gallery-image">
+                                                    <img src="{{ asset('storage/' . $highlight['image']) }}" alt="{{ $highlight['title'] }}">
+                                                    <div class="gallery-caption">
+                                                        <h6 class="mb-0">{{ $highlight['title'] }}</h6>
+                                                    </div>
+                                                </div>
+                                            @endif
                                         </div>
                                     @endforeach
                                 </div>
@@ -107,7 +123,7 @@
     margin-bottom: 1rem;
 }
 
-.gallery-image {
+.gallery-image, .gallery-video {
     height: 200px;
     overflow: hidden;
     border-radius: 8px;
@@ -124,6 +140,21 @@
 
 .gallery-image:hover img {
     transform: scale(1.05);
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 比例 */
+    height: 0;
+    overflow: hidden;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .gallery-caption {
