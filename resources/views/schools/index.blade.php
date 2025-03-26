@@ -14,18 +14,18 @@
                     <div class="school-image">
                         <img src="{{ asset('storage/' . $school['logo']) }}" alt="{{ $school['name'] }}">
                     </div>
-                    <div class="card-body">
+                    <div class="card-body d-flex flex-column">
                         <h5 class="card-title">{{ $school['name'] }}</h5>
                         <div class="d-flex align-items-center mb-3">
                             <i class="fas fa-map-marker-alt text-primary me-2"></i>
                             <span>{{ $school['location'] }}</span>
                         </div>
-                        <div class="d-flex gap-2">
-                            <a href="{{ route('schools.show', $school['id']) }}" class="btn btn-primary">
+                        <div class="button-group mt-auto">
+                            <a href="{{ route('schools.show', $school['id']) }}" class="btn btn-primary w-100 mb-2">
                                 <i class="fas fa-info-circle me-2"></i>瀏覽學校
                             </a>
                             @if($school['website_url'])
-                            <a href="{{ $school['website_url'] }}" class="btn btn-outline-primary" target="_blank">
+                            <a href="{{ $school['website_url'] }}" class="btn btn-outline-primary w-100" target="_blank">
                                 <i class="fas fa-external-link-alt me-2"></i>訪問網站
                             </a>
                             @endif
@@ -119,6 +119,23 @@
     object-fit: cover;
 }
 
+.card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
 .card-title {
     font-size: 1.25rem;
     margin-bottom: 1rem;
@@ -183,6 +200,16 @@
 
 #schoolGalleryCarousel {
     padding: 0 30px;
+}
+
+.button-group {
+    width: 100%;
+}
+
+.button-group .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>
 @endpush 
