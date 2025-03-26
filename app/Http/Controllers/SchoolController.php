@@ -19,8 +19,6 @@ class SchoolController extends Controller
         $highlightsResponse = Http::withoutVerifying()->get($this->apiUrl . '/highlights');
         $highlights = $highlightsResponse->json();
 
-        dd($schools, $highlights);
-
         return view('schools.index', compact('schools', 'highlights'));
     }
 
