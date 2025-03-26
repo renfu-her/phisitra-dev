@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\MemberController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\HomeServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,4 +66,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/students', [App\Http\Controllers\Api\StudentController::class, 'index']);
     Route::post('/students/{student}/toggle', [App\Http\Controllers\Api\StudentController::class, 'toggleStudent']);
     Route::get('/students/selected', [App\Http\Controllers\Api\StudentController::class, 'getSelectedStudents']);
-}); 
+});
+
+// Home Services
+Route::get('/home-services', [HomeServiceController::class, 'index']);
+Route::get('/home-services/{id}', [HomeServiceController::class, 'show']); 

@@ -46,42 +46,23 @@
 <div class="activity-area">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 activity">
-                <div class="single-activity">
-                    <div class="single-activity-icon">
-                        <i class="fa fa-user-graduate"></i>
+            @forelse($homeServices as $service)
+                @if($service->is_active)
+                    <div class="col-lg-3 col-md-6 col-sm-6 activity">
+                        <div class="single-activity">
+                            <div class="single-activity-icon">
+                                <i class="fa-solid {{ $service->icon }}"></i>
+                            </div>
+                            <h4>{{ $service->title }}</h4>
+                            <p>{{ $service->sub_title }}</p>
+                        </div>
                     </div>
-                    <h4>學生管理</h4>
-                    <p>完整的學生資料管理系統，包括個人資料、學籍資料、成績記錄等。</p>
+                @endif
+            @empty
+                <div class="col-12 text-center">
+                    <p>目前沒有服務資料</p>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 activity">
-                <div class="single-activity">
-                    <div class="single-activity-icon">
-                        <i class="fa fa-book"></i>
-                    </div>
-                    <h4>課程管理</h4>
-                    <p>協助安排課程、管理課表、追蹤出席狀況，確保學習品質。</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 activity">
-                <div class="single-activity mrg-res-top-md">
-                    <div class="single-activity-icon">
-                        <i class="fa fa-hands-helping"></i>
-                    </div>
-                    <h4>生活輔導</h4>
-                    <p>提供生活諮詢、心理輔導、文化適應等全方位支援服務。</p>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6 activity">
-                <div class="single-activity mrg-res-top-md">
-                    <div class="single-activity-icon">
-                        <i class="fa fa-globe"></i>
-                    </div>
-                    <h4>國際交流</h4>
-                    <p>促進國際文化交流，擴展學生視野，提供多元學習機會。</p>
-                </div>
-            </div>
+            @endforelse
         </div>
     </div>
 </div>

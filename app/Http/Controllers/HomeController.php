@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Setting;
 use App\Models\Banner;
+use App\Models\HomeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -24,8 +25,12 @@ class HomeController extends Controller
         $schoolsResponse = Http::withoutVerifying()->get($this->apiUrl . '/schools');
         $schoolsData = $schoolsResponse->json();
         $schools = collect($schoolsData['data'] ?? [])->take(4);
-        
-        return view('home', compact('setting', 'about', 'banners', 'schools'));
+
+        $homeServicesResponse = Http::withoutVerifying()->get($this->apiUrl . '/home-services');
+        $homeServicesData = $homeServicesResponse->json();
+        $homeServices = $homeServicesData['data'] ?? [];
+
+        return view('home', compact('setting', 'about', 'banners', 'schools', 'homeServices'));
     }
 
     public function about()
