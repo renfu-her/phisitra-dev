@@ -5,6 +5,7 @@ use App\Http\Controllers\SchoolController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -25,3 +26,6 @@ Route::prefix('schools')->group(function () {
     Route::get('/gallery', [SchoolController::class, 'gallery'])->name('schools.gallery');
     Route::get('/{school}', [SchoolController::class, 'show'])->name('schools.show');
 });
+
+Route::get('/students', [StudentController::class, 'index'])->name('students.index');
+Route::get('/students/{student}', [StudentController::class, 'show'])->name('students.show');

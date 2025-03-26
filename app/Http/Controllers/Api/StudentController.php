@@ -12,43 +12,29 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $member = Auth::user();
         $students = Student::all();
+        $member = Auth::user();
 
-        $data = $students->map(function ($student) use ($member) {
-            // 檢查會員是否有勾選此學生
-            $isSelected = $member->students()->where('student_id', $student->id)->exists();
+        if (!$member) {
+            // 未登入用戶只能看到公開資料
+            $data = $students->map(function ($student) {
+                return $student->getPublicData();
+            });
+        } else {
+            // 已登入用戶可以看到更多資料
+            $data = $students->map(function ($student) use ($member) {
+                // 檢查會員是否有勾選此學生
+                $isSelected = $member->students()->where('student_id', $student->id)->exists();
 
-            if ($isSelected) {
-                // 如果已勾選，返回完整資料
-                return [
-                    'id' => $student->id,
-                    'photo' => $student->photo ? asset('storage/' . $student->photo) : null,
-                    'name_zh' => $student->name_zh,
-                    'name_en' => $student->name_en,
-                    'gender' => $student->gender,
-                    'birth_date' => $student->birth_date,
-                    'nationality' => $student->nationality,
-                    'passport_no' => $student->passport_no,
-                    'overseas_address' => $student->overseas_address,
-                    'school_name' => $student->school_name,
-                    'department' => $student->department,
-                    'enrollment_date' => $student->enrollment_date,
-                    'study_duration' => $student->study_duration,
-                    'expected_graduation_date' => $student->expected_graduation_date,
-                    'specialties' => $student->specialties,
-                    'remarks' => $student->remarks,
-                ];
-            } else {
-                // 如果未勾選，只返回基本資料
-                return [
-                    'id' => $student->id,
-                    'photo' => $student->photo ? asset('storage/' . $student->photo) : null,
-                    'name_zh' => $student->name_zh,
-                    'name_en' => $student->name_en,
-                ];
-            }
-        });
+                if ($isSelected) {
+                    // 如果已勾選，返回完整資料
+                    return $student->getFullData();
+                } else {
+                    // 如果未勾選，只返回公開資料
+                    return $student->getPublicData();
+                }
+            });
+        }
 
         return response()->json([
             'status' => 'success',
@@ -86,24 +72,7 @@ class StudentController extends Controller
         $selectedStudents = $member->students()->get();
 
         $data = $selectedStudents->map(function ($student) {
-            return [
-                'id' => $student->id,
-                'photo' => $student->photo ? asset('storage/' . $student->photo) : null,
-                'name_zh' => $student->name_zh,
-                'name_en' => $student->name_en,
-                'gender' => $student->gender,
-                'birth_date' => $student->birth_date,
-                'nationality' => $student->nationality,
-                'passport_no' => $student->passport_no,
-                'overseas_address' => $student->overseas_address,
-                'school_name' => $student->school_name,
-                'department' => $student->department,
-                'enrollment_date' => $student->enrollment_date,
-                'study_duration' => $student->study_duration,
-                'expected_graduation_date' => $student->expected_graduation_date,
-                'specialties' => $student->specialties,
-                'remarks' => $student->remarks,
-            ];
+            return $student->getFullData();
         });
 
         return response()->json([

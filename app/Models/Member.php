@@ -31,7 +31,7 @@ class Member extends Authenticatable
 
     public function students()
     {
-        return $this->belongsToMany(Student::class)
+        return $this->belongsToMany(Student::class, 'student_members')
             ->withTimestamps();
     }
 } 

@@ -87,7 +87,7 @@ class Student extends Model
 
     public function members()
     {
-        return $this->belongsToMany(Member::class)
+        return $this->belongsToMany(Member::class, 'student_members')
             ->withTimestamps();
     }
 
@@ -95,10 +95,10 @@ class Student extends Model
     public function getPublicData(): array
     {
         return [
+            'id' => $this->id,
+            'photo' => $this->photo ? asset('storage/' . $this->photo) : null,
             'name_zh' => $this->name_zh,
             'name_en' => $this->name_en,
-            'gender' => $this->gender,
-            'nationality' => $this->nationality,
         ];
     }
 
@@ -106,7 +106,8 @@ class Student extends Model
     public function getFullData(): array
     {
         return [
-            'photo' => $this->photo,
+            'id' => $this->id,
+            'photo' => $this->photo ? asset('storage/' . $this->photo) : null,
             'name_zh' => $this->name_zh,
             'name_en' => $this->name_en,
             'gender' => $this->gender,
