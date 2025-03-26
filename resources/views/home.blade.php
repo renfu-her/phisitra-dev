@@ -46,15 +46,15 @@
 <div class="activity-area">
     <div class="container">
         <div class="row">
-            @forelse($homeServices as $service)
-                @if($service->is_active)
+            @forelse($homeServices ?? [] as $service)
+                @if(is_array($service) && ($service['is_active'] ?? false))
                     <div class="col-lg-3 col-md-6 col-sm-6 activity">
                         <div class="single-activity">
                             <div class="single-activity-icon">
-                                <i class="fa-solid {{ $service->icon }}"></i>
+                                <i class="fa-solid {{ $service['icon'] }}"></i>
                             </div>
-                            <h4>{{ $service->title }}</h4>
-                            <p>{{ $service->sub_title }}</p>
+                            <h4>{{ $service['title'] }}</h4>
+                            <p>{{ $service['sub_title'] }}</p>
                         </div>
                     </div>
                 @endif
