@@ -50,12 +50,14 @@
                                             @if($highlight['media_type'] === 'video')
                                                 <div class="gallery-video">
                                                     <div class="video-wrapper">
-                                                        <iframe 
-                                                            src="{{ asset('storage/' . $highlight['image']) }}?autoplay=0" 
-                                                            frameborder="0" 
-                                                            allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                                            allowfullscreen>
-                                                        </iframe>
+                                                        <video 
+                                                            class="video-player"
+                                                            src="{{ asset('storage/' . $highlight['media_path']) }}"
+                                                            poster="{{ asset('storage/' . $highlight['thumbnail'] ?? '') }}"
+                                                            controls
+                                                            preload="metadata">
+                                                            您的瀏覽器不支援影片播放。
+                                                        </video>
                                                     </div>
                                                     <div class="gallery-caption">
                                                         <h6 class="mb-0">{{ $highlight['title'] }}</h6>
@@ -149,12 +151,14 @@
     overflow: hidden;
 }
 
-.video-wrapper iframe {
+.video-player {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    background: #000;
 }
 
 .gallery-caption {
