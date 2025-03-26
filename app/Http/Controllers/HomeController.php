@@ -30,6 +30,8 @@ class HomeController extends Controller
         $homeServicesData = $homeServicesResponse->json();
         $homeServices = $homeServicesData['data'] ?? [];
 
+        dd($homeServices);
+
         return view('home', compact('setting', 'about', 'banners', 'schools', 'homeServices'));
     }
 
