@@ -52,8 +52,8 @@
                                                     <div class="video-wrapper">
                                                         <video 
                                                             class="video-player"
-                                                            src="{{ asset('storage/' . $highlight['media_path']) }}"
-                                                            poster="{{ asset('storage/' . $highlight['thumbnail'] ?? '') }}"
+                                                            src="{{ asset('storage/' . $highlight['image']) }}"
+                                                            poster="{{ asset('storage/' . $highlight['image']) }}"
                                                             controls
                                                             preload="metadata">
                                                             您的瀏覽器不支援影片播放。
