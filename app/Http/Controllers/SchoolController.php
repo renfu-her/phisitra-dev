@@ -33,6 +33,8 @@ class SchoolController extends Controller
     {
         $response = Http::withoutVerifying()->get($this->apiUrl . '/schools/' . $id);
         $school = $response->json();
+
+        dd($school);
         
         if (!$school) {
             abort(404);
