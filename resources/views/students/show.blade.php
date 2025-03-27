@@ -12,107 +12,162 @@
                     <div class="card-body text-center">
                         <h2 class="student-name">{{ $student['name_zh'] }}</h2>
                         <p class="student-en-name">{{ $student['name_en'] }}</p>
-                        <div class="student-tags">
-                            <span class="badge bg-primary">{{ $student['nationality'] }}</span>
-                            <span class="badge bg-info">{{ $student['department'] }}</span>
-                        </div>
+                        @auth
+                            @if(isset($student['is_selected']) && $student['is_selected'])
+                                <div class="student-tags">
+                                    <span class="badge bg-primary">{{ $student['nationality'] }}</span>
+                                    <span class="badge bg-info">{{ $student['department'] }}</span>
+                                </div>
+                            @endif
+                        @endauth
                     </div>
                 </div>
             </div>
-            <div class="col-md-8">
-                <div class="info-section">
-                    <div class="row g-4">
-                        <div class="col-md-6">
-                            <div class="info-card">
-                                <div class="info-card-header">
-                                    <i class="fas fa-user-circle"></i>
-                                    <h5>基本資料</h5>
-                                </div>
-                                <div class="info-card-body">
-                                    <div class="info-item">
-                                        <span class="info-label">性別</span>
-                                        <span class="info-value">{{ $student['gender'] === 'male' ? '男' : '女' }}</span>
-                                    </div>
-                                    <div class="info-item">
-                                        <span class="info-label">生日</span>
-                                        <span class="info-value">{{ $student['birth_date'] ?? '未提供' }}</span>
-                                    </div>
-                                    <div class="info-item">
-                                        <span class="info-label">國籍</span>
-                                        <span class="info-value">{{ $student['nationality'] ?? '未提供' }}</span>
-                                    </div>
-                                    <div class="info-item">
-                                        <span class="info-label">護照號碼</span>
-                                        <span class="info-value">{{ $student['passport_no'] ?? '未提供' }}</span>
-                                    </div>
-                                    @if ($student['overseas_address'])
-                                        <div class="info-item">
-                                            <span class="info-label">海外地址</span>
-                                            <span class="info-value">{{ $student['overseas_address'] }}</span>
+
+            @auth
+                @if(isset($student['is_selected']) && $student['is_selected'])
+                    <div class="col-md-8">
+                        <div class="info-section">
+                            <div class="row g-4">
+                                <div class="col-md-6">
+                                    <div class="info-card">
+                                        <div class="info-card-header">
+                                            <i class="fas fa-user-circle"></i>
+                                            <h5>基本資料</h5>
                                         </div>
-                                    @endif
+                                        <div class="info-card-body">
+                                            <div class="info-item">
+                                                <span class="info-label">性別</span>
+                                                <span class="info-value">{{ $student['gender'] === 'male' ? '男' : '女' }}</span>
+                                            </div>
+                                            <div class="info-item">
+                                                <span class="info-label">生日</span>
+                                                <span class="info-value">{{ $student['birth_date'] ?? '未提供' }}</span>
+                                            </div>
+                                            <div class="info-item">
+                                                <span class="info-label">國籍</span>
+                                                <span class="info-value">{{ $student['nationality'] ?? '未提供' }}</span>
+                                            </div>
+                                            <div class="info-item">
+                                                <span class="info-label">護照號碼</span>
+                                                <span class="info-value">{{ $student['passport_no'] ?? '未提供' }}</span>
+                                            </div>
+                                            @if ($student['overseas_address'])
+                                                <div class="info-item">
+                                                    <span class="info-label">海外地址</span>
+                                                    <span class="info-value">{{ $student['overseas_address'] }}</span>
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="info-card">
+                                        <div class="info-card-header">
+                                            <i class="fas fa-graduation-cap"></i>
+                                            <h5>學籍資料</h5>
+                                        </div>
+                                        <div class="info-card-body">
+                                            <div class="info-item">
+                                                <span class="info-label">學校</span>
+                                                <span class="info-value">{{ $student['school_name'] ?? '未提供' }}</span>
+                                            </div>
+                                            <div class="info-item">
+                                                <span class="info-label">科系</span>
+                                                <span class="info-value">{{ $student['department'] ?? '未提供' }}</span>
+                                            </div>
+                                            <div class="info-item">
+                                                <span class="info-label">入學日期</span>
+                                                <span class="info-value">{{ $student['enrollment_date'] ?? '未提供' }}</span>
+                                            </div>
+                                            <div class="info-item">
+                                                <span class="info-label">修業年限</span>
+                                                <span class="info-value">{{ $student['study_duration'] ?? '未提供' }} 年</span>
+                                            </div>
+                                            <div class="info-item">
+                                                <span class="info-label">預計畢業</span>
+                                                <span class="info-value">{{ $student['expected_graduation_date'] ?? '未提供' }}</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="info-card">
-                                <div class="info-card-header">
-                                    <i class="fas fa-graduation-cap"></i>
-                                    <h5>學籍資料</h5>
-                                </div>
-                                <div class="info-card-body">
-                                    <div class="info-item">
-                                        <span class="info-label">學校</span>
-                                        <span class="info-value">{{ $student['school_name'] ?? '未提供' }}</span>
+
+                            @if ($student['specialties'])
+                                <div class="info-card mt-4">
+                                    <div class="info-card-header">
+                                        <i class="fas fa-star"></i>
+                                        <h5>專長</h5>
                                     </div>
-                                    <div class="info-item">
-                                        <span class="info-label">科系</span>
-                                        <span class="info-value">{{ $student['department'] ?? '未提供' }}</span>
-                                    </div>
-                                    <div class="info-item">
-                                        <span class="info-label">入學日期</span>
-                                        <span class="info-value">{{ $student['enrollment_date'] ?? '未提供' }}</span>
-                                    </div>
-                                    <div class="info-item">
-                                        <span class="info-label">修業年限</span>
-                                        <span class="info-value">{{ $student['study_duration'] ?? '未提供' }} 年</span>
-                                    </div>
-                                    <div class="info-item">
-                                        <span class="info-label">預計畢業</span>
-                                        <span class="info-value">{{ $student['expected_graduation_date'] ?? '未提供' }}</span>
+                                    <div class="info-card-body">
+                                        <p class="mb-0">{{ $student['specialties'] }}</p>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
+
+                            @if ($student['remarks'])
+                                <div class="info-card mt-4">
+                                    <div class="info-card-header">
+                                        <i class="fas fa-comment-alt"></i>
+                                        <h5>備註</h5>
+                                    </div>
+                                    <div class="info-card-body">
+                                        <p class="mb-0">{{ $student['remarks'] }}</p>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
-
-                    @if ($student['specialties'])
-                        <div class="info-card mt-4">
-                            <div class="info-card-header">
-                                <i class="fas fa-star"></i>
-                                <h5>專長</h5>
-                            </div>
-                            <div class="info-card-body">
-                                <p class="mb-0">{{ $student['specialties'] }}</p>
-                            </div>
+                @else
+                    <div class="col-md-8">
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle me-2"></i>
+                            請先選擇此學生以查看詳細資料
+                            <button onclick="toggleStudent({{ $student['id'] }})" class="btn btn-primary btn-sm ms-3">
+                                <i class="fas fa-plus-circle me-1"></i>選擇學生
+                            </button>
                         </div>
-                    @endif
-
-                    @if ($student['remarks'])
-                        <div class="info-card mt-4">
-                            <div class="info-card-header">
-                                <i class="fas fa-comment-alt"></i>
-                                <h5>備註</h5>
-                            </div>
-                            <div class="info-card-body">
-                                <p class="mb-0">{{ $student['remarks'] }}</p>
-                            </div>
-                        </div>
-                    @endif
+                    </div>
+                @endif
+            @else
+                <div class="col-md-8">
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        請先登入以查看更多資訊
+                        <button onclick="showLoginModal()" class="btn btn-primary btn-sm ms-3">
+                            <i class="fas fa-sign-in-alt me-1"></i>登入
+                        </button>
+                    </div>
                 </div>
-            </div>
+            @endauth
         </div>
     </div>
+
+    @push('scripts')
+    <script>
+    function toggleStudent(studentId) {
+        fetch(`/api/students/${studentId}/toggle`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status) {
+                window.location.reload();
+            } else {
+                alert(data.message || '操作失敗');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('操作失敗');
+        });
+    }
+    </script>
+    @endpush
 
     @push('styles')
         <style>
