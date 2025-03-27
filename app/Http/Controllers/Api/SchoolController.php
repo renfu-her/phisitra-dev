@@ -29,6 +29,9 @@ class SchoolController extends Controller
     
     public function show(School $school)
     {
+
+        dd($school);
+
         return response()->json([
             'success' => true,
             'message' => 'Successfully retrieved school details',

@@ -20,8 +20,6 @@ class StudentController extends Controller
     public function show(Student $student)
     {
 
-        dd($student->id);
-        
         $response = Http::withoutVerifying()->get($this->apiUrl . '/students/' . $student->id)->json();
         $student = $response['data'];
 
