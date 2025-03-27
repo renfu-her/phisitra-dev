@@ -14,12 +14,4 @@ class CreateHomeService extends CreateRecord
     {
         return $this->getResource()::getUrl('index');
     }
-
-    protected function getCreatedNotification(): ?Notification
-    {
-        return Notification::make()
-            ->success()
-            ->title('首頁服務已建立')
-            ->body('新的首頁服務已成功建立。');
-    }
 }
