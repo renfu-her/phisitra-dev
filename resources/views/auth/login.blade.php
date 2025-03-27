@@ -6,10 +6,8 @@
 <div class="auth-container">
     <div class="row g-0">
         <!-- 左側圖片區 -->
-        <div class="col-lg-6 d-none d-lg-block illustration-container">
-            <div class="illustration">
-                <img src="{{ asset('images/auth.jpg') }}" alt="Welcome illustration">
-            </div>
+        <div class="col-lg-6">
+            <img src="{{ asset('images/auth.jpg') }}" alt="Welcome illustration" class="auth-image">
         </div>
         
         <!-- 右側表單區 -->
@@ -140,35 +138,12 @@
 .auth-container {
     min-height: calc(100vh - 200px);
     background-color: #ffffff;
-    padding: 2rem;
 }
 
-.illustration-container {
-    background-color: #00b894;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    margin-left: 2rem;
-    height: 100%;
-}
-
-.illustration {
+.auth-image {
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
-.illustration img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    object-fit: contain;
-    padding: 2rem;
+    object-fit: cover;
 }
 
 .auth-form-container {
