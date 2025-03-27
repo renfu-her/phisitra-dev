@@ -52,7 +52,7 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
     Route::get('schools', [SchoolController::class, 'index'])->name('schools');
     Route::get('schools/{school}', [SchoolController::class, 'show'])->name('schools.show');
 
-    // 學生
+    // 學生公開資料
     Route::get('students', [StudentController::class, 'index'])->name('students');
     Route::get('students/{student}', [StudentController::class, 'show'])->name('students.show');
 
@@ -63,11 +63,11 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
     // Home Services
     Route::get('/home-services', [HomeServiceController::class, 'index']);
     Route::get('/home-services/{id}', [HomeServiceController::class, 'show']);
-});
 
-// 學生相關路由
-Route::middleware('auth:member')->group(function () {
-    Route::get('/students', [App\Http\Controllers\Api\StudentController::class, 'index']);
-    Route::post('/students/{student}/toggle', [App\Http\Controllers\Api\StudentController::class, 'toggleStudent']);
-    Route::get('/students/selected', [App\Http\Controllers\Api\StudentController::class, 'getSelectedStudents']);
+    // 需要會員認證的路由
+    Route::middleware('auth:member')->group(function () {
+        // 學生相關功能
+        Route::get('/students/selected', [StudentController::class, 'getSelectedStudents'])->name('students.selected');
+        Route::post('/students/{student}/toggle', [StudentController::class, 'toggleStudent'])->name('students.toggle');
+    });
 });
