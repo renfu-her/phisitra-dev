@@ -18,10 +18,6 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Filament\Navigation\NavigationBuilder;
-use Filament\Navigation\NavigationGroup;
-use Filament\Navigation\NavigationItem;
-use App\Filament\Resources\SchoolResource;
 
 class BackendPanelProvider extends PanelProvider
 {
@@ -50,8 +46,8 @@ class BackendPanelProvider extends PanelProvider
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                // Widgets\AccountWidget::class,
-                // Widgets\FilamentInfoWidget::class,
+                Widgets\AccountWidget::class,
+                Widgets\FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -66,28 +62,6 @@ class BackendPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])
-            ->navigation(function (NavigationBuilder $builder): NavigationBuilder {
-                return $builder
-                    ->groups([
-                        NavigationGroup::make('網站管理')
-                            ->items([
-                                ...NavigationItem::getNavigationItems(),
-                            ])
-                            ->collapsible(),
-                    ]);
-            })
-            ->sidebarCollapsibleOnDesktop()
-            ->maxContentWidth('full')
-            ->brandName('品閎集團')
-            ->navigationItems([
-                NavigationItem::make('合作學校')
-                    ->icon('heroicon-o-academic-cap')
-                    ->isActiveWhen(fn (): bool => request()->routeIs(['filament.backend.resources.schools.*']))
-                    ->url(fn (): string => SchoolResource::getUrl())
-                    ->sort(1),
-                // 其他導航項目...
-            ])
-            ->landingUrl(SchoolResource::getUrl());
+            ]);
     }
 }
