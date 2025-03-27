@@ -45,9 +45,6 @@
                                     <input type="email" class="form-control @error('email') is-invalid @enderror"
                                            id="login_email" name="email" value="{{ old('email') }}" required>
                                 </div>
-                                @error('email')
-                                    <div class="invalid-feedback d-block">{{ $message }}</div>
-                                @enderror
                             </div>
 
                             <div class="form-group">
