@@ -42,6 +42,25 @@ class StudentController extends Controller
         ]);
     }
 
+    public function show(Student $student)
+    {
+        $student = Student::find($student->id);
+
+        if (!$student) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Student not found',
+                'data' => []
+            ]);
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Successfully retrieved student details',
+            'data' => $student
+        ]);
+    }
+
     public function toggleStudent(Request $request, Student $student)
     {
         $member = Auth::user();
