@@ -19,10 +19,11 @@ class StudentController extends Controller
 
     public function show(Student $student)
     {
-        $response = Http::withoutVerifying()->get($this->apiUrl . '/students/' . $student->id)->json();
-        $student = $response['data'];
 
         dd($student);
+        
+        $response = Http::withoutVerifying()->get($this->apiUrl . '/students/' . $student->id)->json();
+        $student = $response['data'];
 
         return view('students.show', compact('student'));
     }
