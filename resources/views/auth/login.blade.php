@@ -159,7 +159,7 @@
 
 .auth-image {
     width: 100%;
-    height: 100%;
+    height: 570px;
     object-fit: cover;
 }
 
