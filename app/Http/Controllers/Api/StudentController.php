@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Student;
 use App\Models\Member;
+use App\Models\StudentMember;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -71,25 +72,41 @@ class StudentController extends Controller
                 'message' => '請先登入'
             ], 401);
         }
-        
-        // 檢查會員是否已勾選此學生
-        $isSelected = $member->students()->where('student_id', $student->id)->exists();
-        
-        if ($isSelected) {
-            // 如果已勾選，則取消勾選
-            $member->students()->detach($student->id);
-            $message = '已取消勾選學生';
-        } else {
-            // 如果未勾選，則勾選
-            $member->students()->attach($student->id);
-            $message = '已勾選學生';
-        }
 
-        return response()->json([
-            'status' => 'success',
-            'message' => $message,
-            'is_selected' => !$isSelected
-        ]);
+        try {
+            // 檢查是否已存在關聯
+            $studentMember = StudentMember::where('student_id', $student->id)
+                ->where('member_id', $member->id)
+                ->first();
+            
+            if ($studentMember) {
+                // 如果已存在，則刪除
+                $studentMember->delete();
+                
+                return response()->json([
+                    'status' => 'success',
+                    'message' => '已取消勾選學生',
+                    'is_selected' => false
+                ]);
+            } else {
+                // 如果不存在，則建立
+                StudentMember::create([
+                    'student_id' => $student->id,
+                    'member_id' => $member->id
+                ]);
+                
+                return response()->json([
+                    'status' => 'success',
+                    'message' => '已成立學生資料',
+                    'is_selected' => true
+                ]);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => '操作失敗：' . $e->getMessage()
+            ], 500);
+        }
     }
 
     public function getSelectedStudents()
