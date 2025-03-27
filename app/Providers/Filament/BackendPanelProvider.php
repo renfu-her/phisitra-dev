@@ -88,6 +88,6 @@ class BackendPanelProvider extends PanelProvider
                     ->sort(1),
                 // 其他導航項目...
             ])
-            ->defaultUrl(fn (): string => SchoolResource::getUrl());
+            ->landingUrl(SchoolResource::getUrl());
     }
 }
