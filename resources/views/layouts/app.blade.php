@@ -136,7 +136,7 @@
         }
 
         .footer-area {
-            background: #333;
+            background: linear-gradient(45deg, #e91e63, #9c27b0);
             color: #fff;
             padding: 60px 0 30px;
         }
@@ -144,6 +144,7 @@
         .footer-widget h4 {
             color: #fff;
             margin-bottom: 20px;
+            font-weight: 600;
         }
 
         .footer-widget ul {
@@ -151,20 +152,35 @@
             padding: 0;
         }
 
+        .footer-widget ul li {
+            margin-bottom: 10px;
+        }
+
         .footer-widget ul li a {
-            color: #ccc;
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
             transition: all 0.3s ease;
         }
 
         .footer-widget ul li a:hover {
             color: #fff;
+            padding-left: 5px;
+        }
+
+        .footer-widget ul li i {
+            margin-right: 10px;
+            opacity: 0.8;
         }
 
         .footer-bottom {
             padding-top: 20px;
             margin-top: 40px;
             border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            opacity: 0.8;
         }
     </style>
 
