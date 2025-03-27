@@ -39,15 +39,25 @@ class AuthController extends Controller
             'password' => 'required|string|min:8|confirmed',
         ]);
 
+        // 檢查是否已存在相同 email 且已啟用的會員
+        $existingMember = Member::where('email', $validated['email'])
+            ->where('is_active', 1)
+            ->first();
+
+        if ($existingMember) {
+            return back()->withErrors([
+                'email' => 'Email 已經是會員',
+            ]);
+        }
+
         $member = Member::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => Hash::make($validated['password']),
+            'is_active' => false, // 預設為未啟用狀態
         ]);
 
-        Auth::guard('member')->login($member);
-
-        return redirect('/');
+        return redirect('/')->with('success', '註冊完成，請等待審核');
     }
 
     public function logout(Request $request)
