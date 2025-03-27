@@ -192,10 +192,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-end">
-                    @if(session('user'))
+                    @if(Auth::guard('member')->check())
                         <div class="d-inline-block">
-                            <span class="me-3">{{ session('user.name') }}</span>
-                            <a href="javascript:void(0)" onclick="logout()" class="btn btn-outline-secondary btn-sm">登出</a>
+                            <span class="me-3">{{ Auth::guard('member')->user()->name }}</span>
+                            <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                                @csrf
+                                <button type="submit" class="btn btn-outline-secondary btn-sm">登出</button>
+                            </form>
                         </div>
                     @else
                         <a href="{{ route('login') }}" class="btn btn-outline-primary btn-sm">登入</a>
@@ -312,75 +315,13 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
     <script>
-    // 全局變量
-    let loginModal;
-
-    // 全局函數
-    window.showLoginModal = function() {
-        loginModal.show();
-    };
-
-    window.login = function() {
-        const email = $('#email').val();
-        const password = $('#password').val();
-
-        $.ajax({
-            url: '/api/auth/login',
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            data: JSON.stringify({ email, password }),
-            contentType: 'application/json',
-            success: function(data) {
-                if (data.success) {
-                    loginModal.hide();
-                    window.location.reload();
-                } else {
-                    alert(data.message || '登入失敗');
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error('Error:', error);
-                alert('登入失敗');
-            }
+        $(document).ready(function() {
+            // 初始化 Bootstrap 組件
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
         });
-    };
-
-    window.logout = function() {
-        if (!confirm('確定要登出嗎？')) return;
-
-        $.ajax({
-            url: '/api/auth/logout',
-            method: 'POST',
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: function(data) {
-                if (data.success) {
-                    window.location.reload();
-                } else {
-                    alert(data.message || '登出失敗');
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error('Error:', error);
-                alert('登出失敗');
-            }
-        });
-    };
-
-    // 當文檔準備就緒時執行
-    $(document).ready(function() {
-        // 初始化登入 Modal
-        loginModal = new bootstrap.Modal($('#loginModal'));
-
-        // 綁定登入表單提交事件
-        $('#loginForm').on('submit', function(e) {
-            e.preventDefault();
-            login();
-        });
-    });
     </script>
 
     @stack('scripts')
