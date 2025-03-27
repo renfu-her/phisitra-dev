@@ -299,10 +299,9 @@
 
     @push('scripts')
     <script>
-    let loginModal;
-
-    document.addEventListener('DOMContentLoaded', function() {
-        loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+    $(document).ready(function() {
+        // 初始化登入 Modal
+        window.loginModal = new bootstrap.Modal($('#loginModal'));
     });
 
     function showLoginModal() {
@@ -310,53 +309,52 @@
     }
 
     function login() {
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
+        const email = $('#email').val();
+        const password = $('#password').val();
 
-        fetch('/api/auth/login', {
+        $.ajax({
+            url: '/api/auth/login',
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            body: JSON.stringify({ email, password })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                loginModal.hide();
-                window.location.reload();
-            } else {
-                alert(data.message || '登入失敗');
+            data: JSON.stringify({ email, password }),
+            contentType: 'application/json',
+            success: function(data) {
+                if (data.success) {
+                    loginModal.hide();
+                    window.location.reload();
+                } else {
+                    alert(data.message || '登入失敗');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+                alert('登入失敗');
             }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('登入失敗');
         });
     }
 
     function logout() {
         if (!confirm('確定要登出嗎？')) return;
 
-        fetch('/api/auth/logout', {
+        $.ajax({
+            url: '/api/auth/logout',
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function(data) {
+                if (data.success) {
+                    window.location.reload();
+                } else {
+                    alert(data.message || '登出失敗');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Error:', error);
+                alert('登出失敗');
             }
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                window.location.reload();
-            } else {
-                alert(data.message || '登出失敗');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('登出失敗');
         });
     }
     </script>
