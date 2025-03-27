@@ -76,16 +76,6 @@
 
                         <!-- 註冊表單 -->
                         <div class="tab-pane fade" id="register">
-                            @if ($errors->any())
-                                <div class="alert alert-danger mb-3">
-                                    <ul class="mb-0">
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-
                             <form method="POST" action="{{ route('register.submit') }}" class="auth-form">
                                 @csrf
                                 <div class="form-group">
@@ -108,12 +98,11 @@
                                         <span class="input-group-text">
                                             <i class="fas fa-envelope"></i>
                                         </span>
-                                        <input type="email"
-                                            class="form-control @error('register_email') is-invalid @enderror"
-                                            id="register_email" name="email" value="{{ old('register_email') }}"
+                                        <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                            id="register_email" name="email" value="{{ old('email') }}"
                                             required>
                                     </div>
-                                    @error('register_email')
+                                    @error('email')
                                         <div class="invalid-feedback d-block">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -124,11 +113,10 @@
                                         <span class="input-group-text">
                                             <i class="fas fa-lock"></i>
                                         </span>
-                                        <input type="password"
-                                            class="form-control @error('register_password') is-invalid @enderror"
+                                        <input type="password" class="form-control @error('password') is-invalid @enderror"
                                             id="register_password" name="password" required>
                                     </div>
-                                    @error('register_password')
+                                    @error('password')
                                         <div class="invalid-feedback d-block">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -139,9 +127,12 @@
                                         <span class="input-group-text">
                                             <i class="fas fa-lock"></i>
                                         </span>
-                                        <input type="password" class="form-control" id="register_password_confirmation"
-                                            name="password_confirmation" required>
+                                        <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror"
+                                            id="register_password_confirmation" name="password_confirmation" required>
                                     </div>
+                                    @error('password_confirmation')
+                                        <div class="invalid-feedback d-block">{{ $message }}</div>
+                                    @enderror
                                 </div>
 
                                 <button type="submit" class="btn btn-primary btn-auth">註冊</button>
