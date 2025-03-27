@@ -13,7 +13,7 @@ class StudentController extends Controller
     public function index()
     {
         $students = Student::all();
-        $member = Auth::user();
+        $member = Auth::guard('member')->user();
 
         if (!$member) {
             // 未登入用戶只能看到公開資料
@@ -63,7 +63,14 @@ class StudentController extends Controller
 
     public function toggleStudent(Request $request, Student $student)
     {
-        $member = Auth::user();
+        $member = Auth::guard('member')->user();
+        
+        if (!$member) {
+            return response()->json([
+                'status' => 'error',
+                'message' => '請先登入'
+            ], 401);
+        }
         
         // 檢查會員是否已勾選此學生
         $isSelected = $member->students()->where('student_id', $student->id)->exists();
@@ -87,7 +94,15 @@ class StudentController extends Controller
 
     public function getSelectedStudents()
     {
-        $member = Auth::user();
+        $member = Auth::guard('member')->user();
+        
+        if (!$member) {
+            return response()->json([
+                'status' => 'error',
+                'message' => '請先登入'
+            ], 401);
+        }
+
         $selectedStudents = $member->students()->get();
 
         $data = $selectedStudents->map(function ($student) {
