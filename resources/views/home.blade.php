@@ -15,7 +15,7 @@
             @foreach($banners as $key => $banner)
                 <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
                     <img src="{{ Storage::url($banner->image) }}" class="d-block w-100" alt="{{ $banner->title }}">
-                    <div class="banner-content">
+                    {{-- <div class="banner-content">
                         <div class="container">
                             <div class="row">
                                 <div class="col-lg-7 col-md-7">
@@ -28,7 +28,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             @endforeach
         </div>
