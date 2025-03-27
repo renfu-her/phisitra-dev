@@ -27,8 +27,8 @@ class AuthController extends Controller
         }
 
         return back()->withErrors([
-            'email' => '提供的認證資訊不正確。',
-        ])->onlyInput('email');
+            'email' => '電子郵件或密碼錯誤',
+        ]);
     }
 
     public function register(Request $request)
