@@ -40,7 +40,7 @@
                     目前沒有任何學生資料。
                 </div>
             </div>
-        @endforeach
+        @endforelse
     </div>
 </div>
 
