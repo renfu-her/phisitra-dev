@@ -8,7 +8,7 @@
         <!-- 左側圖片區 -->
         <div class="col-lg-6 d-none d-lg-block illustration-container">
             <div class="illustration">
-                <img src="{{ asset('images/auth-illustration.svg') }}" alt="Welcome illustration">
+                <img src="{{ asset('images/auth.jpg') }}" alt="Welcome illustration">
             </div>
         </div>
         
