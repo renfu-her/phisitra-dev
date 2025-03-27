@@ -140,6 +140,7 @@
 .auth-container {
     min-height: calc(100vh - 200px);
     background-color: #ffffff;
+    padding: 2rem;
 }
 
 .illustration-container {
@@ -148,6 +149,8 @@
     align-items: center;
     justify-content: center;
     padding: 2rem;
+    border-radius: 20px;
+    margin-left: 2rem;
 }
 
 .illustration {
