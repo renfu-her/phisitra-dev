@@ -65,9 +65,9 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
     Route::get('/home-services/{id}', [HomeServiceController::class, 'show']);
 
     // 需要會員認證的路由
-    Route::middleware('auth:member')->group(function () {
+    // Route::middleware('auth:member')->group(function () {
         // 學生相關功能
         Route::get('/students/selected', [StudentController::class, 'getSelectedStudents'])->name('students.selected');
         Route::post('/students/{student}/toggle', [StudentController::class, 'toggleStudent'])->name('students.toggle');
-    });
+    // });
 });
