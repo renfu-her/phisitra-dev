@@ -239,7 +239,7 @@
                                     <a href="{{ route('schools') }}" class="dropdown-toggle" data-bs-toggle="dropdown">合作學校</a>
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" href="{{ route('schools') }}">學校列表</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('students,index') }}">學生資料</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('students.index') }}">學生資料</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="{{ route('contact.index') }}">聯絡我們</a></li>
