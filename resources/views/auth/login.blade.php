@@ -147,8 +147,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4rem;
-    height: 100%;
+    padding: 2rem;
 }
 
 .illustration {
@@ -159,7 +158,7 @@
 }
 
 .illustration img {
-    max-width: 90%;
+    max-width: 80%;
     height: auto;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
