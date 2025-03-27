@@ -79,8 +79,7 @@ class BackendPanelProvider extends PanelProvider
             })
             ->sidebarCollapsibleOnDesktop()
             ->maxContentWidth('full')
-            ->brandName('飛師特留學')
-            ->favicon(asset('images/favicon.ico'))
+            ->brandName('品閎集團')
             ->navigationItems([
                 NavigationItem::make('合作學校')
                     ->icon('heroicon-o-academic-cap')
