@@ -28,11 +28,4 @@ class EditHomeService extends EditRecord
         return $this->getResource()::getUrl('index');
     }
 
-    protected function getSavedNotification(): ?Notification
-    {
-        return Notification::make()
-            ->success()
-            ->title('首頁服務已更新')
-            ->body('首頁服務資料已成功更新。');
-    }
 }
