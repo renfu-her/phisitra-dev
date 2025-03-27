@@ -82,6 +82,59 @@
             color: #007bff;
         }
 
+        .mainmenu .dropdown {
+            position: relative;
+        }
+
+        .mainmenu .dropdown-toggle::after {
+            display: inline-block;
+            margin-left: 0.255em;
+            vertical-align: 0.255em;
+            content: "";
+            border-top: 0.3em solid;
+            border-right: 0.3em solid transparent;
+            border-bottom: 0;
+            border-left: 0.3em solid transparent;
+        }
+
+        .mainmenu .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            min-width: 160px;
+            padding: 0.5rem 0;
+            margin: 0;
+            background-color: #fff;
+            border: 1px solid rgba(0,0,0,0.15);
+            border-radius: 0.25rem;
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+        }
+
+        .mainmenu .dropdown:hover .dropdown-menu {
+            display: block;
+        }
+
+        .mainmenu .dropdown-item {
+            display: block;
+            width: 100%;
+            padding: 0.5rem 1rem;
+            clear: both;
+            font-weight: 400;
+            color: #333;
+            text-align: inherit;
+            text-decoration: none;
+            white-space: nowrap;
+            background-color: transparent;
+            border: 0;
+        }
+
+        .mainmenu .dropdown-item:hover,
+        .mainmenu .dropdown-item:focus {
+            color: #007bff;
+            background-color: #f8f9fa;
+        }
+
         .footer-area {
             background: #333;
             color: #fff;
@@ -182,7 +235,13 @@
                                 <li><a href="{{ route('home') }}">首頁</a></li>
                                 <li><a href="{{ route('about') }}">關於我們</a></li>
                                 <li><a href="{{ route('services') }}">服務項目</a></li>
-                                <li><a href="{{ route('schools') }}">合作學校</a></li>
+                                <li class="dropdown">
+                                    <a href="{{ route('schools') }}" class="dropdown-toggle" data-bs-toggle="dropdown">合作學校</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="{{ route('schools') }}">學校列表</a></li>
+                                        <li><a class="dropdown-item" href="{{ route('schools.students') }}">學生資料</a></li>
+                                    </ul>
+                                </li>
                                 <li><a href="{{ route('contact.index') }}">聯絡我們</a></li>
                             </ul>
                         </nav>

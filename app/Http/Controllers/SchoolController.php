@@ -40,4 +40,12 @@ class SchoolController extends Controller
         
         return view('schools.show', compact('school'));
     }
+
+    public function students()
+    {
+        $response = Http::withoutVerifying()->get($this->apiUrl . '/students');
+        $students = $response->json()['data'] ?? [];
+        
+        return view('schools.students', compact('students'));
+    }
 } 
