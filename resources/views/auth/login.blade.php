@@ -34,7 +34,7 @@
                                 </div>
                             @endif
 
-                            <form method="POST" action="{{ route('login.submit') }}" class="auth-form">
+                            <form method="POST" action="{{ route('login.submit') }}?action=login" class="auth-form">
                                 @csrf
                                 <div class="form-group">
                                     <label for="login_email">電子郵件</label>
@@ -76,7 +76,7 @@
 
                         <!-- 註冊表單 -->
                         <div class="tab-pane fade" id="register">
-                            <form method="POST" action="{{ route('register.submit') }}" class="auth-form">
+                            <form method="POST" action="{{ route('register.submit') }}?action=register" class="auth-form">
                                 @csrf
                                 <div class="form-group">
                                     <label for="register_name">姓名</label>
@@ -311,17 +311,27 @@
     @push('scripts')
         <script>
             $(document).ready(function() {
-                // 初始化 Bootstrap Tab
-                var tabs = new bootstrap.Tab(document.querySelector('.auth-tab-btn.active'));
-
                 // 根據 URL 參數或 session 中的 action 顯示對應的表單
                 const urlParams = new URLSearchParams(window.location.search);
                 const action = urlParams.get('action') || '{{ session('action') }}' || 'login';
                 
+                // 顯示對應的表單
                 if (action === 'register') {
-                    $('.auth-tab-btn[data-bs-target="#register"]').click();
+                    // 移除所有 active 類別
+                    $('.auth-tab-btn').removeClass('active');
+                    $('.tab-pane').removeClass('show active');
+                    
+                    // 啟用註冊表單
+                    $('.auth-tab-btn[data-bs-target="#register"]').addClass('active');
+                    $('#register').addClass('show active');
                 } else {
-                    $('.auth-tab-btn[data-bs-target="#login"]').click();
+                    // 移除所有 active 類別
+                    $('.auth-tab-btn').removeClass('active');
+                    $('.tab-pane').removeClass('show active');
+                    
+                    // 啟用登入表單
+                    $('.auth-tab-btn[data-bs-target="#login"]').addClass('active');
+                    $('#login').addClass('show active');
                 }
 
                 // 切換頁籤時更新按鈕狀態和顯示相應的表單
@@ -342,6 +352,13 @@
                     const newUrl = new URL(window.location.href);
                     newUrl.searchParams.set('action', newAction);
                     window.history.pushState({}, '', newUrl);
+
+                    // 更新表單的 action URL
+                    if (newAction === 'register') {
+                        $('#register form').attr('action', '{{ route('register.submit') }}?action=register');
+                    } else {
+                        $('#login form').attr('action', '{{ route('login.submit') }}?action=login');
+                    }
                 });
             });
         </script>
