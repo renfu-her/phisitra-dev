@@ -3,114 +3,131 @@
 @section('title', '登入/註冊 - ' . config('app.name'))
 
 @section('content')
-<div class="container py-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header text-center">
-                    <ul class="nav nav-tabs card-header-tabs" id="authTabs" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab">
-                                登入
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="register-tab" data-bs-toggle="tab" data-bs-target="#register" type="button" role="tab">
-                                註冊
-                            </button>
-                        </li>
-                    </ul>
+<div class="auth-container">
+    <div class="row g-0">
+        <!-- 左側圖片區 -->
+        <div class="col-lg-6 d-none d-lg-block illustration-container">
+            <div class="illustration">
+                <img src="{{ asset('images/auth-illustration.svg') }}" alt="Welcome illustration">
+            </div>
+        </div>
+        
+        <!-- 右側表單區 -->
+        <div class="col-lg-6 col-md-12">
+            <div class="auth-form-container">
+                <div class="auth-header">
+                    <h2 class="auth-title">歡迎回來</h2>
+                    <div class="auth-tabs">
+                        <button class="auth-tab-btn active" data-bs-toggle="tab" data-bs-target="#login">登入</button>
+                        <button class="auth-tab-btn" data-bs-toggle="tab" data-bs-target="#register">註冊</button>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <div class="tab-content" id="authTabsContent">
-                        <!-- 登入表單 -->
-                        <div class="tab-pane fade show active" id="login" role="tabpanel">
-                            <form method="POST" action="{{ route('login.submit') }}">
-                                @csrf
 
-                                <div class="mb-3">
-                                    <label for="login_email" class="form-label">電子郵件</label>
-                                    <input type="email" class="form-control @error('email') is-invalid @enderror" 
-                                           id="login_email" name="email" value="{{ old('email') }}" required autofocus>
-                                    @error('email')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
+                <div class="tab-content auth-forms">
+                    <!-- 登入表單 -->
+                    <div class="tab-pane fade show active" id="login">
+                        <form method="POST" action="{{ route('login.submit') }}" class="auth-form">
+                            @csrf
+                            <div class="form-group">
+                                <label for="login_email">電子郵件</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <input type="email" class="form-control @error('email') is-invalid @enderror"
+                                           id="login_email" name="email" value="{{ old('email') }}" required>
                                 </div>
+                                @error('email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
 
-                                <div class="mb-3">
-                                    <label for="login_password" class="form-label">密碼</label>
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror" 
+                            <div class="form-group">
+                                <label for="login_password">密碼</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
                                            id="login_password" name="password" required>
-                                    @error('password')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
                                 </div>
+                                @error('password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
 
-                                <div class="mb-3 form-check">
-                                    <input type="checkbox" class="form-check-input" id="remember" name="remember" 
+                            <div class="form-group d-flex justify-content-between align-items-center">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="remember" name="remember"
                                            {{ old('remember') ? 'checked' : '' }}>
                                     <label class="form-check-label" for="remember">記住我</label>
                                 </div>
+                                <a href="{{ route('password.request') }}" class="forgot-password">忘記密碼？</a>
+                            </div>
 
-                                <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary">登入</button>
-                                </div>
-                            </form>
-                        </div>
+                            <button type="submit" class="btn btn-primary btn-auth">登入</button>
+                        </form>
+                    </div>
 
-                        <!-- 註冊表單 -->
-                        <div class="tab-pane fade" id="register" role="tabpanel">
-                            <form method="POST" action="{{ route('register.submit') }}">
-                                @csrf
-
-                                <div class="mb-3">
-                                    <label for="register_name" class="form-label">姓名</label>
-                                    <input type="text" class="form-control @error('name') is-invalid @enderror" 
+                    <!-- 註冊表單 -->
+                    <div class="tab-pane fade" id="register">
+                        <form method="POST" action="{{ route('register.submit') }}" class="auth-form">
+                            @csrf
+                            <div class="form-group">
+                                <label for="register_name">姓名</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-user"></i>
+                                    </span>
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror"
                                            id="register_name" name="name" value="{{ old('name') }}" required>
-                                    @error('name')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
                                 </div>
+                                @error('name')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
 
-                                <div class="mb-3">
-                                    <label for="register_email" class="form-label">電子郵件</label>
-                                    <input type="email" class="form-control @error('register_email') is-invalid @enderror" 
+                            <div class="form-group">
+                                <label for="register_email">電子郵件</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-envelope"></i>
+                                    </span>
+                                    <input type="email" class="form-control @error('register_email') is-invalid @enderror"
                                            id="register_email" name="email" value="{{ old('register_email') }}" required>
-                                    @error('register_email')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
                                 </div>
+                                @error('register_email')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
 
-                                <div class="mb-3">
-                                    <label for="register_password" class="form-label">密碼</label>
-                                    <input type="password" class="form-control @error('register_password') is-invalid @enderror" 
+                            <div class="form-group">
+                                <label for="register_password">密碼</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                    <input type="password" class="form-control @error('register_password') is-invalid @enderror"
                                            id="register_password" name="password" required>
-                                    @error('register_password')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
                                 </div>
+                                @error('register_password')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
 
-                                <div class="mb-3">
-                                    <label for="register_password_confirmation" class="form-label">確認密碼</label>
-                                    <input type="password" class="form-control" 
+                            <div class="form-group">
+                                <label for="register_password_confirmation">確認密碼</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-lock"></i>
+                                    </span>
+                                    <input type="password" class="form-control"
                                            id="register_password_confirmation" name="password_confirmation" required>
                                 </div>
+                            </div>
 
-                                <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary">註冊</button>
-                                </div>
-                            </form>
-                        </div>
+                            <button type="submit" class="btn btn-primary btn-auth">註冊</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -120,34 +137,173 @@
 
 @push('styles')
 <style>
-    .nav-tabs .nav-link {
-        color: #495057;
-        border: none;
-        padding: 1rem 2rem;
-        font-weight: 500;
+.auth-container {
+    min-height: calc(100vh - 200px);
+    background-color: #ffffff;
+}
+
+.illustration-container {
+    background-color: #00b894;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.illustration img {
+    max-width: 80%;
+    height: auto;
+}
+
+.auth-form-container {
+    padding: 3rem;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.auth-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #2d3436;
+    margin-bottom: 1.5rem;
+}
+
+.auth-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.auth-tab-btn {
+    background: none;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    color: #636e72;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.auth-tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+.auth-tab-btn.active {
+    color: #00b894;
+}
+
+.auth-tab-btn.active::after {
+    background-color: #00b894;
+}
+
+.auth-forms {
+    margin-top: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #2d3436;
+    font-weight: 500;
+}
+
+.input-group {
+    border: 1px solid #dfe6e9;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.input-group-text {
+    background-color: #f8f9fa;
+    border: none;
+    color: #636e72;
+}
+
+.form-control {
+    border: none;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+}
+
+.form-control:focus {
+    box-shadow: none;
+    border-color: #00b894;
+}
+
+.btn-auth {
+    width: 100%;
+    padding: 0.75rem;
+    font-size: 1rem;
+    background-color: #00b894;
+    border: none;
+    border-radius: 8px;
+    margin-top: 1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-auth:hover {
+    background-color: #00a884;
+    transform: translateY(-1px);
+}
+
+.forgot-password {
+    color: #00b894;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.forgot-password:hover {
+    color: #00a884;
+    text-decoration: underline;
+}
+
+.form-check-label {
+    color: #636e72;
+    font-size: 0.9rem;
+}
+
+.invalid-feedback {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    color: #e74c3c;
+}
+
+@media (max-width: 991.98px) {
+    .auth-form-container {
+        padding: 2rem 1.5rem;
     }
-    
-    .nav-tabs .nav-link.active {
-        color: #0d6efd;
-        border-bottom: 2px solid #0d6efd;
-        background: none;
-    }
-    
-    .nav-tabs .nav-link:hover {
-        border-color: transparent;
-        color: #0d6efd;
-    }
-    
-    .card-header {
-        background: none;
-        border-bottom: none;
-        padding: 0;
-    }
-    
-    .card {
-        border: none;
-        box-shadow: 0 0 20px rgba(0,0,0,0.1);
-    }
+}
 </style>
+@endpush
+
+@push('scripts')
+<script>
+$(document).ready(function() {
+    // 切換頁籤時更新按鈕狀態
+    $('.auth-tab-btn').on('click', function() {
+        $('.auth-tab-btn').removeClass('active');
+        $(this).addClass('active');
+    });
+});
+</script>
 @endpush
 @endsection 
