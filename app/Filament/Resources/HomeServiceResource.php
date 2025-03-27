@@ -19,6 +19,10 @@ class HomeServiceResource extends Resource
     protected static ?string $model = HomeService::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-home';
+
+    protected static ?string $navigationGroup = '網站管理';
+    
+    protected static ?int $navigationSort = 1;
     
     protected static ?string $navigationLabel = '首頁服務';
     

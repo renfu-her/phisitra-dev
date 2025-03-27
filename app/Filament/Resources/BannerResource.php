@@ -24,7 +24,7 @@ class BannerResource extends Resource
     
     protected static ?string $modelLabel = '輪播圖';
 
-    protected static ?int $navigationSort = 1;
+    protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
     {
