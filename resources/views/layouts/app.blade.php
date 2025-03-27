@@ -182,7 +182,7 @@
                             <a href="javascript:void(0)" onclick="logout()" class="btn btn-outline-secondary btn-sm">登出</a>
                         </div>
                     @else
-                        <a href="javascript:void(0)" onclick="showLoginModal()" class="btn btn-outline-primary btn-sm">登入</a>
+                        <a href="{{ route('login') }}" class="btn btn-outline-primary btn-sm">登入</a>
                     @endif
                 </div>
             </div>

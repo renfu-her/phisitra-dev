@@ -20,6 +20,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 // 登入相關路由
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
 
 Route::prefix('schools')->group(function () {
     Route::get('/', [SchoolController::class, 'index'])->name('schools');
