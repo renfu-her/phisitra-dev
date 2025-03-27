@@ -77,7 +77,6 @@ class BackendPanelProvider extends PanelProvider
                             ->collapsible(),
                     ]);
             })
-            ->defaultNavigationGroup('網站管理')
             ->sidebarCollapsibleOnDesktop()
             ->maxContentWidth('full')
             ->brandName('飛師特留學')
