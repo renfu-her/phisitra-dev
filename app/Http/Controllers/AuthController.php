@@ -28,7 +28,7 @@ class AuthController extends Controller
 
         return back()->withErrors([
             'email' => '電子郵件或密碼錯誤',
-        ]);
+        ])->withInput()->with('action', 'login');
     }
 
     public function register(Request $request)
@@ -62,7 +62,7 @@ class AuthController extends Controller
         if ($existingMember) {
             return back()->withErrors([
                 'email' => 'Email 已經是會員',
-            ]);
+            ])->withInput()->with('action', 'register');
         }
 
         $member = Member::create([

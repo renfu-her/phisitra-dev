@@ -314,6 +314,16 @@
                 // 初始化 Bootstrap Tab
                 var tabs = new bootstrap.Tab(document.querySelector('.auth-tab-btn.active'));
 
+                // 根據 URL 參數或 session 中的 action 顯示對應的表單
+                const urlParams = new URLSearchParams(window.location.search);
+                const action = urlParams.get('action') || '{{ session('action') }}' || 'login';
+                
+                if (action === 'register') {
+                    $('.auth-tab-btn[data-bs-target="#register"]').click();
+                } else {
+                    $('.auth-tab-btn[data-bs-target="#login"]').click();
+                }
+
                 // 切換頁籤時更新按鈕狀態和顯示相應的表單
                 $('.auth-tab-btn').on('click', function(e) {
                     e.preventDefault();
@@ -326,6 +336,12 @@
                     var targetId = $(this).data('bs-target');
                     $('.tab-pane').removeClass('show active');
                     $(targetId).addClass('show active');
+
+                    // 更新 URL 參數
+                    const newAction = targetId === '#register' ? 'register' : 'login';
+                    const newUrl = new URL(window.location.href);
+                    newUrl.searchParams.set('action', newAction);
+                    window.history.pushState({}, '', newUrl);
                 });
             });
         </script>
