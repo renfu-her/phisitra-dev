@@ -295,20 +295,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
-    @stack('scripts')
-
-    @push('scripts')
     <script>
-    $(document).ready(function() {
-        // 初始化登入 Modal
-        window.loginModal = new bootstrap.Modal($('#loginModal'));
-    });
+    // 全局變量
+    let loginModal;
 
-    function showLoginModal() {
+    // 全局函數
+    window.showLoginModal = function() {
         loginModal.show();
-    }
+    };
 
-    function login() {
+    window.login = function() {
         const email = $('#email').val();
         const password = $('#password').val();
 
@@ -333,9 +329,9 @@
                 alert('登入失敗');
             }
         });
-    }
+    };
 
-    function logout() {
+    window.logout = function() {
         if (!confirm('確定要登出嗎？')) return;
 
         $.ajax({
@@ -356,8 +352,21 @@
                 alert('登出失敗');
             }
         });
-    }
+    };
+
+    // 當文檔準備就緒時執行
+    $(document).ready(function() {
+        // 初始化登入 Modal
+        loginModal = new bootstrap.Modal($('#loginModal'));
+
+        // 綁定登入表單提交事件
+        $('#loginForm').on('submit', function(e) {
+            e.preventDefault();
+            login();
+        });
+    });
     </script>
-    @endpush
+
+    @stack('scripts')
 </body>
 </html> 
