@@ -149,8 +149,8 @@
     align-items: center;
     justify-content: center;
     padding: 2rem;
-    border-radius: 20px;
     margin-left: 2rem;
+    height: 100%;
 }
 
 .illustration {
@@ -159,14 +159,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .illustration img {
+    position: absolute;
     width: 100%;
     height: 100%;
-    border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    object-fit: cover;
+    object-fit: contain;
+    padding: 2rem;
 }
 
 .auth-form-container {
