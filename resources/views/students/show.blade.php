@@ -12,19 +12,19 @@
                     <div class="card-body text-center">
                         <h2 class="student-name">{{ $student['name_zh'] }}</h2>
                         <p class="student-en-name">{{ $student['name_en'] }}</p>
-                        @auth
+                        @if(Auth::guard('member')->check())
                             @if(isset($student['is_selected']) && $student['is_selected'])
                                 <div class="student-tags">
                                     <span class="badge bg-primary">{{ $student['nationality'] }}</span>
                                     <span class="badge bg-info">{{ $student['department'] }}</span>
                                 </div>
                             @endif
-                        @endauth
+                        @endif
                     </div>
                 </div>
             </div>
 
-            @auth
+            @if(Auth::guard('member')->check())
                 @if(isset($student['is_selected']) && $student['is_selected'])
                     <div class="col-md-8">
                         <div class="info-section">
@@ -134,12 +134,12 @@
                     <div class="alert alert-info">
                         <i class="fas fa-info-circle me-2"></i>
                         請先登入以查看更多資訊
-                        <button onclick="showLoginModal()" class="btn btn-primary btn-sm ms-3">
+                        <a href="{{ route('login') }}" class="btn btn-primary btn-sm ms-3">
                             <i class="fas fa-sign-in-alt me-1"></i>登入
-                        </button>
+                        </a>
                     </div>
                 </div>
-            @endauth
+            @endif
         </div>
     </div>
 
