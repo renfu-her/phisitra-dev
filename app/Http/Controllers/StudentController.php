@@ -21,6 +21,9 @@ class StudentController extends Controller
     {
         $response = Http::withoutVerifying()->get($this->apiUrl . '/students/' . $student->id)->json();
         $student = $response['data'];
+
+        dd($student);
+
         return view('students.show', compact('student'));
     }
 } 
