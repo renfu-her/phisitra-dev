@@ -67,9 +67,9 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
     Route::get('students', [StudentController::class, 'index'])->name('students');
 
     Route::get('/students/selected', [StudentController::class, 'getSelectedStudents'])->name('students.selected');
-    Route::post('/students/{student}/toggle', [StudentController::class, 'toggleStudent'])->name('students.toggle');
+    
     // 學生公開資料
     Route::get('students/{student}', [StudentController::class, 'show'])->name('students.show');
-
+    Route::post('/students/{student}/toggle', [StudentController::class, 'toggleStudent'])->name('students.toggle');
     // });
 });
