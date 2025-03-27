@@ -147,12 +147,24 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 4rem;
+    height: 100%;
+}
+
+.illustration {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .illustration img {
-    max-width: 80%;
+    max-width: 90%;
     height: auto;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    object-fit: cover;
+    aspect-ratio: 4/3;
 }
 
 .auth-form-container {
