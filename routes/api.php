@@ -52,9 +52,6 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
     Route::get('schools', [SchoolController::class, 'index'])->name('schools');
     Route::get('schools/{school}', [SchoolController::class, 'show'])->name('schools.show');
 
-    // 學生公開資料
-    Route::get('students', [StudentController::class, 'index'])->name('students');
-    Route::get('students/{student}', [StudentController::class, 'show'])->name('students.show');
 
     // 會員
     Route::get('members', [MemberController::class, 'index'])->name('members');
@@ -66,8 +63,13 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
 
     // 需要會員認證的路由
     // Route::middleware('auth:member')->group(function () {
-        // 學生相關功能
-        Route::get('/students/selected', [StudentController::class, 'getSelectedStudents'])->name('students.selected');
-        Route::post('/students/{student}/toggle', [StudentController::class, 'toggleStudent'])->name('students.toggle');
+    // 學生相關功能
+    Route::get('students', [StudentController::class, 'index'])->name('students');
+
+    Route::get('/students/selected', [StudentController::class, 'getSelectedStudents'])->name('students.selected');
+    Route::post('/students/{student}/toggle', [StudentController::class, 'toggleStudent'])->name('students.toggle');
+    // 學生公開資料
+    Route::get('students/{student}', [StudentController::class, 'show'])->name('students.show');
+
     // });
 });
