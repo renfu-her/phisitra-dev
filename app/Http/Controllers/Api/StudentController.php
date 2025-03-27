@@ -65,7 +65,7 @@ class StudentController extends Controller
     public function toggleStudent(Request $request, Student $student)
     {
         
-        dd(Auth::guard('member')->user());
+        dd(Auth::guard('member')->id());
         $member = Auth::guard('member')->user();
         
         if (!$member) {
