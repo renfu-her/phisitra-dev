@@ -62,7 +62,7 @@
                                            {{ old('remember') ? 'checked' : '' }}>
                                     <label class="form-check-label" for="remember">記住我</label>
                                 </div>
-                                <a href="{{ route('password.request') }}" class="forgot-password">忘記密碼？</a>
+                                <a href="#" class="forgot-password">忘記密碼？</a>
                             </div>
 
                             <button type="submit" class="btn btn-primary btn-auth">登入</button>
