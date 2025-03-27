@@ -24,6 +24,16 @@
                 <div class="tab-content auth-forms">
                     <!-- 登入表單 -->
                     <div class="tab-pane fade show active" id="login">
+                        @if($errors->any())
+                            <div class="alert alert-danger mb-3">
+                                <ul class="mb-0">
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        
                         <form method="POST" action="{{ route('login.submit') }}" class="auth-form">
                             @csrf
                             <div class="form-group">
@@ -36,7 +46,7 @@
                                            id="login_email" name="email" value="{{ old('email') }}" required>
                                 </div>
                                 @error('email')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -50,7 +60,7 @@
                                            id="login_password" name="password" required>
                                 </div>
                                 @error('password')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -69,6 +79,16 @@
 
                     <!-- 註冊表單 -->
                     <div class="tab-pane fade" id="register">
+                        @if($errors->any())
+                            <div class="alert alert-danger mb-3">
+                                <ul class="mb-0">
+                                    @foreach($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        
                         <form method="POST" action="{{ route('register.submit') }}" class="auth-form">
                             @csrf
                             <div class="form-group">
@@ -81,7 +101,7 @@
                                            id="register_name" name="name" value="{{ old('name') }}" required>
                                 </div>
                                 @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -95,7 +115,7 @@
                                            id="register_email" name="email" value="{{ old('register_email') }}" required>
                                 </div>
                                 @error('register_email')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -109,7 +129,7 @@
                                            id="register_password" name="password" required>
                                 </div>
                                 @error('register_password')
-                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    <div class="invalid-feedback d-block">{{ $message }}</div>
                                 @enderror
                             </div>
 
@@ -271,11 +291,22 @@
     font-size: 0.9rem;
 }
 
+.alert-danger {
+    background-color: #fff3f3;
+    border-color: #ffa7a7;
+    color: #dc3545;
+}
+
+.alert-danger ul {
+    list-style: none;
+    padding-left: 0;
+}
+
 .invalid-feedback {
     display: block;
     margin-top: 0.5rem;
     font-size: 0.875rem;
-    color: #e74c3c;
+    color: #dc3545;
 }
 
 @media (max-width: 991.98px) {
