@@ -21,6 +21,23 @@ class AuthController extends Controller
             'password' => 'required'
         ]);
 
+        // 先檢查會員是否存在且已啟用
+        $member = Member::where('email', $credentials['email'])
+            ->first();
+
+        if (!$member) {
+            return back()->withErrors([
+                'email' => '電子郵件或密碼錯誤',
+            ])->withInput()->with('action', 'login');
+        }
+
+        if (!$member->is_active) {
+            return back()->withErrors([
+                'email' => '此帳號尚未啟用，請等待審核',
+            ])->withInput()->with('action', 'login');
+        }
+
+        // 嘗試登入
         if (Auth::guard('member')->attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->intended('/');
