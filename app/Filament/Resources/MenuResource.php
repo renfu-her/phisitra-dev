@@ -18,8 +18,10 @@ class MenuResource extends Resource
     protected static ?string $navigationIcon = 'heroicon-o-bars-3';
     
     protected static ?string $navigationGroup = '網站管理';
-    
-    protected static ?string $modelLabel = '選單';
+
+    protected static ?string $modelLabel = '前臺選單';
+
+    protected static ?int $navigationSort = 5;
 
     public static function form(Form $form): Form
     {
