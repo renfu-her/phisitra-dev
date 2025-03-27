@@ -32,7 +32,7 @@ class HomeServiceResource extends Resource
                     ->label('圖標')
                     ->required()
                     ->helperText(new HtmlString('
-                        使用 FontAwesome 6 圖標，只可以用<span class="text-red-500">英文</span>查詢<br>例如：fa-user-graduate<br>
+                        使用 FontAwesome 6 圖標，只可以用<span class="text-danger-500">英文</span>查詢<br>例如：fa-user-graduate<br>
                         <div class="mt-1">
                             <a href="https://fontawesome.com/search?o=r&m=free" 
                                target="_blank" 
