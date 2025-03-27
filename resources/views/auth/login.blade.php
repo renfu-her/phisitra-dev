@@ -317,10 +317,21 @@
 @push('scripts')
 <script>
 $(document).ready(function() {
-    // 切換頁籤時更新按鈕狀態
-    $('.auth-tab-btn').on('click', function() {
+    // 初始化 Bootstrap Tab
+    var tabs = new bootstrap.Tab(document.querySelector('.auth-tab-btn.active'));
+    
+    // 切換頁籤時更新按鈕狀態和顯示相應的表單
+    $('.auth-tab-btn').on('click', function(e) {
+        e.preventDefault();
+        
+        // 更新按鈕狀態
         $('.auth-tab-btn').removeClass('active');
         $(this).addClass('active');
+        
+        // 顯示對應的表單
+        var targetId = $(this).data('bs-target');
+        $('.tab-pane').removeClass('show active');
+        $(targetId).addClass('show active');
     });
 });
 </script>
