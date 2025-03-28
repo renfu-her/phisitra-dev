@@ -154,11 +154,11 @@
         })
         .then(response => response.json())
         .then(data => {
-            if (data.status) {
-                window.location.reload();
-            } else {
+            // if (data.status) {
+            //     window.location.reload();
+            // } else {
                 alert(data.message || '操作失敗');
-            }
+            // }
         })
         .catch(error => {
             console.error('Error:', error);
