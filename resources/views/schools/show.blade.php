@@ -9,8 +9,8 @@
             <div class="col-lg-12">
                 <div class="school-detail-content">
                     <div class="school-header mb-4">
-                        <h2 class="section-title">學校資料</h2>
-                        <h3>{{ $school['name'] }}</h3>
+                        <h2 class="section-title text-center">學校資料</h2>
+                        <h1>{{ $school['name'] }}</h1>
                         @if(!empty($school['location']))
                             <p class="location">
                                 <i class="fas fa-map-marker-alt"></i> {{ $school['location'] }}
@@ -74,18 +74,33 @@
 .section-title {
     font-size: 1.5rem;
     color: #666;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
     font-weight: 500;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title:after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background-color: #007bff;
 }
 
 .school-header h1 {
     margin-bottom: 15px;
     color: #333;
+    text-align: center;
 }
 
 .location, .country {
     color: #666;
     margin-bottom: 10px;
+    text-align: center;
 }
 
 .location i, .country i {
