@@ -19,9 +19,9 @@ class SchoolResource extends Resource
     protected static ?string $model = School::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-academic-cap';
-    
+
     protected static ?string $navigationGroup = '合作學校';
-    
+
     protected static ?string $modelLabel = '合作學校';
 
     protected static ?int $navigationSort = 1;
@@ -34,7 +34,7 @@ class SchoolResource extends Resource
                     ->label('學校名稱')
                     ->required()
                     ->maxLength(255),
-                    
+
                 Forms\Components\FileUpload::make('logo')
                     ->label('學校標誌')
                     ->image()
@@ -50,7 +50,10 @@ class SchoolResource extends Resource
                     ->saveUploadedFileUsing(function ($file) {
                         $manager = new ImageManager(new Driver());
                         $image = $manager->read($file);
-                        $image->cover(800, 800);
+
+                        $image->resize(1024, null);
+                        $image->scaleDown(1024, null);
+
                         $filename = Str::uuid7()->toString() . '.webp';
 
                         if (!file_exists(storage_path('app/public/schools/logos'))) {
@@ -65,43 +68,43 @@ class SchoolResource extends Resource
                             Storage::disk('public')->delete($file);
                         }
                     }),
-                    
+
                 Forms\Components\RichEditor::make('description')
                     ->label('描述')
                     ->columnSpanFull(),
-                    
+
                 Forms\Components\TextInput::make('website_url')
                     ->label('網站連結')
                     ->url()
                     ->maxLength(255),
-                    
+
                 Forms\Components\TextInput::make('location')
                     ->label('地點')
                     ->maxLength(255),
-                    
+
                 Forms\Components\DatePicker::make('cooperation_date')
                     ->label('合作日期'),
-                    
+
                 Forms\Components\TextInput::make('order')
                     ->label('排序')
                     ->numeric()
                     ->default(0),
-                    
+
                 Forms\Components\Toggle::make('is_active')
                     ->label('啟用')
                     ->default(true),
-                    
+
                 Forms\Components\Section::make('SEO 設置')
                     ->schema([
                         Forms\Components\TextInput::make('seo_title')
                             ->label('SEO 標題')
                             ->maxLength(255)
                             ->helperText('留空將使用上方的標題'),
-                            
+
                         Forms\Components\Textarea::make('seo_description')
                             ->label('SEO 描述')
                             ->rows(3),
-                            
+
                         Forms\Components\TextInput::make('seo_keywords')
                             ->label('SEO 關鍵字')
                             ->placeholder('以逗號分隔關鍵字')
@@ -172,4 +175,4 @@ class SchoolResource extends Resource
             'edit' => Pages\EditSchool::route('/{record}/edit'),
         ];
     }
-} 
+}

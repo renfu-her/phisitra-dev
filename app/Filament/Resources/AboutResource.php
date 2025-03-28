@@ -19,9 +19,9 @@ class AboutResource extends Resource
     protected static ?string $model = About::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-information-circle';
-    
+
     protected static ?string $navigationGroup = '網站管理';
-    
+
     protected static ?string $modelLabel = '關於我們';
 
     protected static ?int $navigationSort = 2;
@@ -34,7 +34,7 @@ class AboutResource extends Resource
                     ->label('標題')
                     ->required()
                     ->maxLength(255),
-                    
+
                 Forms\Components\FileUpload::make('image')
                     ->label('圖片')
                     ->image()
@@ -50,7 +50,10 @@ class AboutResource extends Resource
                     ->saveUploadedFileUsing(function ($file) {
                         $manager = new ImageManager(new Driver());
                         $image = $manager->read($file);
-                        $image->cover(1920, 1080);
+                        
+                        $image->resize(1024, null);
+                        $image->scaleDown(1024, null);
+
                         $filename = Str::uuid7()->toString() . '.webp';
 
                         if (!file_exists(storage_path('app/public/about'))) {
@@ -65,12 +68,12 @@ class AboutResource extends Resource
                             Storage::disk('public')->delete($file);
                         }
                     }),
-                    
+
                 Forms\Components\RichEditor::make('content')
                     ->label('內容')
                     ->required()
                     ->columnSpanFull(),
-                    
+
                 Forms\Components\Toggle::make('is_active')
                     ->label('啟用')
                     ->default(true),
@@ -81,11 +84,11 @@ class AboutResource extends Resource
                             ->label('SEO 標題')
                             ->maxLength(255)
                             ->helperText('留空將使用上方的標題'),
-                            
+
                         Forms\Components\Textarea::make('seo_description')
                             ->label('SEO 描述')
                             ->rows(3),
-                            
+
                         Forms\Components\TextInput::make('seo_keywords')
                             ->label('SEO 關鍵字')
                             ->placeholder('以逗號分隔關鍵字')
@@ -101,14 +104,14 @@ class AboutResource extends Resource
                 Tables\Columns\TextColumn::make('title')
                     ->label('標題')
                     ->searchable(),
-                    
+
                 Tables\Columns\ImageColumn::make('image')
                     ->label('圖片'),
-                    
+
                 Tables\Columns\ToggleColumn::make('is_active')
                     ->label('狀態')
                     ->sortable(),
-                    
+
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('更新時間')
                     ->dateTime()
@@ -147,4 +150,4 @@ class AboutResource extends Resource
             'edit' => Pages\EditAbout::route('/{record}/edit'),
         ];
     }
-} 
+}
