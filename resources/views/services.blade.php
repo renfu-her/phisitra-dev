@@ -26,7 +26,7 @@
     <div class="container">
         <div class="row">
             @foreach($services['data'] as $service)
-            <div class="col-lg-4 col-md-6 mb-4">
+            <div class="col-12 mb-4">
                 <div class="single-service">
                     @if($service['image'])
                     <div class="service-image mb-4">
