@@ -6,7 +6,7 @@
 <div class="school-detail-area section-padding">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <div class="school-detail-content">
                     <div class="school-header mb-4"></div>
                         <h1>{{ $school['name'] }}</h1>
@@ -33,7 +33,7 @@
                 </div>
             </div>
             
-            <div class="col-lg-4">
+            <div class="col-lg-12">
                 <div class="school-sidebar">
                     <div class="school-logo mb-4">
                         <img src="{{ !empty($school['logo']) ? Storage::url($school['logo']) : asset('images/no-image.png') }}" 
@@ -133,6 +133,11 @@
 
 .info-item a:hover {
     text-decoration: underline;
+}
+
+.content img {
+    width: 100%;
+    height: auto;
 }
 </style>
 @endpush 
