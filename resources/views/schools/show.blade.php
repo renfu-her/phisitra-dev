@@ -10,7 +10,7 @@
                 <div class="school-detail-content">
                     <div class="school-header mb-4">
                         <h2 class="section-title text-center">學校資料</h2>
-                        <h1>{{ $school['name'] }}</h1>
+                        <h5>{{ $school['name'] }}</h5>
                         @if(!empty($school['location']))
                             <p class="location">
                                 <i class="fas fa-map-marker-alt"></i> {{ $school['location'] }}
