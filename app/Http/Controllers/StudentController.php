@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Auth;
 use App\Models\StudentMember;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 class StudentController extends Controller
 {
@@ -21,7 +21,7 @@ class StudentController extends Controller
 
     public function show(Student $student)
     {
-        $response = Http::withoutVerifying()->get($this->apiUrl . '/students/' . $student->id)->json();    
+        $response = Http::withoutVerifying()->get($this->apiUrl . '/students/' . $student->id)->json();
         
         $student = $response['data'];
 
@@ -39,7 +39,8 @@ class StudentController extends Controller
         return view('students.show', compact('student'));
     }
 
-    public function toggleStudent(Student $student){
+    public function toggleStudent(Student $student)
+    {
         $member = Auth::guard('member')->user();
         
         if (!$member) {
