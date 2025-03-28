@@ -30,7 +30,7 @@
                 <div class="single-service">
                     @if($service['image'])
                     <div class="service-image mb-4">
-                        <img src="{{ Storage::url($service['image']) }}" alt="{{ $service['title'] }}" class="img-fluid rounded">
+                        <img src="{{ Storage::url($service['image']) }}" alt="{{ $service['title'] }}" class="img-fluid rounded" style="width: 95% !important;">
                     </div>
                     @endif
                     <div class="service-content">
