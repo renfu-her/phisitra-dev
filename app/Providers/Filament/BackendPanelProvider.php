@@ -18,6 +18,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 class BackendPanelProvider extends PanelProvider
 {
@@ -31,6 +32,7 @@ class BackendPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
+            ->darkMode(false)
             ->navigationGroups([
                 '網站管理',
                 '合作學校',
