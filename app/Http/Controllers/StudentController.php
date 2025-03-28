@@ -22,7 +22,7 @@ class StudentController extends Controller
     public function show(Student $student)
     {
         $response = Http::withoutVerifying()->get($this->apiUrl . '/students/' . $student->id)->json();
-        
+
         $student = $response['data'];
 
         // 檢查會員是否已登入
@@ -32,7 +32,7 @@ class StudentController extends Controller
             $studentMember = StudentMember::where('student_id', $student['id'])
                 ->where('member_id', $member->id)
                 ->first();
-            
+
             $student['is_selected'] = $studentMember ? true : false;
         }
 
@@ -42,7 +42,7 @@ class StudentController extends Controller
     public function toggleStudent(Student $student)
     {
         $member = Auth::guard('member')->user();
-        
+
         if (!$member) {
             return response()->json([
                 'status' => 'error',
@@ -55,11 +55,11 @@ class StudentController extends Controller
             $studentMember = StudentMember::where('student_id', $student->id)
                 ->where('member_id', $member->id)
                 ->first();
-            
+
             if ($studentMember) {
                 // 如果已存在，則刪除
                 $studentMember->delete();
-                
+
                 return response()->json([
                     'status' => 'success',
                     'message' => '已取消勾選學生',
@@ -71,7 +71,7 @@ class StudentController extends Controller
                     'student_id' => $student->id,
                     'member_id' => $member->id
                 ]);
-                
+
                 return response()->json([
                     'status' => 'success',
                     'message' => '已勾選學生',
@@ -85,4 +85,4 @@ class StudentController extends Controller
             ], 500);
         }
     }
-} 
+}
