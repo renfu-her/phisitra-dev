@@ -145,7 +145,7 @@
     @push('scripts')
     <script>
     function toggleStudent(studentId) {
-        fetch(`/students/toggle/${studentId}/`, {
+        fetch(`/students/toggle/${studentId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
