@@ -25,6 +25,17 @@ class StudentController extends Controller
         
         $student = $response['data'];
 
+        // 檢查會員是否已登入
+        if (Auth::guard('member')->check()) {
+            $member = Auth::guard('member')->user();
+            // 檢查是否已選擇此學生
+            $studentMember = StudentMember::where('student_id', $student->id)
+                ->where('member_id', $member->id)
+                ->first();
+            
+            $student['is_selected'] = $studentMember ? true : false;
+        }
+
         return view('students.show', compact('student'));
     }
 
