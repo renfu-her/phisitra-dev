@@ -33,6 +33,9 @@ class BackendPanelProvider extends PanelProvider
                 'primary' => Color::Amber,
             ])
             ->darkMode(false)
+            ->brandName('PhiSitra')
+            ->brandLogo(asset('images/logo.png'))
+            ->favicon(asset('images/favicon.png'))
             ->navigationGroups([
                 '網站管理',
                 '合作學校',
@@ -40,7 +43,6 @@ class BackendPanelProvider extends PanelProvider
                 '會員管理',
                 '系統設定'
             ])
-            ->defaultThemeMode(ThemeMode::Light)
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
