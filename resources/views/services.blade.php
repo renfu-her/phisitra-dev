@@ -30,7 +30,7 @@
                 <div class="single-service">
                     @if($service['image'])
                     <div class="service-image mb-4">
-                        <img src="{{ Storage::url($service['image']) }}" alt="{{ $service['title'] }}" class="img-fluid rounded" style="width: 95% !important;">
+                        <img src="{{ Storage::url($service['image']) }}" alt="{{ $service['title'] }}" class="img-fluid rounded">
                     </div>
                     @endif
                     <div class="service-content">
@@ -97,6 +97,11 @@
 .service-text {
     color: #666;
     line-height: 1.8;
+}
+
+.service-text img {
+    max-width: 100%;
+    height: auto;
 }
 </style>
 @endpush 
