@@ -35,7 +35,6 @@ class BackendPanelProvider extends PanelProvider
             ->darkMode(false)
             ->brandName('PhiSitra')
             ->brandLogo(asset('images/logo.png'))
-            ->brandLogoHeight('100px')
             ->favicon(asset('images/favicon.png'))
             ->navigationGroups([
                 '網站管理',
