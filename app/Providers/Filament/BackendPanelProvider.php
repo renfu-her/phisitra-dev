@@ -33,7 +33,7 @@ class BackendPanelProvider extends PanelProvider
                 'primary' => Color::Amber,
             ])
             ->darkMode(false)
-            ->brandName('PhiSitra')
+            ->brandName('品閎集團後臺')
             ->brandLogo(asset('images/logo.png'))
             ->favicon(asset('images/favicon.png'))
             ->navigationGroups([
