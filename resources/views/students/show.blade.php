@@ -10,8 +10,6 @@
                             alt="{{ $student['name_zh'] }}" onerror="this.src='/images/default-student.jpg'">
                     </div>
                     <div class="card-body text-center">
-                        <h2 class="student-name">{{ Auth::guard('member')->user()->name }}</h2>
-                        <h2 class="student-name">{{ Auth::guard('member')->check() }}</h2>
                         <p class="student-en-name">{{ $student['name_en'] }}</p>
                         @if(Auth::guard('member')->check())
                             @if(isset($student['is_selected']) && $student['is_selected'])
@@ -147,7 +145,7 @@
     @push('scripts')
     <script>
     function toggleStudent(studentId) {
-        fetch(`/api/v1/students/toggle/${studentId}/`, {
+        fetch(`/students/toggle/${studentId}/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

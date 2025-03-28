@@ -30,3 +30,4 @@ Route::prefix('schools')->group(function () {
 
 Route::get('/students', [StudentController::class, 'index'])->name('students.index');
 Route::get('/students/{student}', [StudentController::class, 'show'])->name('students.show');
+Route::post('/students/toggle/{student}', [StudentController::class, 'toggleStudent'])->name('students.toggle');
