@@ -8,8 +8,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="school-detail-content">
-                    <div class="school-header mb-4"></div>
-                        <h1>{{ $school['name'] }}</h1>
+                    <div class="school-header mb-4">
+                        <h2 class="section-title">學校資料</h2>
+                        <h3>{{ $school['name'] }}</h3>
                         @if(!empty($school['location']))
                             <p class="location">
                                 <i class="fas fa-map-marker-alt"></i> {{ $school['location'] }}
@@ -68,6 +69,13 @@
 .school-detail-area {
     padding: 80px 0;
     background: #f8f9fa;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    color: #666;
+    margin-bottom: 1rem;
+    font-weight: 500;
 }
 
 .school-header h1 {
