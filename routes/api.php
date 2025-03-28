@@ -70,6 +70,6 @@ Route::prefix('v1')->name('api.v1.')->group(function () {
     
     // 學生公開資料
     Route::get('students/{student}', [StudentController::class, 'show'])->name('students.show');
-    Route::post('/students/{student}/toggle', [StudentController::class, 'toggleStudent'])->name('students.toggle');
+    Route::post('/students/toggle/{student}', [StudentController::class, 'toggleStudent'])->name('students.toggle');
     // });
 });
