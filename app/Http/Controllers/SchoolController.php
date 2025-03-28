@@ -31,12 +31,7 @@ class SchoolController extends Controller
 
     public function show($id)
     {
-        $response = Http::withoutVerifying()->get($this->apiUrl . '/schools/' . $id);
-        $school = $response->json();
-        
-        if (!$school) {
-            abort(404);
-        }
+        $school = School::find($id);
         
         return view('schools.show', compact('school'));
     }
