@@ -1,0 +1,12 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+/* 隱藏 RichEditor 的上傳提示和文件大小信息 */
+.no-attachment-info .trix-button-group--file-tools,
+.no-attachment-info .trix-attachment__size,
+.no-attachment-info .trix-attachment__remove {
+    display: none !important;
+}
+
+.trix-attachment__metadata {
+    display: none !important;
+} 

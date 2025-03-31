@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use Mohamedsabil83\FilamentFormsTinyeditor\Components\TinyEditor;
 
 class SchoolResource extends Resource
 {
@@ -69,7 +70,7 @@ class SchoolResource extends Resource
                         }
                     }),
 
-                Forms\Components\RichEditor::make('description')
+                TinyEditor::make('description')
                     ->label('描述')
                     ->columnSpanFull(),
 

@@ -18,10 +18,42 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Filament\Forms\Components\RichEditor;
 
 class BackendPanelProvider extends PanelProvider
 {
+    public function boot(): void
+    {
+        RichEditor::configureUsing(function (RichEditor $editor) {
+            return $editor
+                ->fileAttachmentsDisk('public')
+                ->fileAttachmentsVisibility('public')
+                ->fileAttachmentsDirectory('uploads')
+                ->extraInputAttributes(['class' => 'no-attachment-info'])
+                ->toolbarButtons([
+                    'attachFiles',
+                    'blockquote',
+                    'bold',
+                    'bulletList',
+                    'codeBlock',
+                    'h2',
+                    'h3',
+                    'italic',
+                    'link',
+                    'orderedList',
+                    'redo',
+                    'strike',
+                    'underline',
+                    'undo',
+                    'image',
+                ])
+                ->enableToolbarButtons([
+                    'attachFiles',
+                    'image',
+                ]);
+        });
+    }
+
     public function panel(Panel $panel): Panel
     {
         return $panel
