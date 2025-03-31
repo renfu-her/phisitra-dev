@@ -243,7 +243,7 @@
                 <div class="col-lg-3 col-md-12">
                     <div class="logo">
                         <a href="{{ route('home') }}">
-                            <img src="{{ Storage::url('images/site_logo.png') }}" alt="{{ config('app.name') }}">
+                            <img src="{{ asset('images/site_logo.png') }}" alt="{{ config('app.name') }}">
                         </a>
                     </div>
                 </div>
