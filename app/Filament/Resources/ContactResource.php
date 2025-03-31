@@ -26,6 +26,10 @@ class ContactResource extends Resource
             ->schema([
                 Forms\Components\Section::make('基本資訊')
                     ->schema([
+                        Forms\Components\TextInput::make('business_hours')
+                            ->label('營業時間')
+                            ->required()
+                            ->placeholder('例如：週一至週五 9:30-18:30'),
                         Forms\Components\TextInput::make('name_zh')
                             ->label('中文名稱')
                             ->required(),
@@ -66,7 +70,8 @@ class ContactResource extends Resource
             'address' => '台北市中山區復興北路58號12樓',
             'phone' => '(02) 8772-3812',
             'fax' => '(02) 2775-2373',
-            'email' => 'phi87723812@gmail.com'
+            'email' => 'phi87723812@gmail.com',
+            'business_hours' => '週一至週五 9:30-18:30'
         ]);
 
         return [

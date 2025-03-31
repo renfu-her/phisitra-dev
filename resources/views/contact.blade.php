@@ -23,7 +23,7 @@
                             </div>
                             <div>
                                 <div class="fw-bold">營業時間</div>
-                                <div>週一至週五 9:00-18:00</div>
+                                <div>{{ $contact->business_hours }}</div>
                             </div>
                         </div>
 

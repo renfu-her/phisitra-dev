@@ -16,6 +16,7 @@ class Contact extends Model
         'phone',            // 電話
         'fax',             // 傳真
         'email',           // Email
+        'business_hours',   // 營業時間
         'seo_title',
         'seo_description',
         'seo_keywords'
@@ -23,5 +24,6 @@ class Contact extends Model
 
     protected $casts = [
         'status' => 'string',
+        'business_hours' => 'string',
     ];
 } 
