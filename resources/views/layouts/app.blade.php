@@ -50,7 +50,7 @@
         }
 
         .logo img {
-            height: 60px;
+            max-height: 60px;
         }
 
         .mainmenu-area {
