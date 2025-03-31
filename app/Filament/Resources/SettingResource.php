@@ -39,38 +39,11 @@ class SettingResource extends Resource
                         FileUpload::make('logo')
                             ->label('網站 Logo')
                             ->image()
-                            ->imageEditor()
                             ->directory('settings')
                             ->columnSpanFull()
+                            ->maxSize(5120) // 5MB
                             ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
-                            ->downloadable()
-                            ->openable()
-                            ->getUploadedFileNameForStorageUsing(
-                                fn($file): string => (string) str('logo-' . Str::uuid7() . '.webp')
-                            )
-                            ->saveUploadedFileUsing(function ($file) {
-                                $manager = new ImageManager(new Driver());
-                                $image = $manager->read($file);
-                                
-                                // 如果寬度大於 500px，則等比例縮小到 500px
-                                if ($image->width() > 500) {
-                                    $image->scale(width: 500);
-                                }
-
-                                $filename = 'logo-' . Str::uuid7()->toString() . '.webp';
-
-                                if (!file_exists(storage_path('app/public/settings'))) {
-                                    mkdir(storage_path('app/public/settings'), 0755, true);
-                                }
-
-                                $image->toWebp(80)->save(storage_path('app/public/settings/' . $filename));
-                                return 'settings/' . $filename;
-                            })
-                            ->deleteUploadedFileUsing(function ($file) {
-                                if ($file) {
-                                    Storage::disk('public')->delete($file);
-                                }
-                            }),
+                            ->downloadable(),
                         FileUpload::make('favicon')
                             ->label('網站 Favicon')
                             ->image()
