@@ -130,19 +130,35 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <form class="newsletter-container">
+                <form class="newsletter-container" action="{{ route('contact-info.store') }}" method="POST">
+                    @csrf
                     <div class="row">
                         <div class="col-lg-12">
                             <h4>立即諮詢</h4>
                         </div>
-                        <div class="col-lg-6">
-                            <input type="text" name="name" placeholder="您的姓名">
-                            <input type="email" name="email" placeholder="電子郵件">
-                            <input type="text" name="subject" placeholder="主旨">
-                        </div>
-                        <div class="col-lg-6">
-                            <textarea name="message" placeholder="您的訊息"></textarea>
-                            <button type="submit" class="button-default">送出</button>
+                        <div class="col-lg-12">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <input type="text" name="name" placeholder="您的姓名" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="tel" name="phone" placeholder="聯絡電話" required>
+                                </div>
+                                <div class="col-12">
+                                    <input type="email" name="email" placeholder="電子郵件" required>
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" name="subject" placeholder="主旨" required>
+                                </div>
+                                <div class="col-12">
+                                    <textarea name="message" placeholder="您的訊息" required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <div class="text-start mt-3">
+                                        <button type="submit" class="button-default">送出</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
