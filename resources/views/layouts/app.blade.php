@@ -418,7 +418,7 @@
             <div class="header-wrapper">
                 <div class="logo">
                     <a href="{{ route('home') }}">
-                        <img src="{{ Storage::url($setting->logo ?? 'images/site_logo.png') }}" alt="{{ config('app.name') }}">
+                        <img src="{{ asset( 'images/site_logo.png') }}" alt="{{ config('app.name') }}">
                     </a>
                 </div>
                 <div class="d-flex align-items-center">
