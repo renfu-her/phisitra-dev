@@ -75,11 +75,15 @@
                     <!-- 聯絡表單 -->
                     <div class="mt-5">
                         <h2 class="h4 mb-4">聯絡表單</h2>
-                        <form action="{{ route('contact.store') }}" method="POST">
+                        <form action="{{ route('contact-info.store') }}" method="POST">
                             @csrf
                             <div class="mb-3">
                                 <label for="name" class="form-label">姓名</label>
                                 <input type="text" class="form-control" id="name" name="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">電話</label>
+                                <input type="tel" class="form-control" id="phone" name="phone" required>
                             </div>
                             <div class="mb-3">
                                 <label for="email" class="form-label">電子郵件</label>
