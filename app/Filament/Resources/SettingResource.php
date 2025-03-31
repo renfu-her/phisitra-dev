@@ -13,6 +13,10 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class SettingResource extends Resource
 {
@@ -35,13 +39,71 @@ class SettingResource extends Resource
                         FileUpload::make('logo')
                             ->label('網站 Logo')
                             ->image()
+                            ->imageEditor()
                             ->directory('settings')
-                            ->imageEditor(),
+                            ->columnSpanFull()
+                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                            ->downloadable()
+                            ->openable()
+                            ->getUploadedFileNameForStorageUsing(
+                                fn($file): string => (string) str('logo-' . Str::uuid7() . '.webp')
+                            )
+                            ->saveUploadedFileUsing(function ($file) {
+                                $manager = new ImageManager(new Driver());
+                                $image = $manager->read($file);
+                                
+                                $image->resize(500, null);
+                                $image->scaleDown(500, null);
+
+                                $filename = 'logo-' . Str::uuid7()->toString() . '.webp';
+
+                                if (!file_exists(storage_path('app/public/settings'))) {
+                                    mkdir(storage_path('app/public/settings'), 0755, true);
+                                }
+
+                                $image->toWebp(80)->save(storage_path('app/public/settings/' . $filename));
+                                return 'settings/' . $filename;
+                            })
+                            ->deleteUploadedFileUsing(function ($file) {
+                                if ($file) {
+                                    Storage::disk('public')->delete($file);
+                                }
+                            }),
                         FileUpload::make('favicon')
                             ->label('網站 Favicon')
                             ->image()
+                            ->imageEditor()
                             ->directory('settings')
-                            ->imageEditor(),
+                            ->columnSpanFull()
+                            ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/x-icon'])
+                            ->downloadable()
+                            ->openable()
+                            ->getUploadedFileNameForStorageUsing(
+                                fn($file): string => (string) str('favicon-' . Str::uuid7() . '.webp')
+                            )
+                            ->saveUploadedFileUsing(function ($file) {
+                                $manager = new ImageManager(new Driver());
+                                $image = $manager->read($file);
+                                
+                                // 正方形裁切
+                                $size = min($image->width(), $image->height());
+                                $image->cover($size, $size);
+                                $image->resize(32, 32); // favicon 標準尺寸
+
+                                $filename = 'favicon-' . Str::uuid7()->toString() . '.webp';
+
+                                if (!file_exists(storage_path('app/public/settings'))) {
+                                    mkdir(storage_path('app/public/settings'), 0755, true);
+                                }
+
+                                $image->toWebp(80)->save(storage_path('app/public/settings/' . $filename));
+                                return 'settings/' . $filename;
+                            })
+                            ->deleteUploadedFileUsing(function ($file) {
+                                if ($file) {
+                                    Storage::disk('public')->delete($file);
+                                }
+                            }),
                     ])->columns(2),
 
                 Section::make('SEO 設定')
