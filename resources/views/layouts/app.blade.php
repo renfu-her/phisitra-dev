@@ -27,6 +27,7 @@
     <style>
         body {
             font-family: 'Noto Sans TC', sans-serif;
+            overflow-x: hidden;
         }
 
         .header-top {
@@ -47,6 +48,12 @@
             padding: 15px 0;
             background: #fff;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .header-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         .logo img {
@@ -182,11 +189,180 @@
             margin: 0;
             opacity: 0.8;
         }
+
+        /* 手機版選單樣式 */
+        .mobile-menu {
+            display: none;
+        }
+
+        .mobile-menu-btn {
+            border: none;
+            background: none;
+            font-size: 24px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .mobile-menu-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #fff;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .mobile-menu-content.show {
+            display: block;
+        }
+
+        .mobile-menu-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-menu-content ul li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .mobile-menu-content ul li:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-menu-content ul li a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+            font-weight: 500;
+        }
+
+        .mobile-menu-content .dropdown-menu {
+            position: static;
+            float: none;
+            border: none;
+            box-shadow: none;
+            padding-left: 15px;
+        }
+
+        /* 側邊選單 */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 300px;
+            height: 100vh;
+            background: #fff;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+            transition: left 0.3s ease;
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .side-menu.show {
+            left: 0;
+        }
+
+        .side-menu .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            border: none;
+            background: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .side-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 50px 0 0 0;
+        }
+
+        .side-menu ul li {
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .side-menu ul li:last-child {
+            border-bottom: none;
+        }
+
+        .side-menu ul li a {
+            color: #333;
+            text-decoration: none;
+            display: block;
+            font-weight: 500;
+        }
+
+        .side-menu .dropdown-menu {
+            position: static;
+            float: none;
+            border: none;
+            box-shadow: none;
+            padding-left: 15px;
+            display: none;
+        }
+
+        /* 遮罩層 */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            z-index: 999;
+        }
+
+        @media (max-width: 991px) {
+            .mainmenu {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .logo {
+                text-align: center;
+                margin-bottom: 15px;
+            }
+        }
     </style>
 
     @stack('styles')
 </head>
 <body>
+    <!-- 遮罩層 -->
+    <div class="menu-overlay"></div>
+
+    <!-- 側邊選單 -->
+    <div class="side-menu">
+        <button class="close-btn">
+            <i class="fas fa-times"></i>
+        </button>
+        <ul>
+            <li><a href="{{ route('home') }}">首頁</a></li>
+            <li><a href="{{ route('about') }}">關於我們</a></li>
+            <li><a href="{{ route('services') }}">服務項目</a></li>
+            <li class="dropdown">
+                <a href="#" onclick="toggleDropdown(this)">
+                    合作學校 <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="{{ route('schools') }}">學校列表</a></li>
+                    <li><a href="{{ route('students.index') }}">學生資料</a></li>
+                </ul>
+            </li>
+            <li><a href="{{ route('contact.index') }}">聯絡我們</a></li>
+        </ul>
+    </div>
+
     <!-- 頂部資訊區 -->
     <div class="header-top">
         <div class="container">
@@ -236,35 +412,34 @@
         </div>
     </div>
 
-    <!-- Logo 和主選單 -->
+    <!-- Logo 和選單按鈕 -->
     <div class="header-logo-menu">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-3 col-md-12">
-                    <div class="logo">
-                        <a href="{{ route('home') }}">
-                            <img src="{{ asset('images/site_logo.png') }}" alt="{{ config('app.name') }}">
-                        </a>
-                    </div>
+            <div class="header-wrapper">
+                <div class="logo">
+                    <a href="{{ route('home') }}">
+                        <img src="{{ Storage::url($setting->logo ?? 'images/site_logo.png') }}" alt="{{ config('app.name') }}">
+                    </a>
                 </div>
-                <div class="col-lg-9 d-none d-lg-block">
-                    <div class="mainmenu-area">
-                        <nav class="mainmenu">
-                            <ul>
-                                <li><a href="{{ route('home') }}">首頁</a></li>
-                                <li><a href="{{ route('about') }}">關於我們</a></li>
-                                <li><a href="{{ route('services') }}">服務項目</a></li>
-                                <li class="dropdown">
-                                    <a href="{{ route('schools') }}" class="dropdown-toggle" data-bs-toggle="dropdown">合作學校</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="{{ route('schools') }}">學校列表</a></li>
-                                        <li><a class="dropdown-item" href="{{ route('students.index') }}">學生資料</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="{{ route('contact.index') }}">聯絡我們</a></li>
-                            </ul>
-                        </nav>
-                    </div>
+                <div class="d-flex align-items-center">
+                    <nav class="mainmenu d-none d-lg-block me-3">
+                        <ul>
+                            <li><a href="{{ route('home') }}">首頁</a></li>
+                            <li><a href="{{ route('about') }}">關於我們</a></li>
+                            <li><a href="{{ route('services') }}">服務項目</a></li>
+                            <li class="dropdown">
+                                <a href="{{ route('schools') }}" class="dropdown-toggle" data-bs-toggle="dropdown">合作學校</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="{{ route('schools') }}">學校列表</a></li>
+                                    <li><a class="dropdown-item" href="{{ route('students.index') }}">學生資料</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="{{ route('contact.index') }}">聯絡我們</a></li>
+                        </ul>
+                    </nav>
+                    <button class="mobile-menu-btn d-block d-lg-none">
+                        <i class="fas fa-bars"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -351,6 +526,27 @@
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
             tooltipTriggerList.map(function (tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+
+            // 打開側邊選單
+            $('.mobile-menu-btn').click(function() {
+                $('.side-menu').addClass('show');
+                $('.menu-overlay').fadeIn();
+                $('body').css('overflow', 'hidden');
+            });
+
+            // 關閉側邊選單
+            $('.close-btn, .menu-overlay').click(function() {
+                $('.side-menu').removeClass('show');
+                $('.menu-overlay').fadeOut();
+                $('body').css('overflow', '');
+            });
+
+            // 手機版下拉選單切換
+            $('.side-menu .dropdown > a').click(function(e) {
+                e.preventDefault();
+                $(this).next('.dropdown-menu').slideToggle();
+                $(this).find('.fa-chevron-down').toggleClass('fa-chevron-up');
             });
         });
     </script>
