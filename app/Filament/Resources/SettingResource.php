@@ -52,8 +52,10 @@ class SettingResource extends Resource
                                 $manager = new ImageManager(new Driver());
                                 $image = $manager->read($file);
                                 
-                                $image->resize(500, null);
-                                $image->scaleDown(500, null);
+                                // 如果寬度大於 500px，則等比例縮小到 500px
+                                if ($image->width() > 500) {
+                                    $image->scale(width: 500);
+                                }
 
                                 $filename = 'logo-' . Str::uuid7()->toString() . '.webp';
 
