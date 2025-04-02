@@ -356,7 +356,9 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li><a href="{{ route('schools') }}">學校列表</a></li>
+                    @if(Auth::guard('members')->check())
                     <li><a href="{{ route('students.index') }}">學生資料</a></li>
+                    @endif
                 </ul>
             </li>
             <li><a href="{{ route('contact.index') }}">聯絡我們</a></li>
@@ -368,9 +370,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-end">
-                    @if(Auth::guard('member')->check())
+                    @if(Auth::guard('members')->check())
                         <div class="d-inline-block">
-                            <span class="me-3">{{ Auth::guard('member')->user()->name }}</span>
+                            <span class="me-3">{{ Auth::guard('members')->user()->name }}</span>
                             <form action="{{ route('logout') }}" method="POST" class="d-inline">
                                 @csrf
                                 <button type="submit" class="btn btn-outline-secondary btn-sm">登出</button>
@@ -431,7 +433,9 @@
                                 <a href="{{ route('schools') }}" class="dropdown-toggle" data-bs-toggle="dropdown">合作學校</a>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="{{ route('schools') }}">學校列表</a></li>
+                                    @if(Auth::guard('members')->check())
                                     <li><a class="dropdown-item" href="{{ route('students.index') }}">學生資料</a></li>
+                                    @endif
                                 </ul>
                             </li>
                             <li><a href="{{ route('contact.index') }}">聯絡我們</a></li>
