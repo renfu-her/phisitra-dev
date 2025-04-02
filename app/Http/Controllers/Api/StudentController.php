@@ -11,35 +11,26 @@ use Illuminate\Support\Facades\Auth;
 
 class StudentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::all();
-        $member = Auth::guard('member')->user();
+        $perPage = $request->input('per_page', 12); // 每頁顯示12筆資料
+        $currentPage = $request->input('page', 1);
 
-        if (!$member) {
-            // 未登入用戶只能看到公開資料
-            $data = $students->map(function ($student) {
-                return $student->getPublicData();
-            });
-        } else {
-            // 已登入用戶可以看到更多資料
-            $data = $students->map(function ($student) use ($member) {
-                // 檢查會員是否有勾選此學生
-                $isSelected = $member->students()->where('student_id', $student->id)->exists();
-
-                if ($isSelected) {
-                    // 如果已勾選，返回完整資料
-                    return $student->getFullData();
-                } else {
-                    // 如果未勾選，只返回公開資料
-                    return $student->getPublicData();
-                }
-            });
-        }
+        $students = Student::paginate($perPage, ['*'], 'page', $currentPage);
 
         return response()->json([
             'status' => 'success',
-            'data' => $data
+            'data' => [
+                'data' => $students->items(),
+                'meta' => [
+                    'current_page' => $students->currentPage(),
+                    'from' => $students->firstItem(),
+                    'last_page' => $students->lastPage(),
+                    'per_page' => $students->perPage(),
+                    'to' => $students->lastItem(),
+                    'total' => $students->total()
+                ]
+            ]
         ]);
     }
 
