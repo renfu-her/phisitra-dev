@@ -52,11 +52,16 @@ class StudentsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('gender')
                     ->label('性別')
                     ->formatStateUsing(fn ($state) => $state === 'male' ? '男生' : '女生'),
-                Tables\Columns\ToggleColumn::make('pivot.status')
+                Tables\Columns\ToggleColumn::make('status')
                     ->label('審核狀態')
                     ->sortable()
-                    ->afterStateUpdated(function ($record, $state) {
-                        // 更新 student_members 表的狀態
+                    ->getStateUsing(function ($record) {
+                        return DB::table('student_members')
+                            ->where('student_id', $record->id)
+                            ->where('member_id', $this->getOwnerRecord()->id)
+                            ->value('status') ?? false;
+                    })
+                    ->updateStateUsing(function ($record, $state) {
                         DB::table('student_members')
                             ->where('student_id', $record->id)
                             ->where('member_id', $this->getOwnerRecord()->id)
