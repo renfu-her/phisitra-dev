@@ -12,10 +12,16 @@ class StudentController extends Controller
 {
     protected $apiUrl = 'https://phisitra.dev-vue.com/api/v1';
 
-    public function index()
+    public function index(Request $request)
     {
-        $response = Http::withoutVerifying()->get($this->apiUrl . '/students')->json();
-        $studentsData = $response['data'];
+        $page = $request->input('page', 1);
+        $response = Http::withoutVerifying()->get($this->apiUrl . '/students', [
+            'page' => $page,
+            'per_page' => 12
+        ])->json();
+        
+        $studentsData = $response['data']['data'];
+        $pagination = $response['data']['meta'];
         
         // 將陣列資料轉換為 Student 模型實例
         $students = collect($studentsData)->map(function ($studentData) {
@@ -55,7 +61,7 @@ class StudentController extends Controller
             return true;
         });
 
-        return view('students.index', compact('students'));
+        return view('students.index', compact('students', 'pagination'));
     }
 
     public function show(Student $student)

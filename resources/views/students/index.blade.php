@@ -62,6 +62,38 @@
             </div>
         @endforelse
     </div>
+
+    @if(isset($pagination))
+        <div class="row mt-4">
+            <div class="col-12">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination justify-content-center">
+                        @if($pagination['current_page'] > 1)
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ $pagination['current_page'] - 1 }}" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            </li>
+                        @endif
+
+                        @for($i = 1; $i <= $pagination['last_page']; $i++)
+                            <li class="page-item {{ $i == $pagination['current_page'] ? 'active' : '' }}">
+                                <a class="page-link" href="?page={{ $i }}">{{ $i }}</a>
+                            </li>
+                        @endfor
+
+                        @if($pagination['current_page'] < $pagination['last_page'])
+                            <li class="page-item">
+                                <a class="page-link" href="?page={{ $pagination['current_page'] + 1 }}" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    @endif
 </div>
 
 @push('styles')
