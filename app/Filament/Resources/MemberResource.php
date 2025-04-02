@@ -37,6 +37,7 @@ class MemberResource extends Resource
                     ->required()
                     ->unique(ignoreRecord: true)
                     ->maxLength(255)
+                    ->disabled(fn (string $context): bool => $context === 'edit')
                     ->live(onBlur: true),
                     
                 Forms\Components\TextInput::make('password')
