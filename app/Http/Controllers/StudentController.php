@@ -30,9 +30,10 @@ class StudentController extends Controller
             // 檢查是否已選擇此學生
             if (Auth::guard('member')->check()) {
                 $member = Auth::guard('member')->user();
-                $student->studentMember = StudentMember::where('student_id', $studentData['id'])
+                $studentMember = StudentMember::where('student_id', $studentData['id'])
                     ->where('member_id', $member->id)
                     ->first();
+                $student->setRelation('studentMember', $studentMember);
             }
             
             return $student;
