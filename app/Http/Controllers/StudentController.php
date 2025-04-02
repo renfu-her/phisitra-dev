@@ -15,7 +15,29 @@ class StudentController extends Controller
     public function index()
     {
         $response = Http::withoutVerifying()->get($this->apiUrl . '/students')->json();
-        $students = $response['data'];
+        $studentsData = $response['data'];
+        
+        // 將陣列資料轉換為 Student 模型實例
+        $students = collect($studentsData)->map(function ($studentData) {
+            $student = new Student();
+            $student->id = $studentData['id'];
+            $student->name_zh = $studentData['name_zh'];
+            $student->name_en = $studentData['name_en'];
+            $student->gender = $studentData['gender'];
+            $student->school_name = $studentData['school_name'];
+            $student->photo = $studentData['photo'];
+            
+            // 檢查是否已選擇此學生
+            if (Auth::guard('member')->check()) {
+                $member = Auth::guard('member')->user();
+                $student->studentMember = StudentMember::where('student_id', $studentData['id'])
+                    ->where('member_id', $member->id)
+                    ->first();
+            }
+            
+            return $student;
+        });
+
         return view('students.index', compact('students'));
     }
 

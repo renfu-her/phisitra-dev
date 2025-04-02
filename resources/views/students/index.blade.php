@@ -16,9 +16,9 @@
             <div class="col-md-3 col-sm-6">
                 <div class="card student-card">
                     <div class="card-img-wrapper position-relative">
-                        <img src="{{ $student['photo'] }}" 
+                        <img src="{{ $student->photo }}" 
                              class="card-img-top student-photo" 
-                             alt="{{ $student['name_zh'] }}"
+                             alt="{{ $student->name_zh }}"
                              onerror="this.src='/images/default-student.jpg'">
                         <div class="status-toggle">
                             <div class="form-check form-switch">
@@ -33,21 +33,21 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <h5 class="card-title student-name">{{ $student['name_zh'] }}</h5>
-                        <p class="card-text student-name-en">{{ $student['name_en'] }}</p>
-                        @if(isset($student['gender']))
+                        <h5 class="card-title student-name">{{ $student->name_zh }}</h5>
+                        <p class="card-text student-name-en">{{ $student->name_en }}</p>
+                        @if($student->gender)
                             <p class="card-text">
                                 <small class="text-muted">
                                     <i class="fas fa-venus-mars"></i> 
-                                    {{ $student['gender'] === 'male' ? '男生' : '女生' }}
+                                    {{ $student->gender === 'male' ? '男生' : '女生' }}
                                 </small>
                             </p>
                         @endif
-                        @if(isset($student['school_name']))
+                        @if($student->school_name)
                             <p class="card-text">
                                 <small class="text-muted">
                                     <i class="fas fa-school"></i> 
-                                    {{ $student['school_name'] }}
+                                    {{ $student->school_name }}
                                 </small>
                             </p>
                         @endif
