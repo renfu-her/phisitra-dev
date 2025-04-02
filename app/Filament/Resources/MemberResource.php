@@ -49,6 +49,7 @@ class MemberResource extends Resource
                         }
                         return Hash::make($state);
                     })
+                    ->dehydrated(fn ($state) => filled($state))
                     ->required(fn (string $context): bool => $context === 'create')
                     ->default(fn (Forms\Get $get) => $get('email'))
                     ->maxLength(255),
