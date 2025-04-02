@@ -23,10 +23,10 @@
                         <div class="status-toggle">
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" 
-                                       id="select-{{ $student['id'] }}"
+                                       id="select-{{ $student->id }}"
                                        {{ $student->studentMember ? 'checked' : '' }}
-                                       onchange="toggleStudentMember({{ $student['id'] }}, this.checked)">
-                                <label class="form-check-label" for="select-{{ $student['id'] }}">
+                                       onchange="toggleStudentMember({{ $student->id }}, this.checked)">
+                                <label class="form-check-label" for="select-{{ $student->id }}">
                                     {{ $student->studentMember ? '已選擇' : '未選擇' }}
                                 </label>
                             </div>
