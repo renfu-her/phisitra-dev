@@ -55,14 +55,6 @@ class MemberResource extends Resource
                 Forms\Components\Toggle::make('is_active')
                     ->label('啟用')
                     ->default(true),
-
-                Forms\Components\Select::make('students')
-                    ->label('選擇學生')
-                    ->multiple()
-                    ->relationship('students', 'name_en')
-                    ->preload()
-                    ->searchable(['name_en', 'name_zh'])
-                    ->columnSpanFull(),
             ]);
     }
 

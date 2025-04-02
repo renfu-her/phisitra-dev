@@ -7,6 +7,7 @@ use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Model;
 
 class StudentsRelationManager extends RelationManager
 {
@@ -44,13 +45,17 @@ class StudentsRelationManager extends RelationManager
                     ->label('英文姓名')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('gender')
-                    ->label('性別'),
+                    ->label('性別')
+                    ->formatStateUsing(fn ($state) => $state === 'male' ? '男生' : '女生'),
                 Tables\Columns\TextColumn::make('nationality')
                     ->label('國籍')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('school_name')
                     ->label('就讀學校')
                     ->searchable(),
+                Tables\Columns\ToggleColumn::make('student_member.status')
+                    ->label('狀態')
+                    ->sortable(),
             ])
             ->filters([
                 //
@@ -59,13 +64,17 @@ class StudentsRelationManager extends RelationManager
                 Tables\Actions\AttachAction::make()
                     ->preloadRecordSelect()
                     ->recordSelectSearchColumns(['name_en', 'name_zh']),
+                Tables\Actions\CreateAction::make(),
             ])
             ->actions([
                 Tables\Actions\DetachAction::make(),
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DetachBulkAction::make(),
+                    Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
     }
