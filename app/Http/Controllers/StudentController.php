@@ -26,6 +26,16 @@ class StudentController extends Controller
             $student->gender = $studentData['gender'] ?? null;
             $student->school_name = $studentData['school_name'] ?? null;
             $student->photo = $studentData['photo'] ?? '/images/default-student.jpg';
+            $student->department = $studentData['department'] ?? null;
+            $student->nationality = $studentData['nationality'] ?? null;
+            $student->birth_date = $studentData['birth_date'] ?? null;
+            $student->passport_no = $studentData['passport_no'] ?? null;
+            $student->overseas_address = $studentData['overseas_address'] ?? null;
+            $student->enrollment_date = $studentData['enrollment_date'] ?? null;
+            $student->study_duration = $studentData['study_duration'] ?? null;
+            $student->expected_graduation_date = $studentData['expected_graduation_date'] ?? null;
+            $student->specialties = $studentData['specialties'] ?? null;
+            $student->remarks = $studentData['remarks'] ?? null;
             
             // 檢查是否已選擇此學生
             if (Auth::guard('member')->check()) {
