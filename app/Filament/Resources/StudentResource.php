@@ -34,6 +34,7 @@ class StudentResource extends Resource
                     ->imageEditor()
                     ->directory('students/photos')
                     ->columnSpanFull()
+                    ->required()
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
                     ->downloadable()
                     ->openable()
@@ -75,20 +76,20 @@ class StudentResource extends Resource
                         'male' => '男',
                         'female' => '女',
                     ])
-                    ->required(),
+                    ->nullable(),
                     
                 Forms\Components\DatePicker::make('birth_date')
                     ->label('出生日期')
-                    ->required(),
+                    ->nullable(),
                     
                 Forms\Components\TextInput::make('nationality')
                     ->label('國籍')
-                    ->required()
+                    ->nullable()
                     ->maxLength(255),
                     
                 Forms\Components\TextInput::make('passport_no')
                     ->label('護照號碼')
-                    ->required()
+                    ->nullable()
                     ->maxLength(255),
                     
                 Forms\Components\Textarea::make('overseas_address')
@@ -98,33 +99,35 @@ class StudentResource extends Resource
                     
                 Forms\Components\TextInput::make('school_name')
                     ->label('學校名稱')
-                    ->required()
+                    ->nullable()
                     ->maxLength(255),
                     
                 Forms\Components\TextInput::make('department')
                     ->label('科系')
-                    ->required()
+                    ->nullable()
                     ->maxLength(255),
                     
                 Forms\Components\DatePicker::make('enrollment_date')
                     ->label('入學日期')
-                    ->required(),
+                    ->nullable(),
                     
                 Forms\Components\TextInput::make('study_duration')
                     ->label('就讀年限')
-                    ->required()
+                    ->nullable()
                     ->numeric(),
                     
                 Forms\Components\DatePicker::make('expected_graduation_date')
                     ->label('預計畢業日期')
-                    ->required(),
+                    ->nullable(),
                     
                 Forms\Components\Textarea::make('specialties')
                     ->label('專長')
+                    ->nullable()
                     ->rows(3),
                     
                 Forms\Components\Textarea::make('remarks')
                     ->label('備註')
+                    ->nullable()
                     ->rows(3),
             ]);
     }
