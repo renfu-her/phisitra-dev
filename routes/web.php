@@ -34,3 +34,9 @@ Route::get('/students/{student}', [StudentController::class, 'show'])->name('stu
 Route::post('/students/toggle/{student}', [StudentController::class, 'toggleStudent'])->name('students.toggle');
 
 Route::post('/contact-info', [ContactInfoController::class, 'store'])->name('contact-info.store');
+
+// 學生選擇狀態路由
+Route::middleware(['auth:member'])->group(function () {
+    Route::post('/students/{student}/attach', [StudentController::class, 'attach'])->name('students.attach');
+    Route::post('/students/{student}/detach', [StudentController::class, 'detach'])->name('students.detach');
+});

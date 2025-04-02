@@ -107,4 +107,72 @@ class StudentController extends Controller
             ], 500);
         }
     }
+
+    public function attach(Student $student)
+    {
+        $member = Auth::guard('member')->user();
+
+        try {
+            // 檢查是否已存在關聯
+            $studentMember = StudentMember::where('student_id', $student->id)
+                ->where('member_id', $member->id)
+                ->first();
+
+            if (!$studentMember) {
+                // 如果不存在，則建立
+                StudentMember::create([
+                    'student_id' => $student->id,
+                    'member_id' => $member->id,
+                    'status' => false // 預設狀態為待審核
+                ]);
+
+                return response()->json([
+                    'success' => true,
+                    'message' => '已選擇學生'
+                ]);
+            }
+
+            return response()->json([
+                'success' => false,
+                'message' => '已經選擇過此學生'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => '操作失敗：' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    public function detach(Student $student)
+    {
+        $member = Auth::guard('member')->user();
+
+        try {
+            // 檢查是否已存在關聯
+            $studentMember = StudentMember::where('student_id', $student->id)
+                ->where('member_id', $member->id)
+                ->first();
+
+            if ($studentMember) {
+                // 如果存在，則刪除
+                $studentMember->delete();
+
+                return response()->json([
+                    'success' => true,
+                    'message' => '已取消選擇學生'
+                ]);
+            }
+
+            return response()->json([
+                'success' => false,
+                'message' => '尚未選擇此學生'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => '操作失敗：' . $e->getMessage()
+            ], 500);
+        }
+    }
 }
