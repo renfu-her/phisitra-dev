@@ -16,7 +16,7 @@
             <div class="col-md-3 col-sm-6">
                 <div class="card student-card">
                     <div class="card-img-wrapper position-relative">
-                        <img src="{{ $student->photo }}" 
+                        <img src="{{ asset($student->photo) }}" 
                              class="card-img-top student-photo" 
                              alt="{{ $student->name_zh }}">
                         <div class="status-toggle">
