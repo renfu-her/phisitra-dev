@@ -45,6 +45,14 @@
                                 </small>
                             </p>
                         @endif
+                        @if(isset($student['school_name']))
+                            <p class="card-text">
+                                <small class="text-muted">
+                                    <i class="fas fa-school"></i> 
+                                    {{ $student['school_name'] }}
+                                </small>
+                            </p>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -80,6 +88,15 @@
     .student-name-en {
         font-size: 0.9rem;
         color: #6c757d;
+        margin-bottom: 0.5rem;
+    }
+    .card-text {
+        margin-bottom: 0.3rem;
+    }
+    .card-text .fas {
+        width: 20px;
+        text-align: center;
+        margin-right: 5px;
     }
     .card-img-wrapper {
         position: relative;
