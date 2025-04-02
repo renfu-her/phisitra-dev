@@ -49,8 +49,6 @@ class StudentsRelationManager extends RelationManager
                     ->formatStateUsing(fn ($state) => $state === 'male' ? '男生' : '女生'),
                 Tables\Columns\ToggleColumn::make('pivot.status')
                     ->label('審核狀態')
-                    ->onColor('success')
-                    ->offColor('danger')
                     ->sortable(),
             ])
             ->filters([
