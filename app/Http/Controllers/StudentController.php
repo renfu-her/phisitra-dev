@@ -20,12 +20,12 @@ class StudentController extends Controller
         // 將陣列資料轉換為 Student 模型實例
         $students = collect($studentsData)->map(function ($studentData) {
             $student = new Student();
-            $student->id = $studentData['id'];
-            $student->name_zh = $studentData['name_zh'];
-            $student->name_en = $studentData['name_en'];
-            $student->gender = $studentData['gender'];
-            $student->school_name = $studentData['school_name'];
-            $student->photo = $studentData['photo'];
+            $student->id = $studentData['id'] ?? null;
+            $student->name_zh = $studentData['name_zh'] ?? '';
+            $student->name_en = $studentData['name_en'] ?? '';
+            $student->gender = $studentData['gender'] ?? null;
+            $student->school_name = $studentData['school_name'] ?? null;
+            $student->photo = $studentData['photo'] ?? '/images/default-student.jpg';
             
             // 檢查是否已選擇此學生
             if (Auth::guard('member')->check()) {
