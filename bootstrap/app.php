@@ -15,7 +15,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->validateCsrfTokens(except: [
             'contact-info',
             'contact',
-            'backend/login'
+            'backend/login',
+            'login'
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
