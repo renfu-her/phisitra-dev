@@ -31,7 +31,7 @@ class StudentController extends Controller
             $student->name_en = $studentData['name_en'] ?? '';
             $student->gender = $studentData['gender'] ?? null;
             $student->school_name = $studentData['school_name'] ?? null;
-            $student->photo = $studentData['photo'] ?? '/images/default-student.jpg';
+            $student->photo = $studentData['photo'] ?? null;
             $student->department = $studentData['department'] ?? null;
             $student->nationality = $studentData['nationality'] ?? null;
             $student->birth_date = $studentData['birth_date'] ?? null;
