@@ -15,6 +15,10 @@ class StudentsRelationManager extends RelationManager
 
     protected static ?string $recordTitleAttribute = 'name_en';
 
+    protected static ?string $navigationGroup = '學生管理';
+
+    protected static ?string $modelLabel = '學生列表';
+
     protected static ?string $title = '學生列表';
 
     public function form(Form $form): Form
