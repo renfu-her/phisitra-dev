@@ -24,10 +24,10 @@
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" 
                                        id="select-{{ $student['id'] }}"
-                                       {{ isset($student['student_member']) ? 'checked' : '' }}
+                                       {{ $student->studentMember ? 'checked' : '' }}
                                        onchange="toggleStudentMember({{ $student['id'] }}, this.checked)">
                                 <label class="form-check-label" for="select-{{ $student['id'] }}">
-                                    {{ isset($student['student_member']) ? '已選擇' : '未選擇' }}
+                                    {{ $student->studentMember ? '已選擇' : '未選擇' }}
                                 </label>
                             </div>
                         </div>
@@ -142,14 +142,12 @@ function toggleStudentMember(studentId, checked) {
         } else {
             // 如果操作失敗，恢復開關狀態
             document.getElementById(`select-${studentId}`).checked = !checked;
-            label.textContent = !checked ? '已選擇' : '未選擇';
         }
     })
     .catch(error => {
         console.error('Error:', error);
         // 發生錯誤時恢復開關狀態
         document.getElementById(`select-${studentId}`).checked = !checked;
-        label.textContent = !checked ? '已選擇' : '未選擇';
     });
 }
 </script>

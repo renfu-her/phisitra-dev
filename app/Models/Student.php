@@ -91,6 +91,11 @@ class Student extends Model
             ->withTimestamps();
     }
 
+    public function studentMember()
+    {
+        return $this->hasOne(StudentMember::class);
+    }
+
     // 獲取公開資料
     public function getPublicData(): array
     {
