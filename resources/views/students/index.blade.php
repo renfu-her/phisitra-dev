@@ -16,7 +16,7 @@
                 <div class="col-md-3 col-sm-6">
                     <div class="card student-card">
                         <div class="card-img-wrapper position-relative">
-                            <img src="{{ asset('students/' . $student->photo) }}" class="card-img-top student-photo"
+                            <img src="{{ asset('storage/' . $student->photo) }}" class="card-img-top student-photo"
                                 alt="{{ $student->name_zh }}">
                             <div class="status-toggle">
                                 <div class="form-check form-switch">
