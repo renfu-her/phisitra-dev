@@ -8,6 +8,7 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class StudentsRelationManager extends RelationManager
 {
@@ -53,7 +54,14 @@ class StudentsRelationManager extends RelationManager
                     ->formatStateUsing(fn ($state) => $state === 'male' ? '男生' : '女生'),
                 Tables\Columns\ToggleColumn::make('pivot.status')
                     ->label('審核狀態')
-                    ->sortable(),
+                    ->sortable()
+                    ->afterStateUpdated(function ($record, $state) {
+                        // 更新 student_members 表的狀態
+                        DB::table('student_members')
+                            ->where('student_id', $record->id)
+                            ->where('member_id', $this->getOwnerRecord()->id)
+                            ->update(['status' => $state]);
+                    }),
             ])
             ->filters([
                 //
@@ -64,8 +72,10 @@ class StudentsRelationManager extends RelationManager
                     ->recordSelectSearchColumns(['name_en', 'name_zh'])
                     ->after(function ($data, $record) {
                         // 設置初始狀態為待審核
-                        $record->pivot->status = false;
-                        $record->pivot->save();
+                        DB::table('student_members')
+                            ->where('student_id', $record->id)
+                            ->where('member_id', $this->getOwnerRecord()->id)
+                            ->update(['status' => false]);
                     }),
             ])
             ->actions([
