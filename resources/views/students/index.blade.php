@@ -18,8 +18,7 @@
                     <div class="card-img-wrapper position-relative">
                         <img src="{{ $student->photo }}" 
                              class="card-img-top student-photo" 
-                             alt="{{ $student->name_zh }}"
-                             onerror="this.src='{{ asset('images/default-student.jpg') }}'">
+                             alt="{{ $student->name_zh }}">
                         <div class="status-toggle">
                             <div class="form-check form-switch">
                                 <input class="form-check-input" type="checkbox" 
