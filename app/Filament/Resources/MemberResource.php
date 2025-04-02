@@ -43,7 +43,12 @@ class MemberResource extends Resource
                 Forms\Components\TextInput::make('password')
                     ->label('密碼')
                     ->password()
-                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
+                    ->dehydrateStateUsing(function ($state) {
+                        if (empty($state)) {
+                            return null;
+                        }
+                        return Hash::make($state);
+                    })
                     ->required(fn (string $context): bool => $context === 'create')
                     ->default(fn (Forms\Get $get) => $get('email'))
                     ->maxLength(255),
