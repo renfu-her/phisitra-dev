@@ -47,7 +47,7 @@ class StudentsRelationManager extends RelationManager
                 Tables\Columns\TextColumn::make('gender')
                     ->label('性別')
                     ->formatStateUsing(fn ($state) => $state === 'male' ? '男生' : '女生'),
-                Tables\Columns\ToggleColumn::make('student_member.status')
+                Tables\Columns\ToggleColumn::make('pivot.status')
                     ->label('審核狀態')
                     ->onColor('success')
                     ->offColor('danger')
@@ -59,7 +59,12 @@ class StudentsRelationManager extends RelationManager
             ->headerActions([
                 Tables\Actions\AttachAction::make()
                     ->preloadRecordSelect()
-                    ->recordSelectSearchColumns(['name_en', 'name_zh']),
+                    ->recordSelectSearchColumns(['name_en', 'name_zh'])
+                    ->after(function ($data, $record) {
+                        // 設置初始狀態為待審核
+                        $record->pivot->status = false;
+                        $record->pivot->save();
+                    }),
             ])
             ->actions([
                 Tables\Actions\DetachAction::make()
