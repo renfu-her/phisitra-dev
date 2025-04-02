@@ -47,6 +47,12 @@ class StudentController extends Controller
             }
             
             return $student;
+        })->filter(function ($student) {
+            // 只顯示未通過審核的學生
+            if ($student->studentMember) {
+                return !$student->studentMember->status;
+            }
+            return true;
         });
 
         return view('students.index', compact('students'));
