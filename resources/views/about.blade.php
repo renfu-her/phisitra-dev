@@ -86,6 +86,10 @@
     line-height: 1.8;
 }
 
+.about-text img {
+    width: 100%;
+}
+
 .about-image img {
     width: 100%;
 }
