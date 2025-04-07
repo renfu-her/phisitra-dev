@@ -194,8 +194,7 @@
     }
     
     .slider-area .carousel-item img {
-        object-fit: contain;
-        background-color: #f8f9fa;
+        object-fit: cover;
     }
 }
 
