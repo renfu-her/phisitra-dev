@@ -14,7 +14,10 @@
         <div class="carousel-inner">
             @foreach($banners as $key => $banner)
                 <div class="carousel-item {{ $key === 0 ? 'active' : '' }}">
-                    <img src="{{ Storage::url($banner->image) }}" class="d-block w-100" alt="{{ $banner->title }}">
+                    <picture>
+                        <source media="(max-width: 768px)" srcset="{{ Storage::url($banner->thumb_image) }}">
+                        <img src="{{ Storage::url($banner->image) }}" class="d-block w-100" alt="{{ $banner->title }}">
+                    </picture>
                     {{-- <div class="banner-content">
                         <div class="container">
                             <div class="row">
@@ -183,6 +186,17 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+@media (max-width: 768px) {
+    .slider-area .carousel-item {
+        height: 300px;
+    }
+    
+    .slider-area .carousel-item img {
+        object-fit: contain;
+        background-color: #f8f9fa;
+    }
 }
 
 .banner-content {
