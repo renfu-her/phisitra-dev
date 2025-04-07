@@ -37,7 +37,7 @@
                         <div id="collapse{{ $index }}" class="accordion-collapse collapse {{ $index === 0 ? 'show' : '' }}" data-bs-parent="#aboutAccordion">
                             <div class="accordion-body">
                                 <div class="row align-items-center">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-12">
                                         <div class="about-content">
                                             <div class="about-text">
                                                 {!! $item['content'] !!}
@@ -88,6 +88,7 @@
 
 .about-text img {
     width: 100%;
+    height: auto;
 }
 
 .about-image img {
