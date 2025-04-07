@@ -54,7 +54,7 @@ class BannerResource extends Resource
                     ->saveUploadedFileUsing(function ($file) {
                         $manager = new ImageManager(new Driver());
                         $image = $manager->read($file);
-                        $image->cover(1920, 1080);
+                        $image->scale(1920);
                         $filename = Str::uuid7()->toString() . '.webp';
 
                         if (!file_exists(storage_path('app/public/banners'))) {
@@ -63,6 +63,37 @@ class BannerResource extends Resource
 
                         $image->toWebp(80)->save(storage_path('app/public/banners/' . $filename));
                         return 'banners/' . $filename;
+                    })
+                    ->deleteUploadedFileUsing(function ($file) {
+                        if ($file) {
+                            Storage::disk('public')->delete($file);
+                        }
+                    }),
+
+                Forms\Components\FileUpload::make('thumb_image')
+                    ->label('手機版圖片')
+                    ->image()
+                    ->imageEditor()
+                    ->directory('banners/thumb')
+                    ->columnSpanFull()
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->downloadable()
+                    ->openable()
+                    ->getUploadedFileNameForStorageUsing(
+                        fn($file): string => (string) str(Str::uuid7() . '.webp')
+                    )
+                    ->saveUploadedFileUsing(function ($file) {
+                        $manager = new ImageManager(new Driver());
+                        $image = $manager->read($file);
+                        $image->scale(800);
+                        $filename = Str::uuid7()->toString() . '.webp';
+
+                        if (!file_exists(storage_path('app/public/banners/thumb'))) {
+                            mkdir(storage_path('app/public/banners/thumb'), 0755, true);
+                        }
+
+                        $image->toWebp(80)->save(storage_path('app/public/banners/thumb/' . $filename));
+                        return 'banners/thumb/' . $filename;
                     })
                     ->deleteUploadedFileUsing(function ($file) {
                         if ($file) {
